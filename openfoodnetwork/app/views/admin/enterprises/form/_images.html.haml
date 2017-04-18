@@ -1,0 +1,21 @@
+.row
+  .alpha.three.columns
+    = f.label :logo
+    %br
+    100 x 100 pixels
+  .omega.eight.columns
+    = image_tag @object.logo(:medium) if @object.logo.present?
+    = f.file_field :logo
+.row
+  .alpha.three.columns
+    = f.label :promo_image, 'ofn-with-tip' => t('.promo_image_placeholder')
+    %br/
+    %span{ style: 'font-weight:bold' }= t('.promo_image_note1')
+    %br
+    = t('.promo_image_note2')
+    %br
+    = t('.promo_image_note3')
+
+  .omega.eight.columns
+    = image_tag @object.promo_image(:large) if @object.promo_image.present?
+    = f.file_field :promo_image
