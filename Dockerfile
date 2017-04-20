@@ -25,7 +25,7 @@ RUN echo "postfix postfix/main_mailer_type string Internet site" > preseed.txt
 
 RUN debconf-set-selections preseed.txt
 
-RUN apt-get update -y && apt-get install --no-install-recommends apt-transport-https libterm-readline-perl-perl locales mc net-tools nginx postfix build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
+RUN apt-get update -y && apt-get install -y --no-install-recommends apt-transport-https libterm-readline-perl-perl locales mc net-tools nginx postfix build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
 
 RUN gem install bundler
 
@@ -47,5 +47,8 @@ RUN mv phantomjs-2.1.1/bin/phantomjs /usr/bin/phantomjs
 # docker init
 COPY scripts/docker-entrypoint.sh /
 RUN chown ofn:ofn /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
+
+USER ofn
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
-#CMD ["zammad"]
+CMD ["ofn"]

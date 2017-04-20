@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "$1" = 'zammad' ]; then
+if [ "$1" = 'ofn' ]; then
 
   # starting services
   #service postgresql start
