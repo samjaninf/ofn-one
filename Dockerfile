@@ -30,7 +30,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends apt-transpor
 RUN gem install bundler
 
 COPY openfoodnetwork/. /opt/ofn
-
+WORKDIR /opt/ofn
 # Start postfix and nginx because I am scrub.
 RUN service postfix start && service nginx start
 
