@@ -39,13 +39,13 @@ update-ca-certificates -f
 #git checkout "${GIT_BRANCH}"
 
 # install zammad
-if [ "${RAILS_ENV}" == "production" ]; then
-  bundle install --without test development mysql
-  # bundle install --without test development postgres
-elif [ "${RAILS_ENV}" == "development" ]; then
-  # bundle install --without mysql
-  bundle install --without postgres
-fi
+# if [ "${RAILS_ENV}" == "production" ]; then
+#   bundle install --without test development mysql
+#   # bundle install --without test development postgres
+# elif [ "${RAILS_ENV}" == "development" ]; then
+#   # bundle install --without mysql
+#   bundle install --without postgres
+# fi
 
 # fetch locales
 #contrib/packager.io/fetch_locales.rb

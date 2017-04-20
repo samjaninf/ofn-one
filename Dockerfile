@@ -31,6 +31,7 @@ RUN gem install bundler
 RUN bundle config git.allow_insecure true
 COPY openfoodnetwork/. /opt/ofn
 WORKDIR /opt/ofn
+RUN bundle install --without test development mysql
 # Start postfix and nginx because I am scrub.
 RUN service postfix start && service nginx start
 
@@ -48,7 +49,7 @@ RUN mv phantomjs-2.1.1/bin/phantomjs /usr/bin/phantomjs
 COPY scripts/docker-entrypoint.sh /
 RUN chown ofn:ofn /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
 
-#USER ofn
 
+USER ofn
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["ofn"]
