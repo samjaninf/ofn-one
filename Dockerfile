@@ -1,4 +1,4 @@
-FROM ruby:2.3.1
+FROM ruby:2.1.5
 MAINTAINER Zammad.org <info@zammad.org>
 ARG BUILD_DATE
 
@@ -28,7 +28,7 @@ RUN debconf-set-selections preseed.txt
 RUN apt-get update -y && apt-get install -y --no-install-recommends apt-transport-https libterm-readline-perl-perl locales mc net-tools nginx postfix build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
 
 RUN gem install bundler
-
+RUN bundle config git.allow_insecure true
 COPY openfoodnetwork/. /opt/ofn
 WORKDIR /opt/ofn
 # Start postfix and nginx because I am scrub.
