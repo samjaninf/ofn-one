@@ -41,7 +41,7 @@ RUN useradd -M -d /opt/ofn -s /bin/bash ofn
 COPY scripts/install-ofn.sh /tmp
 RUN chmod +x /tmp/install-ofn.sh;/bin/bash -l -c /tmp/install-ofn.sh
 
-RUN wget -q https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1.tar.bz2 -O phantomjs-2.1.1.tar.bz2
+RUN wget -q https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O phantomjs-2.1.1.tar.bz2
 RUN tar xvjf phantomjs-2.1.1.tar.bz2
 RUN mv phantomjs-2.1.1/bin/phantomjs /usr/bin/phantomjs
 
