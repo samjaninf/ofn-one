@@ -50,6 +50,6 @@ COPY scripts/docker-entrypoint.sh /
 RUN chown ofn:ofn /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
 
 
-USER ofn
+#USER ofn
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["ofn"]
