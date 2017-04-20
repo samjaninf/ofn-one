@@ -16,65 +16,49 @@ if [ "$1" = 'zammad' ]; then
   #done
 
 
-  #until $(mysql -s -N -e -u${ZAMMAD_DB_USER} -p${ZAMMAD_DB_PASS} -h ${ZAMMAD_DB_HOST} "SELECT schema_name FROM information_schema.schemata WHERE SCHEMA_NAME = '${ZAMMAD_DB}'"); do
+  #until $(mysql -s -N -e -u${OFN_DB_USER} -p${OFN_DB_PASS} -h ${OFN_DB_HOST} "SELECT schema_name FROM information_schema.schemata WHERE SCHEMA_NAME = '${OFN_DB}'"); do
   #  echo "=> Waiting for MariaDB to be ready..."
   #done
-  export tableExists=$(mysql -s -N -e -u${ZAMMAD_DB_USER} -p${ZAMMAD_DB_PASS} -h ${ZAMMAD_DB_HOST} "SELECT * FROM information_schema.tables WHERE table_schema = '${ZAMMAD_DB}' AND table_name = 'users'")
-  if [[ -z "${tableExists}" ]]; then
-    echo "==> Configuring Zammad for production please wait..."
-    sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: mysql2#" -e "s#.*username:.*#  username: ${ZAMMAD_DB_USER}#" -e "s#.*password:.*#  password: ${ZAMMAD_DB_PASS}#" -e "s#.*database:.*#  database: ${ZAMMAD_DB}\n  host: ${ZAMMAD_DB_HOST}#" < ${ZAMMAD_DIR}/config/database.yml.pkgr > ${ZAMMAD_DIR}/config/database.yml
-    cd ${ZAMMAD_DIR}
+  #export tableExists=$(mysql -s -N -e -u${OFN_DB_USER} -p${OFN_DB_PASS} -h ${OFN_DB_HOST} "SELECT * FROM information_schema.tables WHERE table_schema = '${OFN_DB}' AND table_name = 'users'")
+  # if [[ -z "${tableExists}" ]]; then
+    echo "===> Configuring Openfoodnetwork for production please wait..."
+    sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${OFN_DB_USER}#" -e "s#.*password:.*#  password: ${OFN_DB_PASS}#" -e "s#.*database:.*#  database: ${OFN_DB}\n  host: ${OFN_DB_HOST}#" < ${OFN_DIR}/config/database.yml.pkgr > ${OFN_DIR}/config/database.yml
+    cd ${OFN_DIR}
     # populate database
-    echo "==> Running db:migrate..."
-    bundle exec rake db:migrate
-    echo "==> Running db:seed..."
-    bundle exec rake db:seed
+    echo "===> Running db:setup..."
+    bundle exec rake db:setup
+
 
     # assets precompile
-    echo "==> Running assets:precompile..."
+    echo "===> Running assets:precompile..."
     bundle exec rake assets:precompile
 
     # delete assets precompile cache
     rm -r tmp/cache
+    
+  # fi
 
-    # create es searchindex
-    # bundle exec rails r "Setting.set('es_url', 'http://localhost:9200')"
-    echo "==> Running searchindex:rebuild..."
-    bundle exec rails r "Setting.set('es_url', 'http://${ZAMMAD_ES_URL}:9200')"
-    bundle exec rake searchindex:rebuild
-
-    # copy nginx zammad config
-    cp ${ZAMMAD_DIR}/contrib/nginx/zammad.conf /etc/nginx/sites-enabled/zammad.conf
-  fi
-
-  service postfix start
-  service nginx start
-
-# set user & group to zammad
-chown -R zammad:zammad "${ZAMMAD_DIR}"
-
-  cd ${ZAMMAD_DIR}
-  echo "starting zammad...."
-  su -c "bundle exec script/websocket-server.rb -b 0.0.0.0 start &>> ${ZAMMAD_DIR}/log/zammad.log &" zammad
-  su -c "bundle exec script/scheduler.rb start &>> ${ZAMMAD_DIR}/log/zammad.log &" zammad
+  echo "===> Starting openfoodnetwork...."
+  #su -c "bundle exec script/websocket-server.rb -b 0.0.0.0 start &>> ${OFN_DIR}/log/zammad.log &" zammad
+ # su -c "bundle exec script/scheduler.rb start &>> ${OFN_DIR}/log/zammad.log &" zammad
 
   if [ "${RAILS_SERVER}" == "puma" ]; then
-    su -c "bundle exec puma -b tcp://0.0.0.0:3000 -e ${RAILS_ENV} &>> ${ZAMMAD_DIR}/log/zammad.log &" zammad
+    su -c "bundle exec puma -b tcp://0.0.0.0:3000 -e ${RAILS_ENV} &>> ${OFN_DIR}/log/ofn.log &" zammad
   elif [ "${RAILS_SERVER}" == "unicorn" ]; then
-    su -c "bundle exec unicorn -p 3000 -c config/unicorn.rb -E ${RAILS_ENV} &>> ${ZAMMAD_DIR}/log/zammad.log &" zammad
+    su -c "bundle exec unicorn -p 3000 -c config/unicorn.rb -E ${RAILS_ENV} &>> ${OFN_DIR}/log/ofn.log &" zammad
   fi
 
   # wait for zammad processe coming up
   until (echo > /dev/tcp/localhost/3000) &> /dev/null; do
-    echo "waiting for zammad to be ready..."
+    echo "==> waiting for openfoodnetwork to be ready..."
     sleep 2
   done
 
   # show url
-  echo -e "==> \nZammad is ready! Visit the url in your browser to configure!"
-  #echo -e "If you like to use Zammad from somewhere else edit servername directive in /etc/nginx/sites-enabled/zammad.conf!\n"
+  echo -e "==> \Openfoodnetwork is ready! Visit the url in your browser to configure!"
 
   # run shell
+  tail -f ${OFN_DIR}/log/ofn.log
   /bin/bash
 
 fi

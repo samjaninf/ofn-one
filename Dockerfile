@@ -2,10 +2,12 @@ FROM ruby:2.3.1
 MAINTAINER Zammad.org <info@zammad.org>
 ARG BUILD_DATE
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
+ENV OFN_DIR /opt/ofn
 ENV RAILS_ENV production
 ENV GIT_URL https://github.com/openfoodfoundation/openfoodnetwork.git
 ENV GIT_BRANCH master
+ENV RAILS_SERVER unicorn
 
 # Expose ports
 EXPOSE 80
@@ -23,7 +25,7 @@ RUN echo "postfix postfix/main_mailer_type string Internet site" > preseed.txt
 
 RUN debconf-set-selections preseed.txt
 
-RUN apt-get update -y && apt-get install --no-install-recommends install apt-transport-https libterm-readline-perl-perl locales mc net-tools nginx postfix
+RUN apt-get update -y && apt-get install --no-install-recommends install apt-transport-https libterm-readline-perl-perl locales mc net-tools nginx postfix build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
 
 RUN gem install bundler
 
@@ -38,6 +40,9 @@ RUN useradd -M -d /opt/ofn -s /bin/bash ofn
 COPY scripts/install-ofn.sh /tmp
 RUN chmod +x /tmp/install-ofn.sh;/bin/bash -l -c /tmp/install-ofn.sh
 
+RUN wget -q https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1.tar.bz2 -O phantomjs-2.1.1.tar.bz2
+RUN tar xvjf phantomjs-2.1.1.tar.bz2
+RUN mv phantomjs-2.1.1/bin/phantomjs /usr/bin/phantomjs
 
 # docker init
 COPY scripts/docker-entrypoint.sh /

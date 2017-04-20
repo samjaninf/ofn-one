@@ -6,7 +6,7 @@ set -ex
 #apt-get --no-install-recommends -y install apt-transport-https libterm-readline-perl-perl locales mc net-tools nginx openjdk-8-jre openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION"
 
 # install postfix
-echo "postfix postfix/main_mailer_type string Internet site" > preseed.txt
+#echo "postfix postfix/main_mailer_type string Internet site" > preseed.txt
 
 # install postgresql server
 #locale-gen en_US.UTF-8
@@ -31,17 +31,17 @@ update-ca-certificates -f
 #useradd -M -d /opt/ofn -s /bin/bash ofn
 
 # git clone zammad
-#cd "$(dirname "${ZAMMAD_DIR}")"
+#cd "$(dirname "${OFN_DIR}")"
 #git clone "${GIT_URL}"
 
 # switch to git branch
-#cd "${ZAMMAD_DIR}"
+#cd "${OFN_DIR}"
 #git checkout "${GIT_BRANCH}"
 
 # install zammad
 if [ "${RAILS_ENV}" == "production" ]; then
-  # bundle install --without test development mysql
-  bundle install --without test development postgres
+  bundle install --without test development mysql
+  # bundle install --without test development postgres
 elif [ "${RAILS_ENV}" == "development" ]; then
   # bundle install --without mysql
   bundle install --without postgres
@@ -57,8 +57,8 @@ fi
 #echo "GRANT ALL PRIVILEGES ON DATABASE \"${ZAMMAD_DB}\" TO \"${ZAMMAD_DB_USER}\";" | su - postgres -c psql
 
 # create database.yml
-# sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${ZAMMAD_DB_USER}#" -e "s#.*password:.*#  password: ${ZAMMAD_DB_PASS}#" -e "s#.*database:.*#  database: ${ZAMMAD_DB}\n  host: localhost#" < ${ZAMMAD_DIR}/config/database.yml.pkgr > ${ZAMMAD_DIR}/config/database.yml
-#sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: mysql2#" -e "s#.*username:.*#  username: ${ZAMMAD_DB_USER}#" -e "s#.*password:.*#  password: ${ZAMMAD_DB_PASS}#" -e "s#.*database:.*#  database: ${ZAMMAD_DB}\n  host: ${ZAMMAD_DB_HOST}#" < ${ZAMMAD_DIR}/config/database.yml.pkgr > ${ZAMMAD_DIR}/config/database.yml
+# sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${ZAMMAD_DB_USER}#" -e "s#.*password:.*#  password: ${ZAMMAD_DB_PASS}#" -e "s#.*database:.*#  database: ${ZAMMAD_DB}\n  host: localhost#" < ${OFN_DIR}/config/database.yml.pkgr > ${OFN_DIR}/config/database.yml
+#sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: mysql2#" -e "s#.*username:.*#  username: ${ZAMMAD_DB_USER}#" -e "s#.*password:.*#  password: ${ZAMMAD_DB_PASS}#" -e "s#.*database:.*#  database: ${ZAMMAD_DB}\n  host: ${ZAMMAD_DB_HOST}#" < ${OFN_DIR}/config/database.yml.pkgr > ${OFN_DIR}/config/database.yml
 
 # populate database
 #bundle exec rake db:migrate
@@ -76,7 +76,7 @@ fi
 #bundle exec rake searchindex:rebuild
 
 # copy nginx zammad config
-#cp ${ZAMMAD_DIR}/contrib/nginx/zammad.conf /etc/nginx/sites-enabled/zammad.conf
+#cp ${OFN_DIR}/contrib/nginx/zammad.conf /etc/nginx/sites-enabled/zammad.conf
 
 # set user & group to zammad
-#chown -R zammad:zammad "${ZAMMAD_DIR}"
+#chown -R zammad:zammad "${OFN_DIR}"
