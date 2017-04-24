@@ -26,12 +26,13 @@ if [ "$1" = 'ofn' ]; then
     sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${OFN_DB_USER}#" -e "s#.*password:.*#  password: ${OFN_DB_PASS}#" -e "s#.*database:.*#  database: ${OFN_DB}\n  host: ${OFN_DB_HOST}#" < ${OFN_DIR}/config/database.yml.pkgr > ${OFN_DIR}/config/database.yml
     cd ${OFN_DIR}
     # populate database
-    echo "===> Running db:setup..."
+    echo "===> Running db:drop, db:create, db:schema:load, db:seed..."
     # bundle exec rake db:setup
     bundle exec rake db:drop
     bundle exec rake db:create
     bundle exec rake db:schema:load
-    bundle exec rake db:seed
+    bundle exec rake db:migrate
+    # bundle exec rake db:seed
 
 
     # assets precompile
