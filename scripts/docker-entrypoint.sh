@@ -37,7 +37,7 @@ if [ "$1" = 'ofn' ]; then
     echo "===> Running db:seed..."
     bundle exec rake db:seed
     echo "===> Running dev..."
-    bundle exec rake dev
+    bundle exec rake load_sample_data
 
 
     # assets precompile
