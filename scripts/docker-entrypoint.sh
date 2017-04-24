@@ -21,12 +21,15 @@ if [ "$1" = 'ofn' ]; then
   #done
   #export tableExists=$(mysql -s -N -e -u${OFN_DB_USER} -p${OFN_DB_PASS} -h ${OFN_DB_HOST} "SELECT * FROM information_schema.tables WHERE table_schema = '${OFN_DB}' AND table_name = 'users'")
   # if [[ -z "${tableExists}" ]]; then
+    export rakeSecret=$(rake secret)
     echo "===> Configuring Openfoodnetwork for production please wait..."
     sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${OFN_DB_USER}#" -e "s#.*password:.*#  password: ${OFN_DB_PASS}#" -e "s#.*database:.*#  database: ${OFN_DB}\n  host: ${OFN_DB_HOST}#" < ${OFN_DIR}/config/database.yml.pkgr > ${OFN_DIR}/config/database.yml
     cd ${OFN_DIR}
     # populate database
     echo "===> Running db:setup..."
-    bundle exec rake db:setup
+    # bundle exec rake db:setup
+    bundle exec rake db:schema:load
+    bundle exec rake db:seed
 
 
     # assets precompile
