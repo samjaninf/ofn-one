@@ -36,8 +36,6 @@ if [ "$1" = 'ofn' ]; then
     bundle exec rake db:migrate
     echo "===> Running db:seed..."
     bundle exec rake db:seed
-    echo "===> Running dev..."
-    bundle exec rake load_sample_data
 
 
     # assets precompile
