@@ -60,7 +60,7 @@ if [ "$1" = 'ofn' ]; then
   # wait for zammad processe coming up
   until (echo > /dev/tcp/localhost/3000) &> /dev/null; do
     echo "==> waiting for openfoodnetwork to be ready..."
-    sleep 2
+    sleep 10
   done
 
   # show url
