@@ -49,6 +49,7 @@ RUN mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/bin/phantomjs
 COPY scripts/docker-entrypoint.sh /
 RUN chown ofn:ofn -R /opt/ofn;chown ofn:ofn /docker-entrypoint.sh;chmod +x /docker-entrypoint.sh
 
+COPY scripts/ofn.conf /ofn.conf.pkgr
 
 #USER ofn
 ENTRYPOINT ["/docker-entrypoint.sh"]

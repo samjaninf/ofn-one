@@ -64,7 +64,7 @@ if [ "$1" = 'ofn' ]; then
   done
 
   echo "==> setting hostname now..."
-  sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf > /etc/nginx/sites-enabled/ofn.conf
+  sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
 
   echo "==> starting nginx and postfix..."
   service nginx start; service postfix start
