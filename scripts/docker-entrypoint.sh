@@ -43,8 +43,8 @@ if [ "$1" = 'ofn' ]; then
     bundle exec rake assets:precompile
 
     # delete assets precompile cache
-    rm -r tmp/cache
-    
+    # rm -r tmp/cache
+
   # fi
 
   echo "===> Starting openfoodnetwork...."
@@ -62,6 +62,12 @@ if [ "$1" = 'ofn' ]; then
     echo "==> waiting for openfoodnetwork to be ready..."
     sleep 10
   done
+
+  echo "==> setting hostname now..."
+  sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf > /etc/nginx/sites-enabled/ofn.conf
+
+  echo "==> starting nginx and postfix..."
+  service nginx start; service postfix start
 
   # show url
   echo -e "===> \Openfoodnetwork is ready! Visit the url in your browser to configure!"
