@@ -33,7 +33,7 @@ COPY openfoodnetwork/. /opt/ofn
 WORKDIR /opt/ofn
 RUN bundle install --without test development mysql
 # Start postfix and nginx because I am scrub.
-RUN service postfix start && service nginx start
+# RUN service postfix start && service nginx start
 
 RUN useradd -M -d /opt/ofn -s /bin/bash ofn
 
