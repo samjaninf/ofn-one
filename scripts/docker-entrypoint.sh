@@ -52,9 +52,9 @@ if [ "$1" = 'ofn' ]; then
  # su -c "bundle exec script/scheduler.rb start &>> ${OFN_DIR}/log/zammad.log &" zammad
 
   if [ "${RAILS_SERVER}" == "puma" ]; then
-    su -c "bundle exec puma -b tcp://0.0.0.0:3000 -e ${RAILS_ENV} &>> ${OFN_DIR}/log/ofn.log &" ofn
+    bundle exec puma -b tcp://0.0.0.0:3000 -e ${RAILS_ENV} &>> ${OFN_DIR}/log/ofn.log &
   elif [ "${RAILS_SERVER}" == "unicorn" ]; then
-    su -c "bundle exec unicorn -p 3000 -c config/unicorn.rb -E ${RAILS_ENV} &>> ${OFN_DIR}/log/ofn.log &" ofn
+    bundle exec unicorn -p 3000 -c config/unicorn.rb -E ${RAILS_ENV} &>> ${OFN_DIR}/log/ofn.log &
   fi
 
   # wait for zammad processe coming up
@@ -64,7 +64,7 @@ if [ "$1" = 'ofn' ]; then
   done
 
   # show url
-  echo -e "==> \Openfoodnetwork is ready! Visit the url in your browser to configure!"
+  echo -e "===> \Openfoodnetwork is ready! Visit the url in your browser to configure!"
 
   # run shell
   tail -f ${OFN_DIR}/log/ofn.log
