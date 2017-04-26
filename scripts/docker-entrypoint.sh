@@ -42,15 +42,13 @@ if [ "$1" = 'ofn' ]; then
     echo "===> Running assets:precompile..."
     bundle exec rake assets:precompile
 
-    # delete assets precompile cache
-    # rm -r tmp/cache
+    echo "==> setting hostname now..."
+    sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
 
-  # fi
+    echo "==> starting nginx, postfix and memcached..."
+    service nginx start; service postfix start; service start memcached
 
   echo "===> Starting openfoodnetwork...."
-  #su -c "bundle exec script/websocket-server.rb -b 0.0.0.0 start &>> ${OFN_DIR}/log/zammad.log &" zammad
- # su -c "bundle exec script/scheduler.rb start &>> ${OFN_DIR}/log/zammad.log &" zammad
-
   if [ "${RAILS_SERVER}" == "puma" ]; then
     bundle exec puma -b tcp://0.0.0.0:3000 -e ${RAILS_ENV} &>> ${OFN_DIR}/log/ofn.log &
   elif [ "${RAILS_SERVER}" == "unicorn" ]; then
@@ -63,11 +61,6 @@ if [ "$1" = 'ofn' ]; then
     sleep 10
   done
 
-  echo "==> setting hostname now..."
-  sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
-
-  echo "==> starting nginx and postfix..."
-  service nginx start; service postfix start
 
   # show url
   echo -e "===> \Openfoodnetwork is ready! Visit the url in your browser to configure!"
