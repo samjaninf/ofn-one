@@ -21,21 +21,22 @@ if [ "$1" = 'ofn' ]; then
   #done
   #export tableExists=$(mysql -s -N -e -u${OFN_DB_USER} -p${OFN_DB_PASS} -h ${OFN_DB_HOST} "SELECT * FROM information_schema.tables WHERE table_schema = '${OFN_DB}' AND table_name = 'users'")
   # if [[ -z "${tableExists}" ]]; then
+    export PGPASSWORD=$OFN_DB_PASS
     export rakeSecret=$(rake secret)
     echo "===> Configuring Openfoodnetwork for production please wait..."
     sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${OFN_DB_USER}#" -e "s#.*password:.*#  password: ${OFN_DB_PASS}#" -e "s#.*database:.*#  database: ${OFN_DB}\n  host: ${OFN_DB_HOST}#" < ${OFN_DIR}/config/database.yml.pkgr > ${OFN_DIR}/config/database.yml
     cd ${OFN_DIR}
     # populate database
-    echo "===> Running db:drop..."
-    bundle exec rake db:drop
+    # echo "===> Running db:drop..."
+    # bundle exec rake db:drop
     echo "===> Running db:create..."
-    bundle exec rake db:create
+    psql -h postgresql -U $OFN_DB_USER -q -d $OFN_DB -c 'SELECT 1'; || bundle exec rake db:create
     echo "===> Running db:schema:load..."
-    bundle exec rake db:schema:load
+    bundle exec rake db:schema:load || echo "<== Schema already loaded..."
     echo "===> Running db:migrate..."
-    bundle exec rake db:migrate
+    bundle exec rake db:migrate || echo "<== already migrated..."
     echo "===> Running db:seed..."
-    bundle exec rake db:seed
+    bundle exec rake db:seed || echo "<== Already seeded"
 
 
     # assets precompile
@@ -46,7 +47,7 @@ if [ "$1" = 'ofn' ]; then
     sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
 
     echo "==> starting nginx, postfix and memcached..."
-    service nginx start; service postfix start; service start memcached
+    service nginx start; service postfix start; service memcached start
 
   echo "===> Starting openfoodnetwork...."
   if [ "${RAILS_SERVER}" == "puma" ]; then
