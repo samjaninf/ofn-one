@@ -28,9 +28,10 @@ if [ "$1" = 'ofn' ]; then
     cd ${OFN_DIR}
     # populate database
     # echo "===> Running db:drop..."
-    # bundle exec rake db:drop
+    bundle exec rake db:drop
     echo "===> Running db:create..."
-    psql -h postgresql -U $OFN_DB_USER -q -d $OFN_DB -c 'SELECT 1;' || bundle exec rake db:create
+    # psql -h postgresql -U $OFN_DB_USER -q -d $OFN_DB -c 'SELECT 1;' || bundle exec rake db:create
+    bundle exec rake db:create
     echo "===> Running db:schema:load..."
     bundle exec rake db:schema:load || echo "<== Schema already loaded..."
     echo "===> Running db:migrate..."
