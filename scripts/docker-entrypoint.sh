@@ -30,7 +30,7 @@ if [ "$1" = 'ofn' ]; then
     # echo "===> Running db:drop..."
     # bundle exec rake db:drop
     echo "===> Running db:create..."
-    psql -h postgresql -U $OFN_DB_USER -q -d $OFN_DB -c 'SELECT 1'; || bundle exec rake db:create
+    psql -h postgresql -U $OFN_DB_USER -q -d $OFN_DB -c 'SELECT 1;' || bundle exec rake db:create
     echo "===> Running db:schema:load..."
     bundle exec rake db:schema:load || echo "<== Schema already loaded..."
     echo "===> Running db:migrate..."
