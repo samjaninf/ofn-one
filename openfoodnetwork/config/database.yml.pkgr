@@ -1,9 +1,0 @@
-production:
-  adapter: postgresql
-  database: open_food_network_prod
-  pool: 5
-  timeout: 5000
-  encoding: unicode
-  username: ofn
-  password: f00d
-  host: postgresql
