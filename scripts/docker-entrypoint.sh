@@ -88,6 +88,9 @@ after_fork do |server, worker|
 end
 EOF
 
+  sed -i -e "s#.*config.force_ssl.*#  config.force_ssl = false#" /opt/ofn/config/environments/production.rb
+  sed -i -e "s#.*config.log_level.*#  config.log_level = :info#" /opt/ofn/config/environments/production.rb
+
   echo "===> Starting openfoodnetwork...."
   if [ "${RAILS_SERVER}" == "puma" ]; then
     bundle exec puma -b tcp://0.0.0.0:3000 -e ${RAILS_ENV} &>> ${OFN_DIR}/log/ofn.log &
