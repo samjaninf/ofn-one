@@ -10,7 +10,7 @@ ENV GIT_BRANCH master
 ENV RAILS_SERVER unicorn
 
 # Expose ports
-EXPOSE 80 443
+EXPOSE 22 80 443
 
 # fixing service start
 RUN echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d
