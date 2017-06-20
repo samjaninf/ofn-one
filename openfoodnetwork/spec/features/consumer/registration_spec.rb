@@ -6,7 +6,20 @@ feature "Registration", js: true do
 
   describe "Registering a Profile" do
     let(:user) { create(:user, password: "password", password_confirmation: "password") }
-    before { Spree::Config.enterprises_require_tos = false }
+
+    before do
+      Spree::Config.enterprises_require_tos = false
+
+      albania = Spree::Country.create!({ name: "Albania", iso3: "ALB", iso: "AL", iso_name: "ALBANIA", numcode: "8" }, without_protection: true)
+      Spree::State.create!({ name: "Berat", abbr: "BRA", country: albania }, without_protection: true)
+      Spree::Country.create!({ name: "Chad", iso3: "TCD", iso: "TD", iso_name: "CHAD", numcode: "148" }, without_protection: true)
+    end
+
+    after do
+      Spree::State.where(name: 'Berat').delete_all
+      Spree::Country.where(name: 'Albania').delete_all
+      Spree::Country.where(name: 'Chad').delete_all
+    end
 
     it "Allows a logged in user to register a profile" do
       visit registration_path
@@ -35,7 +48,7 @@ feature "Registration", js: true do
       fill_in 'enterprise_address', with: '123 Abc Street'
       fill_in 'enterprise_city', with: 'Northcote'
       fill_in 'enterprise_zipcode', with: '3070'
-      select 'Australia', from: 'enterprise_country'
+      expect(page).to have_select('enterprise_country', options: %w(Albania Australia), selected: 'Australia')
       select 'VIC', from: 'enterprise_state'
       perform_and_ensure(:click_button, "Continue", lambda { page.has_content? 'Who is responsible for managing My Awesome Enterprise?' })
 
@@ -98,6 +111,23 @@ feature "Registration", js: true do
       expect(e.instagram).to eq "@InStAgRaM"
     end
 
+    context "when the user has no more remaining enterprises" do
+      before do
+        user.update_attributes(enterprise_limit: 0)
+      end
+
+      it "displays the limit reached page" do
+        visit registration_path
+
+        expect(page).to have_selector "dd", text: "Login"
+        switch_to_login_tab
+
+        # Enter Login details
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_login_and_ensure_content I18n.t('limit_reached_headline')
+      end
+    end
   end
 
   describe "Terms of Service agreement" do
@@ -154,18 +184,5 @@ feature "Registration", js: true do
       end
     end
     expect(page).to have_content content
-  end
-
-  def perform_and_ensure(action, *args, assertion)
-    # Buttons/Links/Checkboxes appear to be unresponsive for a while
-    # so keep clicking them until assertion is satified
-    using_wait_time 0.5 do
-      10.times do
-        send(action, *args)
-        return if assertion.call
-      end
-      # Only make it here if we have tried 10 times
-      expect(assertion.call).to be true
-    end
   end
 end

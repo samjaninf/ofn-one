@@ -4,6 +4,13 @@
       %h1
         / TODO: Rohan - logo asset & width is content manageable:
         %img{src: "/assets/logo-white-notext.png", width: "250", title: Spree::Config.site_name}
+        %br
+    .small-12.columns.text-center.brand-story
+      %h2{ :style => "color: white;"}
+        = t :tagline_part1
+        %br/
         %br/
         %a.button.transparent{href: "/shops"}
-          = t :home_shop
+          = t :home_buyer
+        %a.button.transparent{href: "/producers/sell"}
+          = t :home_harvester

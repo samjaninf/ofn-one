@@ -98,7 +98,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: auto 100%;
-    padding: 3rem 0;
+    padding: 0;
     text-align: center;
     margin-top: 2rem;
 
@@ -121,16 +121,38 @@
       background-size: auto 100%;
 
       &.search {
-        background-image: url("/assets/icon-mask-magnifier.png");
+        background-image: url("/assets/Barn.png");
       }
 
       &.shop {
-        background-image: url("/assets/icon-mask-apple.png");
+        background-image: url("/assets/Warehouse.png");
       }
-
+      
+      &.pay {
+        background-image: url("/assets/Wheelbarrow.png");
+      }
+      
       &.pick-up-delivery {
-        background-image: url("/assets/icon-mask-truck.png");
+        background-image: url("/assets/PickupTruck.png");
       }
+      
+      &.community {
+        background-image: url("/assets/Sprouts.png");
+      }
+      
+      &.quality_food {
+        background-image: url("/assets/Vegetables.png");
+      }
+      
+      &.get_noticed {
+        background-image: url("/assets/Farms.png");
+      }
+      
+      &.food_insecurity {
+        background-image: url("/assets/Fruits.png");
+      }
+      
+      
     }
   }
 

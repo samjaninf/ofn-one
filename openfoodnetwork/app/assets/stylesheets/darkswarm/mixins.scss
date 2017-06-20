@@ -5,7 +5,7 @@
 // Generic \\
 
 @mixin tiledPane {
-  background-image: url("/assets/tile-wide.png");
+  background-image: none;
   background-color: $brand-colour;
   background-position: center center;
 

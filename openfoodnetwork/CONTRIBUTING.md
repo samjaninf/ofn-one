@@ -1,7 +1,10 @@
+See this here post on raising a github issue:
+https://community.openfoodnetwork.org/t/how-to-raise-a-github-issue/912
+
 # Contributing
 
 We love pull requests from everyone. Here are some instructions for
-contributing code to Harvest to Order. See the [developer wiki](https://github.com/openfoodfoundation/openfoodnetwork/wiki) for more information.
+contributing code to Open Food Network. See the [developer wiki](https://github.com/openfoodfoundation/openfoodnetwork/wiki) for more information.
 
 Fork, then clone the repo:
 

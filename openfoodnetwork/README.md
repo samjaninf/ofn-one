@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/openfoodfoundation/openfoodnetwork.svg?branch=master)](https://travis-ci.org/openfoodfoundation/openfoodnetwork)
 [![Code Climate](https://codeclimate.com/github/openfoodfoundation/openfoodnetwork.png)](https://codeclimate.com/github/openfoodfoundation/openfoodnetwork)
 
-# Harvest to Order
+# Open Food Network
 
-The Harvest to Order is an online marketplace for local food. It enables a network of independent online food stores that connect farmers and food hubs (including coops, online farmers' markets, independent food businesses etc);  with individuals and local businesses. It gives farmers and food hubs an easier and fairer way to distribute their food.
+The Open Food Network is an online marketplace for local food. It enables a network of independent online food stores that connect farmers and food hubs (including coops, online farmers' markets, independent food businesses etc);  with individuals and local businesses. It gives farmers and food hubs an easier and fairer way to distribute their food.
 
 Supported by the Open Food Foundation, we are proudly open source and not-for-profit - we're trying to seriously disrupt the concentration of power in global agri-food systems, and we need as many smart people working together on this as possible.
 
@@ -15,7 +15,7 @@ We're part of global movement - get involved!
 
 ## Getting started
 
-Below are instructions for setting up a development environment for Harvest to Order. More information is in the [developer wiki](https://github.com/openfoodfoundation/openfoodnetwork/wiki).
+Below are instructions for setting up a development environment for Open Food Network. More information is in the [developer wiki](https://github.com/openfoodfoundation/openfoodnetwork/wiki).
 
 If you're interested in provisioning a server, see [the project's Ansible playbooks](https://github.com/openfoodfoundation/ofn_deployment).
 
@@ -98,6 +98,14 @@ The site is configured to use
 startup time while Rails loads. See the Zeus github page for
 usage instructions.
 
+Once [npm dependencies are
+installed](https://github.com/openfoodfoundation/openfoodnetwork/wiki/Karma), AngularJS tests can be run with:
+
+    ./script/karma run
+
+If you want karma to automatically rerun the tests on file modification, use:
+
+    ./script/karma start
 
 ## Credits
 

@@ -673,35 +673,46 @@ en:
   footer_legal_visit: "Find us on"
   footer_legal_text_html: "Harvest to Order is a free and open source software platform. Our content is licensed with %{content_license} and our code with %{code_license}."
 
-  home_shop: Shop Now
-
+  home_shop: "Shop Now"
+  
+  home_buyer: "I am a buyer"
+  
+  home_harvester: "I am a Harvester"
+  
+  tagline_part1: "Harvest to Order: A new way to source locally grown fresh food"
+  
   brandstory_headline: "Food, unincorporated."
-  brandstory_intro: "Sometimes the best way to fix the system is to start a new one…"
-  brandstory_part1: "We begin from the ground up. With farmers and growers ready to tell their stories proudly and truly. With distributors ready to connect people with products fairly and honestly. With buyers who believe that better weekly shopping decisions can seriously change the world."
-  brandstory_part2: "Then we need a way to make it real. A way to empower everyone who grows, sells and buys food. A way to tell all the stories, to handle all the logistics. A way to turn transaction into transformation every day."
-  brandstory_part3: "So we build an online marketplace that levels the playing field. It’s transparent, so it creates real relationships. It’s open source, so it’s owned by everyone. It scales to regions and nations, so people start versions across the world."
-  brandstory_part4: "It works everywhere. It changes everything."
-  brandstory_part5_strong: "We call it Harvest to Order."
-  brandstory_part6: "We all love food. Now we can love our food system too."
-
+  brandstory_part1_strong: "Support your community"
+  brandstory_part1: "Using our platform you are supporting local food harvesters/ producers."
+  brandstory_part2_strong: "Get Quality Food."
+  brandstory_part2: "You are getting fresh and locally sourced food without all of the hassle of traveling to the farm."
+  brandstory_part3_strong: "Get Noticed"
+  brandstory_part3: "With harvest to order you be able to market and sell your harvest to local customers"
+  brandstory_part4_strong: "Fight Food Insecurity"
+  brandstory_part4: "With every purchase you are helping to fight food insecurity"
+  brandstory_extra_strong: "Get Started with Harvest To Order Today!"
+  brandstory_extra: "With Harvest to Order you will be able to support your local economy and you won’t spend hours getting your local food. You will be able to be able to pick and choose what you want."
+  brandstory_lead2: " for an extra profit margin, and better brand independence, than selling to a major supermarket."
   learn_body: "Explore models, stories and resources to support you to develop your fair food business or organisation.  Find training, events and other opportunities to learn from peers."
   learn_cta: "Get Inspired"
 
   connect_body: "Search our full directories of producers, hubs and groups to find fair food traders near you.  List your business or organisation on the OFN so buyers can find you.  Join the community to get advice and solve problems together."
   connect_cta: "Go Exploring"
 
-  system_headline: "Shopping - here's how it works."
+  system_headline: "Get your locally sourced food in 4 simple steps,"
   system_step1: "1. Search"
-  system_step1_text: "Search our diverse, independent shops for seasonal local food. Search by neighbourhood and food category, or whether you prefer delivery or pickup."
-  system_step2: "2. Shop"
-  system_step2_text: "Transform your transactions with affordable local food from diverse producers and hubs. Know the stories behind your food and the people who make it!"
-  system_step3: "3. Pick-up / Delivery"
-  system_step3_text: "Hang on for your delivery, or visit your producer or hub for a more personal connection with your food. Food shopping as diverse as nature intended it."
+  system_step1_text: "Find all farm producers available near you"
+  system_step2: "2. Choose"
+  system_step2_text: "Browse hundreds of items from local harvesters/ food producers"
+  system_step3: "3. Pay"
+  system_step3_text: "It's quick, secure and easy"
+  system_step4: "4. Pick-up / Delivery"
+  system_step4_text: "Your Food is prepared for pickup or delivered to your door"
 
-  cta_headline: "Shopping that makes the world a better place."
+  cta_headline: "Shop fresh, shop local. Support small business."
   cta_label: "I'm Ready"
 
-  stats_headline: "We're creating a new food system."
+  stats_headline: "Join our community food system."
   stats_producers: "food producers"
   stats_shops: "food shops"
   stats_shoppers: "food shoppers"
