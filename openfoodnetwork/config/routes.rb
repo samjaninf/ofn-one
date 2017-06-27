@@ -1,6 +1,8 @@
 Openfoodnetwork::Application.routes.draw do
   root :to => 'home#index'
-
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
   # Redirects from old URLs avoid server errors and helps search engines
   get "/enterprises", to: redirect("/")
   get "/products", to: redirect("/")

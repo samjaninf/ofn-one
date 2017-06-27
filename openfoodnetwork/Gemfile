@@ -103,7 +103,6 @@ group :test, :development do
   gem 'capybara'
   gem 'database_cleaner', '0.7.1', :require => false
   gem 'awesome_print'
-  gem 'letter_opener'
   gem 'timecop'
   gem 'poltergeist'
   gem 'rspec-retry'
@@ -111,6 +110,7 @@ group :test, :development do
   gem 'unicorn-rails'
   gem 'atomic'
   gem 'knapsack'
+  gem 'letter_opener_web'
 end
 
 group :test do

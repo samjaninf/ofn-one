@@ -67,6 +67,7 @@ en-US:
     # General form elements
     quick_search: Quick Search
     clear_all: Clear All
+    clear_filters: Clear All
     producer: Producer
     shop: Shop
     product: Product
