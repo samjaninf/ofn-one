@@ -51,7 +51,7 @@ RUN chown ofn:ofn -R /opt/ofn;chown ofn:ofn /docker-entrypoint.sh;chmod +x /dock
 
 # Yeah... this was stupid... should just copy the files where they need to be
 COPY scripts/ofn.conf.pkgr /ofn.conf.pkgr
-COPY scripts/database.yml.pkgr /ofn.conf.pkgr
+COPY scripts/database.yml.pkgr /database.yml.pkgr
 
 #USER ofn
 ENTRYPOINT ["/docker-entrypoint.sh"]
