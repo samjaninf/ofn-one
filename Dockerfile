@@ -25,7 +25,7 @@ RUN echo "postfix postfix/main_mailer_type string Internet site" > preseed.txt
 
 RUN debconf-set-selections preseed.txt
 
-RUN apt-get update -y && apt-get install -y --no-install-recommends postgresql-client memcached apt-transport-https libterm-readline-perl-perl locales mc net-tools nginx postfix build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
+RUN apt-get update -y && apt-get install -y --no-install-recommends postgresql-client memcached apt-transport-https libterm-readline-perl-perl locales mc net-tools nginx postfix build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev imagemagick
 
 RUN gem install bundler
 RUN bundle config git.allow_insecure true
