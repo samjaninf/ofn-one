@@ -2,8 +2,8 @@ namespace :openfoodnetwork do
 
   namespace :dev do
 
-    desc 'load sample data us'
-    task :load_sample_data_us => :environment do
+    desc 'load sample data'
+    task :load_sample_data => :environment do
       require_relative '../../spec/factories'
       require_relative '../../spec/support/spree/init'
       task_name = "openfoodnetwork:dev:load_sample_data"
@@ -32,7 +32,7 @@ namespace :openfoodnetwork do
       unless Spree::Address.find_by_zipcode "04937"
         puts "[#{task_name}] Seeding addresses"
 
-        FactoryGirl.create(:address, :address1 => "230 Skowhegan Road", :zipcode => "04937", :city => "Fairfield")
+        FactoryGirl.create(:address, :address1 => "230 Skowhegan Road", :zipcode => "04937", :city => "Fairfield", :state => "ME")
       end
 
       # -- Enterprises
@@ -42,7 +42,7 @@ namespace :openfoodnetwork do
         3.times { FactoryGirl.create(:supplier_enterprise, :address => Spree::Address.find_by_zipcode("04937")) }
 
         
-        FactoryGirl.create(:distributor_enterprise, :name => "PEGAS Technology Solutions", :address => Spree::Address.find_by_zipcode("3040"))
+        FactoryGirl.create(:distributor_enterprise, :name => "PEGAS Technology Solutions", :address => Spree::Address.find_by_zipcode("04937"))
       end
 
       # -- Enterprise users

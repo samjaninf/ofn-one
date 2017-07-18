@@ -1,7 +1,7 @@
 # English language file
 # ---------------------
 #
-# This is the source language file maintained by the Australian Harvest To Order team.
+# This is the source language file maintained by the Australian Fresh Harvest Crate  team.
 # Visit Transifex to translate this file into other languages:
 #
 #   https://www.transifex.com/open-food-foundation/open-food-network/
@@ -12,7 +12,7 @@
 # - opening a pull request at GitHub.
 #
 #
-# See http://community.openfoodnetwork.org/t/localisation-Harvest To Order-in-your-language/397
+# See http://community.openfoodnetwork.org/t/localisation-Fresh Harvest Crate -in-your-language/397
 
 en:
   activerecord:
@@ -37,13 +37,13 @@ en:
       subject: "Please confirm the email address for %{enterprise}"
     welcome:
       subject: "%{enterprise} is now on %{sitename}"
-  home: "Harvest To Order"
-  title: Harvest to Order
+  home: "Fresh Harvest Crate "
+  title: Fresh Harvest Crate 
   welcome_to: 'Welcome to '
   site_meta_description: "We begin from the ground up. With farmers and growers ready to tell their stories proudly and truly. With distributors ready to connect people with products fairly and honestly. With buyers who believe that better weekly shopping decisions can…"
   search_by_name: Search by name or city...
   producers: 'Maine Producers'
-  producers_join: Maine producers are now welcome to join Harvest to Order. #FIXME
+  producers_join: Maine producers are now welcome to join Fresh Harvest Crate.
   charges_sales_tax: Charges Sales Tax?
   print_invoice: "Print Invoice"
   print_ticket: "Print Ticket"
@@ -142,9 +142,9 @@ en:
     business_model_configuration:
       edit:
         business_model_configuration: "Business Model"
-        business_model_configuration_tip: "Configure the rate at which shops will be charged each month for use of Harvest to Order."
+        business_model_configuration_tip: "Configure the rate at which shops will be charged each month for use of Fresh Harvest Crate ."
         bill_calculation_settings: "Bill Calculation Settings"
-        bill_calculation_settings_tip: "Adjust the amount that enterprises will be billed each month for use of Harvest To Order."
+        bill_calculation_settings_tip: "Adjust the amount that enterprises will be billed each month for use of Fresh Harvest Crate ."
         shop_trial_length: "Shop Trial Length (Days)"
         shop_trial_length_tip: "The length of time (in days) that enterprises who are set up as shops can run as a trial period."
         fixed_monthly_charge: "Fixed Monthly Charge"
@@ -156,7 +156,7 @@ en:
         tax_rate: "Tax Rate"
         tax_rate_tip: "Tax rate that applies to the the monthly bill that enterprises are charged for using the system."
         minimum_monthly_billable_turnover: "Minimum Monthly Billable Turnover"
-        minimum_monthly_billable_turnover_tip: "Minimum monthly turnover before a shopfront will be charged for using Harvest To Order. Enterprises turning over less than this amount in a month will not be charged, either as a percentage or fixed rate."
+        minimum_monthly_billable_turnover_tip: "Minimum monthly turnover before a shopfront will be charged for using Fresh Harvest Crate . Enterprises turning over less than this amount in a month will not be charged, either as a percentage or fixed rate."
         example_bill_calculator: "Example Bill Calculator"
         example_bill_calculator_legend: "Alter the example turnover to visualise the effect of the settings to the left."
         example_monthly_turnover: "Example Monthly Turnover"
@@ -361,7 +361,7 @@ en:
           permalink: Permalink (no spaces)
           permalink_tip: "This permalink is used to create the url to your shop: %{link}your-shop-name/shop"
           link_to_front: Link to shop front
-          link_to_front_tip: A direct link to your shopfront on Harvest to Order.
+          link_to_front_tip: A direct link to your shopfront on Fresh Harvest Crate .
         shipping_methods:
           name: Name
           applies: Applies?
@@ -428,22 +428,22 @@ en:
         producer: Producer
       change_type_form:
         producer_profile: Producer Profile
-        connect_Harvest To Order: Connect through Harvest To Order
+        connect_Fresh Harvest Crate : Connect through Fresh Harvest Crate 
         always_free: ALWAYS FREE
-        producer_description_text: Add your products to Harvest to Order, allowing hubs to stock your products in their stores.
+        producer_description_text: Add your products to Fresh Harvest Crate , allowing hubs to stock your products in their stores.
         producer_shop: Producer Shop
         sell_your_produce: Sell your own produce
-        sell_description_text: Sell your products directly to customers through your very own Harvest to Order shopfront.
+        sell_description_text: Sell your products directly to customers through your very own Fresh Harvest Crate  shopfront.
         sell_description_text2: A Producer Shop is for your produce only, if you want to sell produce grown/produced off site, select 'Producer Hub'.
         producer_hub: Producer Hub
         producer_hub_text: Sell produce from self and others
-        producer_hub_description_text: Your enterprise is the backbone of your local food system. You can sell your own produce as well as produce aggregated from other enterprises through your shopfront on Harvest to Order.
+        producer_hub_description_text: Your enterprise is the backbone of your local food system. You can sell your own produce as well as produce aggregated from other enterprises through your shopfront on Fresh Harvest Crate .
         profile: Profile Only
         get_listing: Get a listing
-        profile_description_text: People can find and contact you on Harvest to Order. Your enterprise will be visible on the map, and will be searchable in listings.
+        profile_description_text: People can find and contact you on Fresh Harvest Crate . Your enterprise will be visible on the map, and will be searchable in listings.
         hub_shop: Hub Shop
         hub_shop_text: Sell produce from others
-        hub_shop_description_text: Your enterprise is the backbone of your local food system. You aggregate produce from other enterprises and can sell it through your shop on Harvest to Order.
+        hub_shop_description_text: Your enterprise is the backbone of your local food system. You aggregate produce from other enterprises and can sell it through your shop on Fresh Harvest Crate .
         choose_option: Please choose one of the options above.
         change_now: Change now
       enterprise_user_index:
@@ -463,7 +463,7 @@ en:
         title: New Enterprise
         back_link: Back to enterprises list
       welcome:
-        welcome_title: Welcome to Harvest to Order!
+        welcome_title: Welcome to Fresh Harvest Crate !
         welcome_text: You have successfully created a
         next_step: Next step
         choose_starting_point: 'Choose your starting point:'
@@ -526,7 +526,7 @@ en:
       show_on_map: "Show all on the map"
   shared:
     register_call:
-      selling_on_ofn: "Interested in getting on Harvest to Order?"
+      selling_on_ofn: "Interested in getting on Fresh Harvest Crate ?"
       register: "Register here"
   shop:
     messages:
@@ -631,56 +631,56 @@ en:
   card_securitycode: "Security Code"
   card_expiry_date: Expiry Date
 
-  Harvest To Order_cart_headline: "Current cart for:"
-  Harvest To Order_cart_distributor: "Distributor:"
-  Harvest To Order_cart_oc: "Order cycle:"
-  Harvest To Order_cart_from: "From:"
-  Harvest To Order_cart_to: "To:"
-  Harvest To Order_cart_product: "Product:"
-  Harvest To Order_cart_quantitiy: "Quantity:"
-  Harvest To Order_cart_send: "Buy me"
+  Fresh Harvest Crate _cart_headline: "Current cart for:"
+  Fresh Harvest Crate _cart_distributor: "Distributor:"
+  Fresh Harvest Crate _cart_oc: "Order cycle:"
+  Fresh Harvest Crate _cart_from: "From:"
+  Fresh Harvest Crate _cart_to: "To:"
+  Fresh Harvest Crate _cart_product: "Product:"
+  Fresh Harvest Crate _cart_quantitiy: "Quantity:"
+  Fresh Harvest Crate _cart_send: "Buy me"
 
   ie_warning_headline: "Your browser is out of date :-("
-  ie_warning_text: "For the best Harvest to Order experience, we strongly recommend upgrading your browser:"
+  ie_warning_text: "For the best Fresh Harvest Crate  experience, we strongly recommend upgrading your browser:"
   ie_warning_chrome: Download Chrome
   ie_warning_firefox: Download Firefox
   ie_warning_ie: Upgrade Internet Explorer
-  ie_warning_other: "Can't upgrade your browser? Try Harvest to Order on your smartphone :-)"
+  ie_warning_other: "Can't upgrade your browser? Try Fresh Harvest Crate  on your smartphone :-)"
 
-  footer_global_headline: "Harvest To Order Global"
+  footer_global_headline: "Fresh Harvest Crate  Global"
   footer_global_home: "Home"
   footer_global_news: "News"
   footer_global_about: "About"
   footer_global_contact: "Contact"
 
-  footer_sites_headline: "Harvest To Order Sites"
+  footer_sites_headline: "Fresh Harvest Crate  Sites"
   footer_sites_developer: "Developer"
   footer_sites_community: "Community"
   footer_sites_userguide: "User Guide"
 
   footer_secure: "Secure and trusted."
-  footer_secure_text: "Harvest to Order uses SSL encryption (2048 bit RSA) everywhere to keep your shopping and payment information private. Our servers do not store your credit card details and payments are processed by PCI-compliant services."
+  footer_secure_text: "Fresh Harvest Crate  uses SSL encryption (2048 bit RSA) everywhere to keep your shopping and payment information private. Our servers do not store your credit card details and payments are processed by PCI-compliant services."
 
   footer_contact_headline: "Keep in touch"
   footer_contact_email: "Email us"
 
   footer_nav_headline: "Navigate"
   footer_join_headline: "Join us"
-  footer_join_body: "Create a listing, shop or group directory on Harvest to Order."
+  footer_join_body: "Create a listing, shop or group directory on Fresh Harvest Crate ."
   footer_join_cta: "Tell me more!"
 
   footer_legal_call: "Read our"
   footer_legal_tos: "Terms and conditions"
   footer_legal_visit: "Find us on"
-  footer_legal_text_html: "Harvest to Order is a free and open source software platform. Our content is licensed with %{content_license} and our code with %{code_license}."
-
+  footer_legal_text_html: "Fresh Harvest Crate  is a free and open source software platform. Our content is licensed with %{content_license} and our code with %{code_license}."
+  footer_legal_copyright: "© 2016 Fresh Harvest Crate All Rights Reserved | We are a brand of StoicEdge, a Maine based Company"
   home_shop: "Shop Now"
   
   home_buyer: "I am a buyer"
   
   home_harvester: "I am a Harvester"
   
-  tagline_part1: "Harvest to Order: A new way to source locally grown fresh food"
+  tagline_part1: "Fresh Harvest Crate : A new way to source locally grown fresh food"
   
   brandstory_headline: "Food, unincorporated."
   brandstory_part1_strong: "Support your community"
@@ -688,16 +688,16 @@ en:
   brandstory_part2_strong: "Get Quality Food."
   brandstory_part2: "You are getting fresh and locally sourced food without all of the hassle of traveling to the farm."
   brandstory_part3_strong: "Get Noticed"
-  brandstory_part3: "With harvest to order you be able to market and sell your harvest to local customers"
+  brandstory_part3: "With Fresh Harvest Crate  you be able to market and sell your harvest to local customers"
   brandstory_part4_strong: "Fight Food Insecurity"
   brandstory_part4: "With every purchase you are helping to fight food insecurity, throughout your local area"
-  brandstory_extra_strong: "Get Started with Harvest To Order Today!"
-  brandstory_extra: "With Harvest to Order you will be able to support your local economy and you won’t spend hours getting your local food. You will be able to be able to pick and choose what you want."
+  brandstory_extra_strong: "Get Started with Fresh Harvest Crate  Today!"
+  brandstory_extra: "With Fresh Harvest Crate  you will be able to support your local economy and you won’t spend hours getting your local food. You will be able to be able to pick and choose what you want."
   brandstory_lead2: " for an extra profit margin, and better brand independence, than selling to a major supermarket."
   learn_body: "Explore models, stories and resources to support you to develop your fair food business or organisation.  Find training, events and other opportunities to learn from peers."
   learn_cta: "Get Inspired"
 
-  connect_body: "Search our full directories of producers, hubs and groups to find fair food traders near you.  List your business or organisation on Harvest To Order so buyers can find you.  Join the community to get advice and solve problems together."
+  connect_body: "Search our full directories of producers, hubs and groups to find fair food traders near you.  List your business or organisation on Fresh Harvest Crate  so buyers can find you.  Join the community to get advice and solve problems together."
   connect_cta: "Go Exploring"
 
   system_headline: "Get your locally sourced food in 4 simple steps,"
@@ -775,7 +775,7 @@ en:
   email_userguide_html: "The User Guide with detailed support for setting up your Producer or Hub is here:
 %{link}"
   email_admin_html: "You can manage your account by logging into the %{link} or by clicking on the cog in the top right hand side of the homepage, and selecting Administration."
-  email_community_html: "We also have an online forum for community discussion related to Harvest To Order software and the unique challenges of running a food enterprise. You are encouraged to join in. We are constantly evolving and your input into this forum will shape what happens next.
+  email_community_html: "We also have an online forum for community discussion related to Fresh Harvest Crate  software and the unique challenges of running a food enterprise. You are encouraged to join in. We are constantly evolving and your input into this forum will shape what happens next.
 %{link}"
   join_community: "Join the community"
   email_help: "If you have any difficulties, check out our FAQs, browse the forum or post a 'Support' topic and someone will help you out!"
@@ -884,14 +884,14 @@ See the %{link} to find out more about %{sitename}'s features and to start using
 
   search_no_results_html: "Sorry, no results found for %{query}. Try another search?"
 
-  components_profiles_popover: "Profiles do not have a shopfront on Harvest to Order, but may have their own physical or online shop elsewhere"
+  components_profiles_popover: "Profiles do not have a shopfront on Fresh Harvest Crate , but may have their own physical or online shop elsewhere"
   components_profiles_show: "Show profiles"
   components_filters_nofilters: "No filters"
   components_filters_clearfilters: "Clear all filters"
 
   groups_title: Groups
   groups_headline: Groups / regions
-  groups_text: "Every producer is unique. Every business has something different to offer. Our groups are collectives of producers, hubs and distributors who share something in common like location, farmers market or philosophy. This makes your shopping experience easier. So explore our groups and have the curating done for you."
+  groups_text: "Groups are collectives of producers, hubs and distributors who share something in common like location, farmers market or philosophy."
   groups_search: "Search name or keyword"
   groups_no_groups: "No groups found"
   groups_about: "About Us"
@@ -913,14 +913,14 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   groups_signup_motivation3: We know you have big ideas, and we want to help. We'll share our knowledge, networks and resources. We know that isolation doesn't create change, so we'll partner with you.
   groups_signup_motivation4: We meet you where you are.
   groups_signup_motivation5: You might be an alliance of food hubs, producers, or distributors, and an industry body, or a local government.
-  groups_signup_motivation6: Whatever your role in your local food movement, we're ready to help. However you come to wonder what Harvest to Order would look like or is doing in your part of the world, let's start the conversation.
+  groups_signup_motivation6: Whatever your role in your local food movement, we're ready to help. However you come to wonder what Fresh Harvest Crate  would look like or is doing in your part of the world, let's start the conversation.
   groups_signup_motivation7: We make food movements make more sense.
   groups_signup_motivation8: You need to activate and enable your networks, we offer a platform for conversation and action. You need real engagement. We’ll help reach all the players, all the stakeholders, all the sectors.
   groups_signup_motivation9: You need resourcing. We’ll bring all our experience to bear. You need cooperation. We’ll better connect you to a global network of peers.
   groups_signup_pricing: Group Account
   groups_signup_studies: Case Studies
   groups_signup_contact: Ready to discuss?
-  groups_signup_contact_text: "Get in touch to discover what Harvest To Order can do for you:"
+  groups_signup_contact_text: "Get in touch to discover what Fresh Harvest Crate  can do for you:"
   groups_signup_detail: "Here's the detail."
 
   login_invalid: "Invalid email or password"
@@ -931,19 +931,19 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   modal_hubs_content2: You can only shop at one food hub at a time.
 
   modal_groups: "Groups / Regions"
-  modal_groups_content1: These are the organisations and relationships between hubs which make up Harvest to Order.
+  modal_groups_content1: These are the organisations and relationships between hubs which make up Fresh Harvest Crate .
   modal_groups_content2: Some groups are clustered by location or council, others by non-geographic similarities.
 
   modal_how: "How it works"
-  modal_how_shop: Shop Harvest to Order
+  modal_how_shop: Shop Fresh Harvest Crate 
   modal_how_shop_explained: Search for a food hub near you to start shopping! You can expand each food hub to see what kinds of goodies are available, and click through to start shopping. (You can only shop one food hub at a time.)
   modal_how_pickup: Pick-ups, delivery and shipping costs
   modal_how_pickup_explained: Some food hubs deliver to your door, while others require you to pick-up your purchases. You can see which options are available on the homepage, and select which you'd like at the shopping and check-out pages. Delivery will cost more, and pricing differs from hub-to-hub. Each food hub is a sales point with independent business operations and logisitics - so variations between hubs are to be expected.
   modal_how_more: Learn more
-  modal_how_more_explained: "If you want to learn more about Harvest to Order, how it works, and get involved, check out:"
+  modal_how_more_explained: "If you want to learn more about Fresh Harvest Crate , how it works, and get involved, check out:"
 
   modal_producers: "Producers"
-  modal_producers_explained: "Our producers make all the delicious food you can shop for on Harvest to Order."
+  modal_producers_explained: "Our producers make all the delicious food you can shop for on Fresh Harvest Crate ."
 
   producers_about: About us
   producers_buy: Shop for
@@ -966,6 +966,9 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   producers_signup_cta_action: Join now
   producers_signup_detail: Here's the detail.
   producer: Producer
+  
+  producers_text: "Shop Fresh, Shop Local, and support community businesses!"
+
 
   products_item: Item
   products_description: Description
@@ -978,18 +981,18 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   register_title: Register
 
   sell_title: "Register"
-  sell_headline: "Get on Harvest to Order!"
+  sell_headline: "Get on Fresh Harvest Crate !"
   sell_motivation: "Showcase your beautiful food."
   sell_producers: "Producers"
   sell_hubs: "Hubs"
   sell_groups: "Groups"
-  sell_producers_detail: "Set up a profile for your business on Harvest To Order in just minutes.  At any time you can upgrade your profile to an online store and sell your products direct to customers."
-  sell_hubs_detail: "Set up a profile for your food enterprise or organisation on Harvest To Order. At any time you can upgrade your profile to a multi-producer shop."
+  sell_producers_detail: "Set up a profile for your business on Fresh Harvest Crate  in just minutes.  At any time you can upgrade your profile to an online store and sell your products direct to customers."
+  sell_hubs_detail: "Set up a profile for your food enterprise or organisation on Fresh Harvest Crate . At any time you can upgrade your profile to a multi-producer shop."
   sell_groups_detail: "Set up a tailored directory of enterprises (producers and other food enterprises) for your region or for your organisation."
   sell_user_guide: "Find out more in our user guide."
-  sell_listing_price: "Listing on Harvest To Order is free.  Opening and running a shop on Harvest To Order is free.  Setting up a group directory on Harvest To Order for your organisation or regional network is free."
+  sell_listing_price: "Listing on Fresh Harvest Crate  is free.  Opening and running a shop on Fresh Harvest Crate is free. Setting up a group directory on Fresh Harvest Crate for your organisation or regional network is free."
   sell_embed: ""
-  sell_ask_services: "Ask us about Harvest To Order services."
+  sell_ask_services: "Ask us about Fresh Harvest Crate services."
 
   shops_title: Shops
   shops_headline: Shopping, transformed.
@@ -1085,7 +1088,7 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   choose_password: "Choose a password"
   confirm_password: "Confirm password"
   action_signup: "Sign up now"
-  welcome_to_Harvest To Order: "Welcome to Harvest to Order!"
+  welcome_to_ofn: "Welcome to Fresh Harvest Crate!"
   signup_or_login: "Start By Signing Up (or logging in)"
   have_an_account: "Already have an account?"
   action_login: "Log in now."
@@ -1122,7 +1125,7 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   logo_placeholder: "Your logo will appear here for review once uploaded"
   enterprise_about_headline: "Nice one!"
   enterprise_about_message: "Now let's flesh out the details about"
-  enterprise_success: "Success! %{enterprise} added to Harvest to Order "
+  enterprise_success: "Success! %{enterprise} added to Fresh Harvest Crate  "
   enterprise_registration_exit_message: "If you exit this wizard at any stage, you need to click the confirmation link in the email you have received. This will take you to your admin interface where you can continue setting up your profile."
   enterprise_description: "Short Description"
   enterprise_description_placeholder: "A short sentence describing your enterprise"
@@ -1157,16 +1160,16 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   registration_promo_image: "Landscape image for your profile"
   registration_about_us: "'About Us' text"
   registration_outcome_headline: "What do I get?"
-  registration_outcome1_html: "Your profile helps people <strong>find</strong> and <strong>contact</strong> you on Harvest to Order."
+  registration_outcome1_html: "Your profile helps people <strong>find</strong> and <strong>contact</strong> you on Fresh Harvest Crate ."
   registration_outcome2: "Use this space to tell the story of your enterprise, to help drive connections to your social and online presence. "
-  registration_outcome3: "It's also the first step towards trading on Harvest to Order, or opening an online store."
+  registration_outcome3: "It's also the first step towards trading on Fresh Harvest Crate , or opening an online store."
   registration_finished_headline: "Finished!"
   registration_finished_thanks: "Thanks for filling out the details for %{enterprise}."
-  registration_finished_login: "You can change or update your enterprise at any stage by logging into Harvest to Order and going to Admin."
+  registration_finished_login: "You can change or update your enterprise at any stage by logging into Fresh Harvest Crate  and going to Admin."
   registration_finished_activate: "Activate %{enterprise}."
   registration_finished_activate_instruction_html: "We've sent a confirmation email to <strong>%{email}</strong> if it hasn't been activated before.<br/>
-Please follow the instructions there to make your enterprise visible on Harvest to Order."
-  registration_finished_action: "Harvest to Order home"
+Please follow the instructions there to make your enterprise visible on Fresh Harvest Crate ."
+  registration_finished_action: "Fresh Harvest Crate  home"
   registration_type_headline: "Last step to add %{enterprise}!"
   registration_type_question: "Are you a producer?"
   registration_type_producer: "Yes, I'm a producer"
@@ -1319,7 +1322,7 @@ Please follow the instructions there to make your enterprise visible on Harvest 
   change_package: "Change Package"
   spree_admin_single_enterprise_hint: "Hint: To allow people to find you, turn on your visibility under"
   your_profil_live: "Your profile live"
-  on_Harvest To Order_map: "on Harvest to Order map"
+  on_fresh_harvest_crate_map: "on Fresh Harvest Crate  map"
   see: "See"
   live: "live"
   manage: "Manage"
@@ -1459,15 +1462,15 @@ Please follow the instructions there to make your enterprise visible on Harvest 
           hub_profile: Hub Profile
           hub_profile_cost: "COST: ALWAYS FREE"
           hub_profile_text1: >
-            People can find and contact you on Harvest to Order. Your enterprise will be
+            People can find and contact you on Fresh Harvest Crate . Your enterprise will be
             visible on the map, and will be searchable in listings.
           hub_profile_text2: >
             Having a profile, and making connections within your local food system through
-            Harvest to Order will always be free.
+            Fresh Harvest Crate  will always be free.
           hub_shop: Hub Shop
           hub_shop_text1: >
             Your enterprise is the backbone of your local food system. You aggregate produce
-            from other enterprises and can sell it through your shop on Harvest to Order.
+            from other enterprises and can sell it through your shop on Fresh Harvest Crate .
           hub_shop_text2: >
             Hubs can take many forms, whether they be a food co-op, a buying group, a veggie-box
             program, or a local grocery store.
@@ -1487,13 +1490,13 @@ Please follow the instructions there to make your enterprise visible on Harvest 
             A profile makes you visible and contactable to others and is a way to share your story.
           profile_only_text2: >
             If you prefer to focus on producing food, and want to leave the work of selling it
-            to someone else, you won't require a shop on Harvest to Order.
+            to someone else, you won't require a shop on Fresh Harvest Crate .
           profile_only_text3: >
-            Add your products to Harvest to Order, allowing hubs to stock your products in
+            Add your products to Fresh Harvest Crate , allowing hubs to stock your products in
             their stores.
           producer_shop: Producer Shop
           producer_shop_text1: >
-            Sell your products directly to customers through your very own Harvest to Order
+            Sell your products directly to customers through your very own Fresh Harvest Crate 
             shopfront.
           producer_shop_text2: >
             A Producer Shop is for your produce only, if you want to sell produce grown/produced
@@ -1502,12 +1505,12 @@ Please follow the instructions there to make your enterprise visible on Harvest 
           producer_hub_text1: >
             Your enterprise is the backbone of your local food system. You can sell your own
             produce as well as produce aggregated from other enterprises through your shopfront
-            on Harvest to Order.
+            on Fresh Harvest Crate .
           producer_hub_text2: >
             Producer Hubs can take many forms, whether they be a CSA, a veggie-box program,
             or a food co-op with a rooftop garden.
           producer_hub_text3: >
-            Harvest to Order aims to support as many hub models as possible, so no matter
+            Fresh Harvest Crate  aims to support as many hub models as possible, so no matter
             your situation, we want to provide the tools you need to run your organisation or
             local food business.
           get_listing: Get a listing
@@ -1522,11 +1525,11 @@ Please follow the instructions there to make your enterprise visible on Harvest 
             raise it, brew it, bake it, ferment it, milk it or mould it.
           producer_text2: >
             Producers can also perform other functions, such as aggregating food from other
-            enterprises and selling it through a shop on Harvest to Order.
+            enterprises and selling it through a shop on Fresh Harvest Crate .
           non_producer: Non-producer
           non_producer_text1: >
             Non-producers do not produce any food themselves, meaning that they cannot create
-            their own products for sale through Harvest to Order.
+            their own products for sale through Fresh Harvest Crate .
           non_producer_text2: >
             Instead, non-producers specialise in linking producers to the end eater, whether it
             be by aggregating, grading, packing, selling or delivering food.

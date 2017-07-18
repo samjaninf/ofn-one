@@ -36,14 +36,14 @@ class ContentConfiguration < Spree::Preferences::FileConfiguration
   has_attached_file :footer_logo, default_url: "/assets/ofn-logo-footer.png"
 
   #Other
-  preference :footer_facebook_url, :string, default: "https://www.facebook.com/OpenFoodNet"
-  preference :footer_twitter_url, :string, default: "https://twitter.com/OpenFoodNet"
+  preference :footer_facebook_url, :string, default: ""
+  preference :footer_twitter_url, :string, default: ""
   preference :footer_instagram_url, :string, default: ""
-  preference :footer_linkedin_url, :string, default: "http://www.linkedin.com/groups/Open-Food-Foundation-4743336"
+  preference :footer_linkedin_url, :string, default: ""
   preference :footer_googleplus_url, :string, default: ""
   preference :footer_pinterest_url, :string, default: ""
-  preference :footer_email, :string, default: "hello@openfoodnetwork.org"
-  preference :community_forum_url, :string, default: "http://community.openfoodnetwork.org"
+  preference :footer_email, :string, default: "hello@freshharvestcrate.com"
+  preference :community_forum_url, :string, default: "http://community.freshharvestcrate.com"
   preference :footer_links_md, :text, default: <<-EOS
 [Newsletter sign-up](/)
 
@@ -52,6 +52,6 @@ class ContentConfiguration < Spree::Preferences::FileConfiguration
 [Calendar](/)
 EOS
 
-  preference :footer_about_url, :string, default: "http://www.openfoodnetwork.org/ofn-local/open-food-network-australia/"
+  preference :footer_about_url, :string, default: "join.freshharvestcrate.com"
   preference :footer_tos_url, :string, default: "/Terms-of-service.pdf"
 end

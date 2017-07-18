@@ -1,6 +1,14 @@
 - content_for(:title) do
   = t :groups_title
-
+#panes
+  #shops.pane
+    .row
+      .small-12.medium-6.medium-offset-3.columns.text-center
+        %h2
+          = t :groups_headline
+        %p.text-big
+          = t :groups_text
+          
 = inject_enterprises
 
 :javascript
@@ -8,11 +16,7 @@
 
 #groups.pad-top.footer-pad{"ng-controller" => "GroupsCtrl"}
   .row
-    .small-12.medium-6.medium-offset-3.columns.text-center
-      %h1
-        = t :groups_headline
-      %p.text
-        = t :groups_text
+    
   #active-table-search.row.pad-top
     .small-12.columns
       %p
@@ -35,7 +39,7 @@
         %p{"ng-bind" => "::group.state"}
       .small-9.medium-4.columns.groups-icons
         %p
-          %link-to-service.ofn-i_050-mail-circle{service: '""', ref: 'group.email.split("").reverse().join("")', mailto: true}
+          %link-to-service.ofn-i_050-mail-circle{service: '""', ref: 'group.email', mailto: true}
           %link-to-service.ofn-i_049-web{service: '"http://"', ref: 'group.website'}
           %link-to-service.ofn-i_041-twitter{service: '"http://twitter.com/"', ref: 'group.twitter'}
           %link-to-service.ofn-i_044-facebook{service: '"https://www.facebook.com/"', ref: 'group.facebook'}

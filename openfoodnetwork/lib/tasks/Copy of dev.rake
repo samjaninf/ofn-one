@@ -1,18 +1,19 @@
+
 namespace :openfoodnetwork do
 
   namespace :dev do
 
-    desc 'load sample data us'
-    task :load_sample_data_us => :environment do
+    desc 'load sample data'
+    task :load_sample_data => :environment do
       require_relative '../../spec/factories'
       require_relative '../../spec/support/spree/init'
       task_name = "openfoodnetwork:dev:load_sample_data"
 
       # -- Shipping / payment information
-      unless Spree::Zone.find_by_name 'United States'
+      unless Spree::Zone.find_by_name 'Australia'
         puts "[#{task_name}] Seeding shipping / payment information"
-        zone = FactoryGirl.create(:zone, :name => 'United States', :zone_members => [])
-        country = Spree::Country.find_by_name('United States')
+        zone = FactoryGirl.create(:zone, :name => 'Australia', :zone_members => [])
+        country = Spree::Country.find_by_name('Australia')
         Spree::ZoneMember.create(:zone => zone, :zoneable => country)
         FactoryGirl.create(:shipping_method, :zone => zone)
       end
@@ -29,20 +30,42 @@ namespace :openfoodnetwork do
       end
 
       # -- Addresses
-      unless Spree::Address.find_by_zipcode "04937"
+      unless Spree::Address.find_by_zipcode "3160"
         puts "[#{task_name}] Seeding addresses"
 
-        FactoryGirl.create(:address, :address1 => "230 Skowhegan Road", :zipcode => "04937", :city => "Fairfield")
+        FactoryGirl.create(:address, :address1 => "25 Myrtle Street", :zipcode => "3153", :city => "Bayswater")
+        FactoryGirl.create(:address, :address1 => "6 Rollings Road", :zipcode => "3156", :city => "Upper Ferntree Gully")
+        FactoryGirl.create(:address, :address1 => "72 Lake Road", :zipcode => "3130", :city => "Blackburn")
+        FactoryGirl.create(:address, :address1 => "7 Verbena Street", :zipcode => "3195", :city => "Mordialloc")
+        FactoryGirl.create(:address, :address1 => "20 Galvin Street", :zipcode => "3018", :city => "Altona")
+        FactoryGirl.create(:address, :address1 => "59 Websters Road", :zipcode => "3106", :city => "Templestowe")
+        FactoryGirl.create(:address, :address1 => "17 Torresdale Drive", :zipcode => "3155", :city => "Boronia")
+        FactoryGirl.create(:address, :address1 => "21 Robina CRT", :zipcode => "3764", :city => "Kilmore")
+        FactoryGirl.create(:address, :address1 => "25 Kendall Street", :zipcode => "3134", :city => "Ringwood")
+        FactoryGirl.create(:address, :address1 => "2 Mines Road", :zipcode => "3135", :city => "Ringwood East")
+        FactoryGirl.create(:address, :address1 => "183 Millers Road", :zipcode => "3025", :city => "Altona North")
+        FactoryGirl.create(:address, :address1 => "310 Pascoe Vale Road", :zipcode => "3040", :city => "Essendon")
+        FactoryGirl.create(:address, :address1 => "6 Martin Street", :zipcode => "3160", :city => "Belgrave")
       end
 
       # -- Enterprises
       unless Enterprise.count > 1
         puts "[#{task_name}] Seeding enterprises"
 
-        3.times { FactoryGirl.create(:supplier_enterprise, :address => Spree::Address.find_by_zipcode("04937")) }
+        3.times { FactoryGirl.create(:supplier_enterprise, :address => Spree::Address.find_by_zipcode("3160")) }
 
-        
-        FactoryGirl.create(:distributor_enterprise, :name => "PEGAS Technology Solutions", :address => Spree::Address.find_by_zipcode("3040"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Green Grass", :address => Spree::Address.find_by_zipcode("3153"))
+        FactoryGirl.create(:distributor_enterprise, :name => "AusFarmers United", :address => Spree::Address.find_by_zipcode("3156"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Blackburn FreeGrossers", :address => Spree::Address.find_by_zipcode("3130"))
+        FactoryGirl.create(:distributor_enterprise, :name => "MegaFoods", :address => Spree::Address.find_by_zipcode("3195"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Eco Butchers", :address => Spree::Address.find_by_zipcode("3018"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Western Wines", :address => Spree::Address.find_by_zipcode("3106"))
+        FactoryGirl.create(:distributor_enterprise, :name => "QuickFresh", :address => Spree::Address.find_by_zipcode("3155"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Fooderers", :address => Spree::Address.find_by_zipcode("3764"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Food Local", :address => Spree::Address.find_by_zipcode("3134"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Green Food Trading Corporation", :address => Spree::Address.find_by_zipcode("3135"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Better Food", :address => Spree::Address.find_by_zipcode("3025"))
+        FactoryGirl.create(:distributor_enterprise, :name => "Gippsland Poultry", :address => Spree::Address.find_by_zipcode("3040"))
       end
 
       # -- Enterprise users
