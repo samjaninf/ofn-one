@@ -86,6 +86,7 @@ EOF
   done
 
   echo "==> Starting jobs..."
+  chmod +x script/delayed_job
   script/delayed_job -n 2 start
 
   # show url
