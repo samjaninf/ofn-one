@@ -39,7 +39,8 @@ app_path = File.expand_path(File.dirname(__FILE__) + '/..')
 worker_processes (ENV['RAILS_ENV'] == 'production' ? 2 : 1)
 
 # restarts workers that hang for 30 seconds
-timeout 120
+#timeout 120
+timeout 300
 
 listen app_path + '/tmp/unicorn.sock', backlog: 64
 
