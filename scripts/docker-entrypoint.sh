@@ -11,10 +11,10 @@ if [ "$1" = 'ofn' ]; then
     echo "==> Testing if database exists. if not, then populate database"
     #if ! psql -lqtA -h ${OFN_DB_HOST} -U ${OFN_DB_USER} | grep -qw ${OFN_DB} ; then
       echo "===> Running db:drop..."
-      #bundle exec rake db:drop
+      bundle exec rake db:drop
       echo "===> Running db:create..."
       bundle exec rake db:create
-      #echo "===> Running db:schema:load..."
+      echo "===> Running db:schema:load..."
       bundle exec rake db:schema:load || echo "<== Schema already loaded..."
       echo "===> Running db:migrate..."
       bundle exec rake db:migrate || echo "<== already migrated..."
