@@ -9,7 +9,7 @@ if [ "$1" = 'ofn' ]; then
     sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${OFN_DB_USER}#" -e "s#.*password:.*#  password: ${OFN_DB_PASS}#" -e "s#.*database:.*#  database: ${OFN_DB}\n  host: ${OFN_DB_HOST}#" < /database.yml.pkgr > ${OFN_DIR}/config/database.yml
     cd ${OFN_DIR}
     echo "==> Testing if database exists. if not, then populate database"
-    #if ! psql -lqtA -h ${OFN_DB_HOST} -U ${OFN_DB_USER} | grep -qw ${OFN_DB} ; then
+    if ! psql -lqtA -h ${OFN_DB_HOST} -U ${OFN_DB_USER} | grep -qw ${OFN_DB} ; then
       echo "===> Running db:drop..."
       bundle exec rake db:drop
       echo "===> Running db:create..."
@@ -20,7 +20,7 @@ if [ "$1" = 'ofn' ]; then
       bundle exec rake db:migrate || echo "<== already migrated..."
       echo "===> Running db:seed..."
       bundle exec rake db:seed || echo "<== Already seeded"
-    #fi
+    fi
 
     # assets precompile
     echo "===> Running assets:precompile..."
