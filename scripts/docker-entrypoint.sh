@@ -18,8 +18,8 @@ if [ "$1" = 'ofn' ]; then
       bundle exec rake db:schema:load || echo "<== Schema already loaded..."
       echo "===> Running db:migrate..."
       bundle exec rake db:migrate || echo "<== already migrated..."
-      echo "===> Running db:seed..."
-      bundle exec rake db:seed || echo "<== Already seeded"
+      #echo "===> Running db:seed..."
+      #bundle exec rake db:seed || echo "<== Already seeded"
     #fi
 
     # assets precompile
