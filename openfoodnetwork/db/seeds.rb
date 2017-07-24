@@ -5,7 +5,7 @@
 unless Spree::Country.find_by_name 'United States'
   puts "[db:seed] Seeding Spree"
   Spree::Core::Engine.load_seed if defined?(Spree::Core)
-  Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
+  #Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 end
 
 # -- States
