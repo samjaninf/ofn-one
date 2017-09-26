@@ -72,6 +72,9 @@ EOF
 
   sed -i -e "s#.*config.force_ssl.*#  config.force_ssl = false#" /opt/ofn/config/environments/production.rb
   sed -i -e "s#.*config.log_level.*#  config.log_level = :info#" /opt/ofn/config/environments/production.rb
+  
+  su -c "bundle exec script/websocket-server.rb -b 0.0.0.0 start &>> ${ZAMMAD_DIR}/log/zammad.log &" zammad
+  su -c "bundle exec script/scheduler.rb start &>> ${ZAMMAD_DIR}/log/zammad.log &" zammad
 
   echo "===> Starting openfoodnetwork...."
   if [ "${RAILS_SERVER}" == "puma" ]; then
