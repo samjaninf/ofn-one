@@ -4,6 +4,12 @@ fr:
       spree/order:
         payment_state: Statut du paiement
         shipment_state: Statut livraison
+    errors:
+      models:
+        spree/user:
+          attributes:
+            email:
+              taken: "Un compte existe déjà pour cet e-mail. Connectez-vous ou demandez un nouveau mot de passe."
   devise:
     failure:
       invalid: |
@@ -20,16 +26,19 @@ fr:
       subject: "Confirmez l'adresse email pour %{enterprise}"
     welcome:
       subject: "%{enterprise} est maintenant sur %{sitename}"
-  title: Harvest to Order France
+  producer_mailer:
+    order_cycle:
+      subject: "Rapport de cycle de vente pour %{producer}"
+  home: "OFF"
+  title: Open Food Network France
   welcome_to: 'Bienvenue sur '
   site_meta_description: "Tout commence dans le sol. Avec ces paysans, agriculteurs, producteurs, engagés pour une agriculture durable et régénératrice, et désireux de partager leur histoire et leur passion avec fierté. Avec ces distributeurs souhaitant reconnecter les individus à leurs aliments et aux gens qui les produisent, soutenir les prises de conscience, dans une démarche de transparence, d'honnêteté, en assurant une juste rémunération des producteurs.  Avec ces acheteurs qui croient que de meilleures décisions d'achats peuvent ..."
   search_by_name: Recherche par nom ou département...
-  producers: 'Producteurs Français'
   producers_join: Les producteurs et autres hubs basés en France sont invités à rejoindre Open Food France.
   charges_sales_tax: Soumis à la TVA?
   print_invoice: "Imprimer la facture"
-  print_ticket: "Imprimer le ticket"
-  select_ticket_printer: "Choisir l'imprimante à tickets"
+  print_ticket: "Imprimer ticket de caisse"
+  select_ticket_printer: "Choisir l'imprimante tickets"
   send_invoice: "Envoyer la facture"
   resend_confirmation: "Renvoyer la confirmation"
   view_order: "Voir la commande"
@@ -60,7 +69,37 @@ fr:
   loading: Chargement en cours...
   show_more: Voir plus
   show_all: Tout voir
+  show_all_with_more: "Voir tous (%{num} en plus)"
   cancel: Annuler
+  edit: Modifier
+  distributors: Distributeurs
+  distribution: Distribution
+  bulk_order_management: Gestion des commandes par lot
+  enterprise_groups: Groupes
+  reports: Rapports
+  variant_overrides: Catalogue boutique
+  spree_products: Produits
+  all: Tous
+  current: Actuel
+  available: Disponible
+  dashboard: Tableau de bord
+  undefined: indéfini
+  unused: inutilisé
+  admin_and_handling: Frais de gestion
+  profile: Profil
+  supplier_only: Uniquement Producteur
+  weight: Poids
+  volume: Volume
+  summary: Résumé
+  detailed: Détaillé
+  updated: Mis à jour
+  'yes': "Ou"
+  'no': "Non"
+  y: 'O'
+  n: 'N'
+  powered_by: Propulsé par
+  blocked_cookies_alert: "Votre navigateur semble bloquer des cookies nécessaires à l'utilisation de ce site. Cliquez ci-dessous pour autoriser les cookies et rechargez la page."
+  allow_cookies: "Autoriser les cookies"
   admin:
     date: Date
     email: Email
@@ -78,13 +117,22 @@ fr:
     sku: Référence produit
     tags: Tags
     variant: Variante
+    weight: Poids
+    volume: Volume
+    items: Pièce
+    select_all: Tout sélectionner
+    obsolete_master: Master obsolète
     quick_search: Recherche rapide
     clear_all: Vider
     start_date: "Date de début"
     end_date: "Date de fin"
+    form_invalid: "Le formulaire contient des champs manquants ou invalides"
+    clear_filters: Annuler les filtres
+    clear: Annuler
     columns: Colonnes
     actions: Actions
     viewing: "Vous regardez: %{current_view_name}"
+    description: Description
     whats_this: Qu'est-ce que c'est?
     tag_has_rules: "Règles existantes pour ce tag: %{num}"
     has_one_rule: "a une règle"
@@ -93,49 +141,57 @@ fr:
     unsaved_changes: "Des modifications n'ont pas été sauvegardées."
     accounts_and_billing_settings:
       method_settings:
-        default_accounts_payment_method: "Default Accounts Payment Method"
-        default_accounts_shipping_method: "Default Accounts Shipping Method"
+        default_accounts_payment_method: "Méthode de paiement par défault"
+        default_accounts_shipping_method: "Méthode d'envoi par défault"
       edit:
-        accounts_and_billing: "Compte & Facturation"
-        accounts_administration_distributor: "entreprise d'administration des comptes (facturation des hubs)"
+        accounts_and_billing: "Comptes & Factures"
+        accounts_administration_distributor: "Entreprise d'administration des comptes (facturation des hubs)"
         admin_settings: "Paramètres"
         update_invoice: "Mettre à jour les factures"
+        auto_update_invoices: "Mettre à jour automatiquement les factures chaque nuit à 01:00"
         finalise_invoice: "Finaliser les factures"
+        auto_finalise_invoices: "Finaliser automatiquement les factures le 2 de chaque mois à 01:30"
+        manually_run_task: "Tâche exécutée manuellement"
+        update_user_invoice_explained: "Cliquez ici pour mettre à jour immédiatement les factures pour le mois en cours pour toutes les entreprises utilisant le système. Cette tache peut être définie pour s'effectuer automatiquement chaque nuit."
         finalise_user_invoices: "Finaliser les factures utilisateurs"
         finalise_user_invoice_explained: "Cliquez ici pour finaliser toutes les factures pour le mois calendaire précédent. Cette tâche peut-être définie pour être opérée automatiquement une fois par mois."
-        manually_run_task: "Tache manuelle"
         update_user_invoices: "Mettre à jour les factures utilisateurs"
-        update_user_invoice_explained: "Cliquez ici pour mettre à jour immédiatement les factures pour le mois en cours pour toutes les entreprises utilisant le système. Cette tache peut être définie pour s'effectuer automatiquement chaque nuit."
-        auto_finalise_invoices: "Finaliser automatiquement les factures le 2 de chaque mois à 01:30"
-        auto_update_invoices: "Mettre à jour automatiquement les factures chaque nuit à 01:00"
+      errors:
+        accounts_distributor: 'doit être défini si vous souhaitez générer des factures pour les utilisateurs entreprises. '
+        default_payment_method: 'doit être défini si vous souhaitez générer des factures pour les utilisateurs entreprises. '
+        default_shipping_method: doit être défini si vous souhaitez générer des factures pour les utilisateurs entreprises.
+    shopfront_settings:
+      embedded_shopfront_settings: "Paramètres Boutiques Intégrées"
+      enable_embedded_shopfronts: "Autoriser l'intégration des boutiques"
+      embedded_shopfronts_whitelist: "Liste blanche des Domaines Externes"
     business_model_configuration:
       edit:
-        business_model_configuration: "Configuration du modèle économique"
-        business_model_configuration_tip: "Configure the rate at which shops will be charged each month for use of the Harvest to Order."
-        bill_calculation_settings: "Bill Calculation Settings"
-        bill_calculation_settings_tip: "Adjust the amount that enterprises will be billed each month for use of the OFN."
+        business_model_configuration: "Modèle économique"
+        business_model_configuration_tip: "Configurer la fréquence à laquelle les boutiques seront facturées chaque mois pour l'utilisation d'Open Food Network"
+        bill_calculation_settings: "Paramètres du calcul des frais"
+        bill_calculation_settings_tip: "Définir le montant qui sera facturé aux hubs tous les mois pour leur utilisation d'Open Food France."
         shop_trial_length: "Durée de la période de test (jours)"
-        shop_trial_length_tip: "The length of time (in days) that enterprises who are set up as shops can run as a trial period."
-        fixed_monthly_charge: "Fixed Monthly Charge"
-        fixed_monthly_charge_tip: "A fixed monthly charge for all enterprises who are set up as a shop and have exceeded the minimum billable turnover (if set)."
+        shop_trial_length_tip: "La durée (en jours) de la période d'essai."
+        fixed_monthly_charge: "Charge mensuelle fixe"
+        fixed_monthly_charge_tip: "Le montant fixe mensuel facturé pour tous les hubs qui dépassent le seuil de chiffre d'affaire facturable (si défini)."
         percentage_of_turnover: "Pourcentage du chiffre d'affaire"
-        percentage_of_turnover_tip: "When greater than zero, this rate (0.0 - 1.0) will be applied to the total turnover of each shop and added to any fixed charges (to the left) to calculate the monthly bill."
+        percentage_of_turnover_tip: "Quand supérieur à zéro, ce taux (0.0 - 1.0) sera appliqué au chiffre d'affaire du hub pour déterminer la commission à facturer, qui sera ajoutée aux autres charges (à gauche) pour calculer le montant à facturer pour le mois."
         monthly_cap_excl_tax: "plafond mensuel (sans TVA)"
-        monthly_cap_excl_tax_tip: "When greater than zero, this value will be used as a cap on the amount that shops will be charged each month."
-        tax_rate: "Tax Rate"
-        tax_rate_tip: "Tax rate that applies to the the monthly bill that enterprises are charged for using the system."
-        minimum_monthly_billable_turnover: "Minimum Monthly Billable Turnover"
-        minimum_monthly_billable_turnover_tip: "Minimum monthly turnover before a shopfront will be charged for using OFN. Enterprises turning over less than this amount in a month will not be charged, either as a percentage or fixed rate."
-        example_bill_calculator: "Example Bill Calculator"
-        example_bill_calculator_legend: "Alter the example turnover to visualise the effect of the settings to the left."
-        example_monthly_turnover: "Example Monthly Turnover"
-        example_monthly_turnover_tip: "An example monthly turnover for an enterprise which will be used to generate calculate an example monthly bill below."
-        cap_reached?: "Cap Reached ?"
-        cap_reached?_tip: "Whether the cap (specified to the left) has been reached, given the settings and the turnover provided."
-        included_tax: "Included tax"
-        included_tax_tip: "The total tax included in the example monthly bill, given the settings and the turnover provided."
+        monthly_cap_excl_tax_tip: "Quand supérieure à zéro, cette valeur sert de limite supérieure facturable pour un mois."
+        tax_rate: "TVA applicable"
+        tax_rate_tip: "TVA applicable sur le service facturé par Open Food France."
+        minimum_monthly_billable_turnover: "Chiffre d'affaire minimum facturable (mensuel)"
+        minimum_monthly_billable_turnover_tip: "Chiffre d'affaire mensuel au delà duquel le hub devra payer le service Open Food France. Les hubs n'atteignant pas ce chiffre d'affaire mensuel ne seront pas facturés, ni sur le montant fixe ni sur la commission variable."
+        example_bill_calculator: "Exemple de calcul de facture"
+        example_bill_calculator_legend: "Changer le chiffre d'affaire pour voir l'impact des paramètres définis à gauche."
+        example_monthly_turnover: "Exemple de CA mensuel"
+        example_monthly_turnover_tip: "Exemple de chiffre d'affaire mensuel qui sert de base de calcul pour voir quel est le montant qui sera facturé au hub concerné."
+        cap_reached?: "Seuil atteint?"
+        cap_reached?_tip: "On voit ici si le seuil (défini à gauche) a été atteint, en fonction du chiffre d'affaire et du paramétrage du seuil."
+        included_tax: "Inclut TVA"
+        included_tax_tip: "TVA inclue dans l'exemple en cours, dépend du chiffre d'affaire et des paramétrages à gauche."
         total_monthly_bill_incl_tax: "Facture mensuelle totale (taxes incluses)"
-        total_monthly_bill_incl_tax_tip: "The example total monthly bill with tax included, given the settings and the turnover provided."
+        total_monthly_bill_incl_tax_tip: "Exemple du total TTC facturé pour le mois, selon paramétrages et chiffre d'affaire du mois."
     customers:
       index:
         add_customer: "Ajouter un acheteur"
@@ -157,18 +213,30 @@ fr:
         edit: 'Modifier'
         update_address: 'Mettre à jour l''adresse'
         confirm_delete: 'Confirmer suppression?'
+        search_by_email: "Recherche par email/code..."
+      destroy:
+        has_associated_orders: 'Suppression impossible: des commandes sont associées à cet acheteur pour cette boutique'
     cache_settings:
       show:
+        title: Mise en cache
         distributor: Hub (distributeur)
         order_cycle: Cycle de vente
         status: Statut
         diff: Diff
+        error: Erreur
     contents:
       edit:
         title: Contenu
+        header: Titre
+        home_page: Page d'accueil
+        producer_signup_page: Page d'inscription Producteur
+        hub_signup_page: Page d'inscription Hub
+        group_signup_page: Page d'inscription Groupe
+        footer_and_external_links: Pied de page et Liens Externes
+        your_content: Votre contenu
     enterprise_fees:
       index:
-        title: Marges et commissions
+        title: Marges et Commissions
         enterprise: Entreprise
         fee_type: Type de marge
         name: Nom
@@ -178,7 +246,13 @@ fr:
     enterprise_groups:
       index:
         new_button: Nouveau groupe d'entreprises
+    enterprise_roles:
+      form:
+        manages: gère
+      enterprise_role:
+        manages: gère
     products:
+      unit_name_placeholder: 'ex: botte'
       bulk_edit:
         unit: Unité
         display_as: Affiché
@@ -187,13 +261,16 @@ fr:
         inherits_properties?: Hériter des propriétés producteur?
         available_on: Disponible sur
         av_on: "Disp. sur"
+      properties:
+        property_name: Nom du label
+        inherited_property: Label producteur appliqué par défaut
       variants:
         to_order_tip: "Les articles fabriqués sur commande n'ont pas un niveau de stock défini, comme des pains faits à la main."
     variant_overrides:
       loading_flash:
         loading_inventory: Catalogue boutique en cours de chargement...
       index:
-        title: Stock
+        title: Catalogue boutique
         description: Utilisez cette page pour gérer le catalogue de votre entreprise. Les détails produits saisis ici remplaceront ceux de la page "Produit" pour votre entreprise uniquement.
         enable_reset?: Autoriser réinitialisation du stock (retour configurations par défaut)?
         inherit?: Hériter?
@@ -211,7 +288,12 @@ fr:
         inventory_powertip: Ceci est votre catalogue produits. Pour ajouter des produits à votre catalogue, sélectionnez "Nouveaux Produits" dans le menu déroulant.
         hidden_powertip: Ces produits ont été masqués de votre catalogue, vous ne pourrez pas les proposer dans votre boutique. Vous pouvez cliquer sur "Ajouter" pour ajouter un produit à votre catalogue.
         new_powertip: Ces produits peuvent être ajoutés à votre catalogue. Cliquez sur "Ajouter" pour ajouter un produit à votre catalogue, ou 'Masquer" pour ne plus l'afficher. Vous pourrez changer d'avis plus tard!
+      controls:
+        back_to_my_inventory: Retour à mon catalogue boutique
     orders:
+      index:
+        capture: "Valider"
+        ship: "Expédier"
       bulk_management:
         tip: "Utilisez cette page pour changer les quantités d'un produit sur plusieurs commandes. Les produits peuvent aussi être supprimés de toutes les commandes, si nécessaire."
         shared: "Ressource partagée?"
@@ -228,10 +310,10 @@ fr:
         group_buy_unit_size: "Quantité totale du lot"
         total_qtt_ordered: "Quantité totale commandée"
         max_qtt_ordered: "Quantité max commandée"
-        current_fulfilled_units: "Nombre de lots commandés"
-        max_fulfilled_units: "Nombre max de lots commandés"
+        current_fulfilled_units: "Nombre d'unités commandées"
+        max_fulfilled_units: "Nombre max d'unités commandées"
         order_error: "Des erreurs doivent être résolues avant de pouvoir mettre à jour les commandes.\nLes champs entourés en rouge contiennent des erreurs."
-        variants_without_unit_value: "ATTENTION: certaines variantes n'ont pas de valeur unitaire"
+        variants_without_unit_value: "ATTENTION: certaines variantes n'ont pas de nombre d'unités"
     enterprise:
       select_outgoing_oc_products_from: Sélectionner les produits sortants pour le cycle de vente parmi
     enterprises:
@@ -247,12 +329,14 @@ fr:
           desc_short: Description (en bref)
           desc_short_placeholder: Parlez de votre entreprise en une ou deux phrases
           desc_long: A propos
-          desc_long_placeholder: Parlez de vous à vos acheteurs! Ces informations seront visibles sur votre profil public.
+          desc_long_placeholder: Parlez de vous à vos acheteurs ! Ces informations seront visibles sur votre profil public.
         business_details:
           abn: SIRET
           abn_placeholder: 'ex: 404 833 048 00022'
           acn: n° TVA intracommunautaire
           acn_placeholder: 'ex: 404 833 048'
+          display_invoice_logo: Afficher le logo sur la facture
+          invoice_text: Ajouter une mention spécifique en bas des factures
         contact:
           name: Nom
           name_placeholder: 'ex: Bernard Michelet'
@@ -266,7 +350,7 @@ fr:
           name: Nom
           fee_type: Type de marge
           manage_fees: Gérer les marges et commissions
-          no_fees_yet: Vous n'avez pas encore définies de commissions
+          no_fees_yet: Vous n'avez pas encore défini de commissions
           create_button: Créer une commission
         images:
           logo: Logo
@@ -275,17 +359,22 @@ fr:
           promo_image_note2: Votre bannière doit mesurer 1200 x 260, toute image non conforme sera rognée.
           promo_image_note3: La bannière est affichée en haut de la page de votre entreprise et dans sa version condensée (pop-up).
         inventory_settings:
-          text1: Vous pouvez gérer votre stock et vos prix via votre
-          inventory: inventaire
-          text2: "Si vous utilisez l'outil \"catalogue boutique\", vous pouvez choisir si les nouveaux produits ajoutés par vos fournisseurs à leurs catalogues doivent être ajoutés à votre catalogue boutique avant de pouvoir être mis en ligne dans votre boutique. Si vous n'utilisez pas l'outil \"catalogue boutique\", sélectionnez l'option précisant \"recommandé\" ci-dessous:"
+          text1: Vous pouvez choisir de gérer vos stocks et prix via votre
+          inventory: catalogue boutique
+          text2: >
+              Si vous utilisez l'outil "catalogue boutique", vous pouvez choisir si
+              les nouveaux produits ajoutés par vos fournisseurs doivent être référencés
+              dans votre catalogue boutique avant qu'ils puissent mis en vente dans
+              votre boutique. Si vous n'utilisez pas cet outil, choisissez l'option
+              indiquant "recommandé" ci-dessous:
           preferred_product_selection_from_inventory_only_yes: Les nouveaux produits des producteurs peuvent être ajoutés à ma boutique en ligne (recommandé)
           preferred_product_selection_from_inventory_only_no: Les nouveaux produits des producteurs doivent être ajoutés à mon catalogue boutique avant de pouvoir être ajoutés à ma boutique en ligne
         payment_methods:
           name: Nom
           applies: Active?
-          manage: Gérer les options de paiement
-          not_method_yet: Vous n'avez pas encore d'option de paiement.
-          create_button: Créer une nouvelle option de paiement
+          manage: Gérer les méthodes de paiement
+          not_method_yet: Vous n'avez pas encore de méthode de paiement.
+          create_button: Créer une nouvelle méthode de paiement
           create_one_button: En créer une maintenant
         primary_details:
           name: Nom
@@ -304,29 +393,43 @@ fr:
           visible_in_search: Apparaît sur la plateforme?
           visible_in_search_tip: Indiquez si vous souhaitez ou ne souhaitez pas que votre entreprise apparaisse sur la carte et dans la liste des boutiques.
           visible: Visible
-          not_visible: Pas visible
-          permalink: Lien (pas d'espace)
-          permalink_tip: "This permalink is used to create the url to your shop: %{link}your-shop-name/shop"
-          link_to_front: Link to shop front
-          link_to_front_tip: A direct link to your shopfront on the Harvest to Order.
+          not_visible: Invisible
+          permalink: Nom pour URL (sans espace)
+          permalink_tip: "Ce nom permanent est utilisé pour créer l'url de votre boutique: %{link}ma-boutique/shop"
+          link_to_front: Lien URL de la boutique
+          link_to_front_tip: C'est le lien qui permet d'accéder en direct à votre boutique sur Open Food France.
         shipping_methods:
           name: Nom
           applies: Active?
           manage: Gérer les méthodes de livraison
           create_button: Créer nouvelle méthode de livraison
-          create_one_button: Créer une commission
+          create_one_button: En créer une maintenant
           no_method_yet: Vous n'avez pas encore paramétré de méthode de livraison.
         shop_preferences:
-          shopfront_requires_login: "Cette boutique exige un login?"
-          shopfront_requires_login_tip: "Les acheteurs doivent-ils se connecter pour accéder à la boutique?"
+          shopfront_requires_login: "Boutique visible par tous?"
+          shopfront_requires_login_tip: "Choisissez si les acheteurs doivent être connectés pour voir la boutique ou si la boutique est visible par tout le monde."
           shopfront_requires_login_false: "Visible par tous"
-          shopfront_requires_login_true: "Demander aux acheteurs de se connecter"
+          shopfront_requires_login_true: "Visible uniquement pour les acheteurs logués"
+          recommend_require_login: "Nous recommandons de demander aux utilisateurs de se connecter si vous souhaitez leur permettre de modifier leur commande."
           allow_guest_orders: "Commandes des invités"
           allow_guest_orders_tip: "Autoriser la commande en tant qu'invité ou demander que l'acheteur soit logué."
           allow_guest_orders_false: "Demander que l'acheteur se logue pour pouvoir commander"
           allow_guest_orders_true: "Autoriser les commandes en mode invité"
-          shopfront_message_placeholder: Message optionnel à destination de vos acheteurs expliquant le fonctionnement de votre boutique/groupement d'achat/etc. Il s'affichera au-dessus de la liste des produits.
-          shopfront_closed_message_placeholder: Message expliquant pourquoi votre boutique est fermée en ce moment et/ou quand est-ce qu'elle ouvrira. Ce message s'affiche à l'ouverture de votre boutique uniquement quand il n'y a pas de cycle de vente actif (ce qui veut dire que a boutique est fermée).
+          allow_order_changes: "Modifier la commande"
+          allow_order_changes_tip: "Permettre aux acheteurs de modifier leur commande tant que le cycle de vente est ouvert."
+          allow_order_changes_false: "Les commandes validées ne peuvent plus être modifiées / annulées"
+          allow_order_changes_true: "Les acheteurs peuvent modifier / valider leurs commandes tant que le cycle de vente est ouvert"
+          shopfront_message: Message d'accueil boutique ouverte
+          shopfront_message_placeholder: >
+              Vous pouvez ici expliquer à vos acheteurs comment votre boutique fonctionne.
+              Ce texte s'affiche dans votre boutique, au-dessus de la liste de produits.
+          shopfront_closed_message: Message d'accueil boutique fermée
+          shopfront_closed_message_placeholder: >
+              Vous pouvez ici expliquer à vos acheteurs pourquoi votre boutique est
+              fermée et/ou quand elle ouvrira. Ce texte s'affiche uniquement quand
+              il n'y a pas de cycle de vente en cours (donc quand votre boutique est
+              fermée).
+          shopfront_category_ordering: Ordre d'affichage des catégories
           open_date: Date d'ouverture
           close_date: Date de fermeture
         social:
@@ -375,8 +478,8 @@ fr:
         producer_description_text: Saisissez votre catalogue produits sur Open Food France, ce qui permettra aux hubs-distributeurs utilisant la plateforme de les proposer dans leurs boutiques (sur votre autorisation).
         producer_shop: Boutique Producteur
         sell_your_produce: Vendez vos propres produits
-        sell_description_text: Vendez vos produits en direct aux mangeurs/restaurateurs/etc. via votre propre Boutique Producteur sur Open Food France.
-        sell_description_text2: Une Boutique Producteur vous permet de vendre uniquement vos propres produits. Si vous voulez vendre d'autres produits, sélectionnez "Hub Producteur"
+        producer_shop_description_text: Vendez vos produits en direct aux mangeurs/restaurateurs/etc. via votre propre Boutique Producteur sur Open Food France.
+        producer_shop_description_text2: Une Boutique Producteur vous permet de vendre uniquement vos propres produits. Si vous voulez vendre d'autres produits, sélectionnez "Hub Producteur"
         producer_hub: Hub Producteur
         producer_hub_text: Vendez vos produits et ceux d'autres fournisseurs
         producer_hub_description_text: Vous vendez non seulement vos produits, mais aussi des produits d'autres producteurs de votre région, artisans, ou distributeurs afin de proposer une offre complète dans votre boutique. Vous soutenez ainsi le développement de votre système alimentaire territorial !
@@ -389,6 +492,8 @@ fr:
         choose_option: Veuilliez choisir l'une des options ci-dessus.
         change_now: Changer
       enterprise_user_index:
+        loading_enterprises: CHARGEMENT DES ENTREPRISES
+        no_enterprises_found: Aucune entreprise trouvée.
         search_placeholder: Recherche par nom
         manage: Gérer
       new_form:
@@ -408,24 +513,34 @@ fr:
         next_step: Etape suivante
         choose_starting_point: 'Choisissez par où commencer:'
     order_cycles:
+      edit:
+        advanced_settings: Paramétrages avancés
+        update_and_close: Mettre à jour et fermer
+        choose_products_from: 'Choisir produits depuis :'
+        pickup_time_tip: Date/heure à laquelle les commandes pour ce cycle de vente seront à disposition de / livrées à l'acheteur.
+        pickup_instructions_tip: Ces instructions seront affichées à l'acheteur une fois sa commande passée.
+      exchange_form:
+        pickup_instructions_placeholder: "Modalités de retrait/livraison"
+        pickup_time_placeholder: "Prêt pour (ex : jour + créneau horaire)"
+        receival_instructions_placeholder: "Modalités de livraison"
       advanced_settings:
         title: Paramétrages avancés
-        choose_product_tip: Vous pouvez choisir de restreindre la liste des produits pouvant être proposés dans votre cycle de vente (produits entrants et sortants) aux produits du catalogue producteur de l'entreprise %{inventory}.
+        choose_product_tip: Vous pouvez choisir de limiter le choix des produits pouvant être mis en vente dans votre boutique à ceux figurant dans le catalogue boutique de %{inventory}.
         preferred_product_selection_from_coordinator_inventory_only_here: Uniquement les produits du catalogue boutique
         preferred_product_selection_from_coordinator_inventory_only_all: Tous les produits disponibles dans les catalogues producteurs
         save_reload: Sauvegarder et rafraichir la page
       coordinator_fees:
         add: Ajouter commission coordinateur
       form:
-        incoming: Produits entrants (constitution du catalogue boutique pour le cycle de vente)
+        incoming: Produits entrants (pouvant être mis en vente par les hubs)
         supplier: Fournisseur
         receival_details: Détails livraison produits
         fees: Commission
-        outgoing: Produits sortants (vendus via un ou plusieurs hubs)
+        outgoing: Produits sortants (mis en vente par/via un ou plusieurs hubs)
         distributor: Hub (distributeur)
         products: Produits
         tags: Tags
-        delivery_detaisl: Détails de livraison / retrait
+        delivery_details: Précisions retrait / livraison
         debug_info: Informations de débogage
       name_and_timing_form:
         name: Nom
@@ -443,29 +558,95 @@ fr:
         customer_instructions_placeholder: Commentaires pour le retrait / la livraison
         products: Produits
         fees: Commissions
-      edit:
-        advanced_settings: Paramétrages avancés
-        update_and_close: Mettre à jour et fermer
     producer_properties:
-      form:
-        property: Propriétés / labels
-        value: Détail
       index:
         title: Propriétés / labels du producteur
     shared:
       user_guide_link:
-        user_guide: Guide l'utilisateur
+        user_guide: Guide utilisateur
     invoice_settings:
       edit:
-        title: Apparence de la facture
-        invoice_style2?: Utiliser le modèle de facture alternaltif qui comprend une séparation des taxes par taux et une indication du taux appliqué par item (pas encore adapté pour les pays affichant des prix hors taxe)
-
-  home:
+        title: Paramètres de facturation
+        invoice_style2?: Utiliser le modèle de facture alternatif qui détaille le montant de TVA agrégé par taux et l'information du taux de TVA par produit (pas adapté pour les instances affichant les prix HT)
+        enable_receipt_printing?: Afficher les options d'impression de tickets de caisse dans le menu déroulant des commandes?
+    overview:
+      enterprises_header:
+        ofn_with_tip: Les Entreprises sont des Producteurs et/ou Hubs distributeurs, et sont donc les organisations de base qui utilisent Open Food France.
+      enterprises_hubs_tabs:
+        has_no_payment_methods: "%{enterprise} n'a pas défini de méthode de paiement"
+        has_no_shipping_methods: "%{enterprise} n'a pas défini de méthode de livraison"
+        has_no_enterprise_fees: "%{enterprise} n'a pas défini de marges et commissions"
+    enterprise_issues:
+      create_new: Créer Nouveau
+      resend_email: Renvoyer l'email
+      has_no_payment_methods: "%{enterprise} n'a pas de méthode de paiement active"
+      has_no_shipping_methods: "%{enterprise} n'a pas de méthode de livraison active"
+      email_confirmation: "L'adresse e-mail doit être confirmée. Nous avons envoyé un lien de confirmation à %{email}."
+      not_visible: "%{enterprise}n'est pas visible et ne peut être trouvé sur la carte ou dans les recherches sur le site."
+    reports:
+      hidden: Masqué
+      unitsize: Contenu Unitaire
+      total: Total
+      total_items: Nb Articles
+      supplier_totals: Totaux Cycle de Vente par Producteur
+      supplier_totals_by_distributor: Totaux Cycle de Vente par Producteur pour chaque Hub Distributeur
+      totals_by_supplier: Totaux Cycle de Vente par Hub Distributeur pour chaque Producteur
+      customer_totals: Totaux Cycle de Vente par Acheteur
+      all_products: Tous les produits
+      inventory: Catalogue boutique (en stock)
+      lettuce_share: LettuceShare
+      mailing_list: Liste de mails
+      addresses: Adresses
+      payment_methods: Rapport Méthodes de Paiement
+      delivery: Rapport de Livraison
+      tax_types: Par type de taxe
+      tax_rates: Par taux de taxe
+      pack_by_customer: Préparation des commandes par Acheteur
+      pack_by_supplier: Préparation des commandes par Producteur
+      orders_and_distributors:
+        name: Commandes et Hubs Distributeurs
+        description: Liste des Commandes avec les détails des Hubs Ditributeurs
+      bulk_coop:
+        name: Achat groupés en vrac (non utilisé)
+        description: Rapports achats groupés vrac (non utilisé)
+      payments:
+        name: Rapports des paiements
+        description: Rapports des paiements reçus
+      orders_and_fulfillment:
+        name: Rapports des commandes
+      customers:
+        name: Acheteurs
+      products_and_inventory:
+        name: Produits et Catalogues
+      sales_total:
+        name: Total des Ventes
+        description: Total des Ventes pour toutes les Commandes
+      users_and_enterprises:
+        name: Managers & Entreprises
+        description: Managers de l'Entreprise & Droits
+      order_cycle_management:
+        name: Gestion des Cycles de Vente
+      sales_tax:
+        name: TVA
+      xero_invoices:
+        name: Facture Xero
+        description: Factures pour import dans Xero
+      packing:
+        name: Rapports de préparation des paniers
+  checkout:
+    already_ordered:
+      cart: "panier"
+      message_html: "Vous avez déjà passé une commande pour ce cycle de vente. Vérifiez votre %{cart} pour voir les produits commandés. Vous pouvez annuler ou modifier votre commande jusqu'à la fermeture du cycle de vente."
+  shops:
     hubs:
-      show_closed_shops: "Aficher les boutiques fermées"
+      show_closed_shops: "Afficher les boutiques fermées"
       hide_closed_shops: "Masquer les boutiques fermées"
       show_on_map: "Tout afficher sur la carte"
   shared:
+    menu:
+      cart:
+        checkout: "Finaliser la commande"
+        already_ordered_products: "Déjà commandé dans ce cycle de vente"
     register_call:
       selling_on_ofn: "Vous souhaitez proposer vos produits sur Open Food France?"
       register: "Démarrez ici"
@@ -475,39 +656,32 @@ fr:
       register: "s'inscrire"
       contact: "contact"
       require_customer_login: "La boutique est réservée aux membres."
-      require_login_html: "Déjà inscrit? %{login}. Sinon, %{register} pour pouvoir faire vos achats."
-      require_customer_html: "Veuillez %{contact} %{enterprise} pour devenir membre."
-
+      require_login_html: "Déjà inscrit? %{Connectez-vous}. Sinon, %{inscrivez-vous} pour pouvoir faire vos achats."
+      require_customer_html: "Veuillez %{contacter} %{l'entreprise} pour devenir membre."
   invoice_billing_address: "Adresse de facturation :"
   invoice_column_tax: "TVA"
   invoice_column_price: "Prix"
   invoice_column_item: "Produit"
   invoice_column_qty: "Qté"
-  invoice_column_tax: "TVA"
-  invoice_column_price: "Prix"
-  invoice_column_unit_price_with_taxes: "Prix unitaire (TTC)"
-  invoice_column_unit_price_without_taxes: "Prix unitaire (HT)"
-  invoice_column_price_with_taxes: "Prix total (TTC)"
-  invoice_column_price_without_taxes: "Prix total (HT)"
-  invoice_column_tax_rate: "Taux TVA"
+  invoice_column_unit_price_with_taxes: "Prix unitaire TTC"
+  invoice_column_unit_price_without_taxes: "Prix unitaire HT"
+  invoice_column_price_with_taxes: "Prix total TTC"
+  invoice_column_price_without_taxes: "Prix total HT"
+  invoice_column_tax_rate: "TVA applicable"
+  invoice_tax_total: "Total TVA :"
   tax_invoice: "FACTURE"
-  tax_total: "Total TVA (%{rate}) :"
+  tax_total: "Total taxe (%{rate}) :"
   total_excl_tax: "Total HT :"
   total_incl_tax: "Total TTC :"
-  abn: "SIRET :"
-  acn: "n° TVA :"
-  invoice_issued_on: "Facture éditée le :"
-  order_number: "Numéro de facture :"
+  abn: "SIRET"
+  acn: "n° TVA intracommunautaire"
+  invoice_issued_on: "Date de facture :"
+  order_number: "N° de facture :"
   date_of_transaction: "Date de la transaction :"
-  number:
-    percentage:
-      format:
-        format: "%n %"
   ticket_column_qty: "Qté"
-  ticket_column_item: "Item"
-  ticket_column_unit_price: "Px Unit"
-  ticket_column_total_price: "Px Total"
-
+  ticket_column_item: "Produit"
+  ticket_column_unit_price: "Prix unitaire"
+  ticket_column_total_price: "Prix total"
   logo: "Logo (640x130)"
   logo_mobile: "Logo smartphone (75x26)"
   logo_mobile_svg: "Logo  smartphone (SVG)"
@@ -543,6 +717,11 @@ fr:
   terms_of_service: "Conditions d'utilisation"
   on_demand: A volonté
   none: Aucun
+  not_allowed: Non autorisé
+  no_shipping: pas de méthode de livraison
+  no_payment: pas de méthode de paiement
+  no_shipping_or_payment: pas de méthode de livraison ou de paiement
+  unconfirmed: non confirmé
   label_shops: "Boutiques"
   label_map: "Carte"
   label_producers: "Producteurs"
@@ -563,21 +742,12 @@ fr:
   items: "produits"
   cart_headline: "Votre panier"
   total: "Total"
-  checkout: "Régler la commande"
   cart_updating: "Mettre à jour le panier"
   cart_empty: "Panier vide"
   cart_edit: "Modifier votre panier"
   card_number: Numéro de carte
   card_securitycode: "Cryptogramme visuel"
   card_expiry_date: Date d'expiration
-  ofn_cart_headline: "Panier actuel pour:"
-  ofn_cart_distributor: "Distributeur:"
-  ofn_cart_oc: "Cycle de vente:"
-  ofn_cart_from: "De:"
-  ofn_cart_to: "Pour:"
-  ofn_cart_product: "Produit:"
-  ofn_cart_quantitiy: "Quantité:"
-  ofn_cart_send: "Acheter"
   ie_warning_headline: "Votre navigateur n'est pas à jour :-("
   ie_warning_text: "Pour une expérience optimale sur Open Food France, nous vous recommandons fortement de mettre à jour votre navigateur:"
   ie_warning_chrome: Télécharger Chrome
@@ -599,12 +769,12 @@ fr:
   footer_contact_email: "Nous écrire"
   footer_nav_headline: "Naviguer"
   footer_join_headline: "Nous rejoindre"
-  footer_join_body: "Créer une liste, un répertoire de boutiques ou groupes sur Open Food France."
+  footer_join_body: "Créer un profil, une boutique ou un groupe sur Open Food France."
   footer_join_cta: "Je veux en savoir plus!"
   footer_legal_call: "Lire nos"
   footer_legal_tos: "Termes et conditions"
   footer_legal_visit: "Nous trouver sur"
-  footer_legal_text_html: "Harvest to Order est une plateforme logicielle open source, libre et gratuite. Nos données sont protégées sous licence %{content_license} et notre code sous %{code_license}."
+  footer_legal_text_html: "Open Food Network est une plateforme logicielle open source, libre et gratuite. Nos données sont protégées sous licence %{content_license} et notre code sous %{code_license}."
   home_shop: Faire mes courses
   brandstory_headline: "Des aliments porteurs de sens."
   brandstory_intro: "Parfois, le meilleur moyen de réparer le système, c'est d'en inventer un autre..."
@@ -612,7 +782,7 @@ fr:
   brandstory_part2: "Nous avons besoin d'un outil pour rendre tout ça réel. Un moyen de redonner le pouvoir à ceux qui cultivent, vendent et achètent la nourriture. Un moyen de raconter les histoires, de gérer la logistique. Un moyen de transformer chaque jour les transactions en actions porteuses de changement."
   brandstory_part3: "C'est pour cela que nous construisons cette plateforme, ce \"marché en ligne\", afin de rééquilibrer les échanges et redistribuer le pouvoir. Elle est transparente, pour assurer des relations équitables et favoriser les prises de conscience. Elle est open source, donc possédée par tout le monde. Elle se déploie aux échelles régionales et nationales, et des gens lancent de multiples versions à travers le monde."
   brandstory_part4: "Elle fonctionne partout. Elle change tout."
-  brandstory_part5_strong: "Cette plateforme s'appelle Harvest to Order."
+  brandstory_part5_strong: "Cette plateforme s'appelle Open Food Network."
   brandstory_part6: "Nous aimons notre nourriture. Maintenant nous pouvons aussi aimer notre système alimentaire."
   learn_body: "Explorer les modèles, les histoires et les ressources disponibles pour vous aider à développer votre propre initiative de commerce/organisation oeuvrant pour un système alimentaire équitable et juste. Trouver des outils pour vous former, des événements et autres opportunités d'apprendre de vos pairs."
   learn_cta: "Découvrir "
@@ -632,19 +802,19 @@ fr:
   stats_shops: "boutiques"
   stats_shoppers: "acheteurs"
   stats_orders: "commandes"
-  checkout_title: Paiement
-  checkout_now: Régler la commande
+  checkout_title: Finalisation commande
+  checkout_now: Passer la commande
   checkout_order_ready: Commande prête pour
   checkout_hide: Masquer
   checkout_expand: Afficher
-  checkout_headline: "Ok, prêt pour le paiement?"
-  checkout_as_guest: "Régler en mode invité"
+  checkout_headline: "Ok, prêt à finaliser la commande?"
+  checkout_as_guest: "Passer commande en mode invité"
   checkout_details: "Vos informations"
   checkout_billing: "Informations de facturation"
   checkout_default_bill_address: "Sauvegarder comme adresse de facturation par défaut"
   checkout_shipping: Informations de livraison
   checkout_default_ship_address: "Sauvegarder comme adresse de livraison par défaut"
-  checkout_method_free: Gratuit
+  checkout_method_free: Pas de frais supplémentaires
   checkout_address_same: Adresse de livraison identique à l'adresse de facturation?
   checkout_ready_for: "Prêt pour:"
   checkout_instructions: "Commentaires ou demandes spécifiques?"
@@ -658,18 +828,21 @@ fr:
   order_paid: RÉGLÉ
   order_not_paid: NON RÉGLÉ
   order_total: Total commande
-  order_payment: "Paiement par :"
+  order_payment: "Payer via:"
   order_billing_address: Adresse de facturation
   order_delivery_on: Livraison prévue
   order_delivery_address: Adresse de livraison
+  order_delivery_time: Créneau de livraison/retrait
   order_special_instructions: "Vos commentaires:"
   order_pickup_time: Prêt à être retirer
   order_pickup_instructions: Instructions de retrait
   order_produce: Produit
   order_total_price: Total
-  order_includes_tax: (TVA inclue)
+  order_includes_tax: (dont TVA)
   order_payment_paypal_successful: Votre paiement via PayPal a été réalisé avec succès.
   order_hub_info: Hub Info
+  order_back_to_store: Retour à la boutique
+  order_back_to_cart: Retour au panier
   bom_tip: "Utilisez cette page pour modifier les quantités sur plusieurs commandes à la fois. Les produits peuvent aussi être supprimés des commandes si nécessaire."
   unsaved_changes_warning: "Des modifications n'ont pas été enregistrées et seront perdues si vous continuez."
   unsaved_changes_error: "Les champs entourés en rouge contiennent des erreurs."
@@ -711,7 +884,7 @@ fr:
   email_payment_paid: RÉGLÉ
   email_payment_not_paid: NON RÉGLÉ
   email_payment_summary: Résumé du paiement
-  email_payment_method: "Moyen de paiement :"
+  email_payment_method: "Payer via :"
   email_shipping_delivery_details: Détails de livraison
   email_shipping_delivery_time: "Livré le:"
   email_shipping_delivery_address: "Adresse de livraison:"
@@ -732,7 +905,7 @@ fr:
   producer_mail_delivery_instructions: "Modalités de livraison des produits:"
   producer_mail_signoff: "Merci et belle fin de journée!"
   shopping_oc_closed: La boutique est actuellement fermée
-  shopping_oc_closed_description: "Veuillez attendre l'ouverture du prochain cycle de vente (ou contactez-nous directement pour voir si nous pouvez accépter une commande tardive)"
+  shopping_oc_closed_description: "Veuillez attendre l'ouverture du prochain cycle de vente (ou contactez-nous directement pour voir si nous pouvons accepter une commande tardive)"
   shopping_oc_last_closed: "Le dernier cycle de vente s'est terminé il y a %{distance_of_time}"
   shopping_oc_next_open: "Le prochain cycle de vente ouvrira dans %{distance_of_time}"
   shopping_tabs_about: "A propos de %{distributor}"
@@ -761,6 +934,10 @@ fr:
   hubs_intro: Passez commande près de chez vous
   hubs_distance: Le plus près de
   hubs_distance_filter: "Afficher les boutiques près de %{location}"
+  shop_changeable_orders_alert_html:
+    one: Votre commande avec <a href='%{path}' target='_blank'>%{shop} / %{order}</a> est ouverte pour vérification. Vous pouvez effectuer des modification jusqu'à %{oc_close}.
+    other: Vous avez <a href='%{path}' target='_blank'>%{count} commandes avec %{shop}</a>ouvertes à la vérification. Vous pouvez effectuer des modifications jusqu'à %{oc_close}.
+  orders_changeable_orders_alert_html: Cette commande a été confirmée, mais vous pouvez effectuer des modifications jusqu'à <strong>%{oc_close}</strong>.
   products_clear_all: Vider
   products_showing: "Afficher:"
   products_with: avec
@@ -768,7 +945,7 @@ fr:
   products_loading: "Produits en cours de chargement..."
   products_updating_cart: "Actualisation du panier..."
   products_cart_empty: "Panier vide"
-  products_edit_cart: "Modifier votre panier"
+  products_edit_cart: "Valider votre panier"
   products_from: de
   products_change: "Aucun changement à sauvegarder."
   products_update_error: "Échec de l'enregistrement dû à:"
@@ -803,7 +980,7 @@ fr:
   groups_signup_motivation3: Vous avez de belles idées, et nous voulons vous aider. Nous partageons nos connaissances, réseaux et ressources. Nous savons que l'isolement ne crée pas le changement, alors coopérons.
   groups_signup_motivation4: Nous venons à votre rencontrer.
   groups_signup_motivation5: Vous êtes un réseau de circuits de distribution alternatifs, de producteurs, de distributeurs, une administration liée à l'industrie alimentaire ou une autorité locale?
-  groups_signup_motivation6: Quel que soit votre rôle dans la relocalisation des systèmes alimentaires, nous sommes prêts à vous soutenir. Si vous vous demandez à quoi Harvest to Order ressemble / pourrait ressembler dans votre coin du monde, contactez-nous.
+  groups_signup_motivation6: Quel que soit votre rôle dans la relocalisation des systèmes alimentaires, nous sommes prêts à vous soutenir. Si vous vous demandez à quoi Open Food Network ressemble / pourrait ressembler dans votre coin du monde, contactez-nous.
   groups_signup_motivation7: Nous contribuons à remettre du sens dans les systèmes alimentaires.
   groups_signup_motivation8: Vous avez besoin de connecter et d'outiller vos réseaux, nous offrons une plate-forme pour la coopération et l'action. Vous souhaitez de l'engagement. Nous vous aidons à atteindre les acteurs, les parties-prenantes, les secteurs.
   groups_signup_motivation9: Vous avez besoin de ressources. Nous mettons à votre service notre expérience. Vous avez besoin de coopération. Nous vous connectons à un large réseau d'acteurs et d'organisations soeurs partout dans le monde.
@@ -818,7 +995,7 @@ fr:
   modal_hubs_content1: Vous pouvez chercher le hub qui vous convient par localisation ou par nom. Certains hubs ont de multiples points de retrait de vos achats, et certains proposent également la livraison à domicile. Chaque food hub est un point de vente et gère de façon indépendante ses opérations et sa logistique - attendez-vous donc à des disparités de fonctionnement entre les hubs.
   modal_hubs_content2: Vous pouvez uniquement faire vos courses dans un hub à la fois.
   modal_groups: "Groupes / réseaux territoriaux"
-  modal_groups_content1: Voilà les organisations et les relations inter-hubs qui constituent l'Harvest to Order.
+  modal_groups_content1: Voilà les organisations et les relations inter-hubs qui constituent l'Open Food Network.
   modal_groups_content2: Certains groupes sont regroupés pas localisation ou région, d'autres sur des smilitudes non géographiques.
   modal_how: "Comment ça marche"
   modal_how_shop: Faire vos courses sur Open Food France
@@ -867,9 +1044,9 @@ fr:
   sell_hubs_detail: "Créer un profil pour votre entreprise de distribution ou organisation sur OFFrance. A tout moment vous pourrez créer une boutique multi-fournisseurs."
   sell_groups_detail: "Créer un répertoire sur mesure (regroupant différents producteurs et hubs de distribution) pour votre région ou votre organisation."
   sell_user_guide: "En savoir plus en explorant le guide utilisateur."
-  sell_listing_price: "L'inscription sur OFFrance est gratuite. Ouvrir est gérer une boutique sur OFFrance ou créer un groupe sur OFFrance pour votre organisation ou réseau régional, n'est pas gratuit, mais le prix est libre: soit 2% du chiffre d'affaire (ou autre forme de contribution libre designée par votre hub), soit une contribution \"en compétences\" à Open Food France (développement de fonctionnalités, recherche de financement, support utilisateur, etc.), soit un mix des deux."
+  sell_listing_price: "La création d'un profil sur OFFrance est entièrement libre. Si vous ouvrez et gérez une boutique sur OFFrance, ou créez un groupe pour votre organisation ou réseau régional, nous vous invitons à contribuer au commun Open Food France que vous utilisez. En effet, faire tourner la plateforme Open Food France a un coût, et nous comptons sur VOUS pour contribuer à couvrir ces frais de fonctionnement (location et maintenance des serveurs, support utilisateur, nouveaux développements...). Par exemple, en reversant sous forme de don à l'association 2% de votre chiffre d'affaire, et/ou un montant fixe tous les mois. Vous pouvez aussi contribuer au commun \"en compétences\" (développement de fonctionnalités, recherche de financement, support utilisateur, etc.)"
   sell_embed: "Nous pouvons aussi intégrer votre boutique OFFrance dans votre propre site web ou construire un site web d'alimentation locale sur mesure pour votre région."
-  sell_ask_services: "Nous consulter sur les services OFFrance."
+  sell_ask_services: "Nous consulter sur les services des partenaires OFFrance."
   shops_title: Boutiques
   shops_headline: Des achats qui transforment.
   shops_text: Les aliments poussent selon des cycles naturels, les fermiers récoltent en cycles. Alors ici, nous achetons aussi en cycles. Si un cycle de vente est terminé, attendez le suivant ou demandez des infos au hub !
@@ -887,10 +1064,10 @@ fr:
   orders_edit_headline: Votre panier
   orders_edit_time: Commande prête pour
   orders_edit_continue: Poursuivre mes achats
-  orders_edit_checkout: Régler ma commande
+  orders_edit_checkout: Passer ma commande
   orders_form_empty_cart: "Vider le panier"
   orders_form_subtotal: Sous-total
-  orders_form_admin: Admin et opérations
+  orders_form_admin: Admin & traitements
   orders_form_total: Total
   orders_oc_expired_headline: Les commandes ne sont plus possibles pour ce cycle de vente.
   orders_oc_expired_text: "Désolé, les commandes pour ce cycle de vente ont été clôturées il y a %{time}! Veuillez contacter directement le hub pour voir s'il accepte les commandes tardives."
@@ -900,7 +1077,18 @@ fr:
   orders_oc_expired_phone: "Téléphone:"
   orders_show_title: Confirmation de commande
   orders_show_time: Commande prête pour
-  orders_show_number: Confirmation de commande
+  orders_show_order_number: "Commande #%{number}"
+  orders_show_cancelled: Annulée
+  orders_show_confirmed: Confirmée
+  orders_your_order_has_been_cancelled: "Votre commande a été annulée"
+  orders_could_not_cancel: "Désolé, la commande n'a pas pu être annulée"
+  orders_cannot_remove_the_final_item: "Impossible de supprimer le dernier produit d'une commande, si vous souhaitez supprimer l'ensemble des produits, veuillez annuler la commande."
+  orders_bought_items_notice:
+    one: Un produit ajouté a bien été confirmé pour ce cycle de vente
+    other: '%{count} produits ajoutés ont été confirmés pour ce cycle de vente.'
+  orders_bought_edit_button: Modifier les produits confirmés
+  orders_bought_already_confirmed: "* déjà confirmé"
+  orders_confirm_cancel: Voulez-vous vraiment annuler cette commande ?
   products_cart_distributor_choice: "Distributeur pour votre commande:"
   products_cart_distributor_change: "Vore distributeur pour cette commande sera dorénavant %{name} si vous ajoutez ce produit à votre panier."
   products_cart_distributor_is: "Votre distributeur pour cette commande est %{name}."
@@ -913,31 +1101,35 @@ fr:
   products_max_quantity: Quantité max
   products_distributor: Distributeur
   products_distributor_info: Quand vous choisissez un distributeur pour votre commande, les adresse et date de retrait seront affichées ici.
+  products_distribution_adjustment_label: "Distribution par %{distributor}du produit %{product}"
   shop_trial_expires_in: "Votre période de test se termine dans"
   shop_trial_expired_notice: "Vous pouvez continuer à utiliser la plateforme en contrepartie d'une contribution libre et volontaire. Merci de nous informer de la façon dont vous souhaitez contribuer :-)"
   password: Mot de passe
   remember_me: Se souvenir de moi
   are_you_sure: "Confirmer?"
   orders_open: Boutique ouverte
-  closing: "Fermeture"
+  closing: "Fermeture "
   going_back_to_home_page: "Retour à la page d'accueil"
   creating: Création
   updating: Mettre à jour
   failed_to_create_enterprise: "Impossible de créer votre entreprise"
   failed_to_create_enterprise_unknown: "Impossible de créer votre entreprise.\nVérifiez que tous les champs sont remplis."
   failed_to_update_enterprise_unknown: "Impossible de mettre à jour votre entreprise.\nVérifiez que tous les champs sont remplis."
+  enterprise_confirm_delete_message: "Cette action supprimera également le produit %{product} que cette entreprise distibue. Voulez-vous vraiment continuer ?"
   order_not_saved_yet: "Votre commande n'a pas encore été enregistrée. Attendez quelques secondes!"
   filter_by: "Filtrer par"
   hide_filters: "Masquer les filtres"
   one_filter_applied: "1 filtre appliqué"
   x_filters_applied: "filtres appliqués"
-  submitting_order: "Votre commande est en cours d'envoi: veuillez patienter"
+  submitting_order: "Votre commande est en cours d'envoi : veuillez patienter"
   confirm_hub_change: "Confirmer? Cette action modifiera la boutique sélectionnée et tous les articles de votre panier seront effacés."
   confirm_oc_change: "Confirmer? Cette action modifiera le cycle de vente sélectionné et tous les articles de votre panier seront effacés."
   location_placeholder: "Saisissez une localisation..."
   error_required: "Champ obligatoire"
   error_number: "saisir un nombre"
   error_email: "saisir une adresse email"
+  error_not_found_in_database: "%{name} n'existe pas"
+  error_no_permission_for_enterprise: "\"%{name}\" : vous n'avez pas les droits requis pour gérer les produits de cette entreprise"
   item_handling_fees: "Frais logistiques (inclus dans le prix affiché)"
   january: "Janvier"
   february: "Février"
@@ -1001,13 +1193,14 @@ fr:
   enterprise_long_desc: "Description longue"
   enterprise_long_desc_placeholder: "Vous pouvez ici raconter l'histoire de votre organisation - votre projet, les valeurs que vous défendez. Nous vous conseillons de ne pas dépasser 600 caractères ou 150 mots."
   enterprise_long_desc_length: "%{num} caractères / inférieur à 600 recommandé"
+  enterprise_limit: Nombre max d'entreprises
   enterprise_abn: "SIRET"
   enterprise_abn_placeholder: "ex: 404 833 048 00022"
   enterprise_acn: "n° TVA intracommunautaire"
   enterprise_acn_placeholder: "ex: 404 833 048"
   enterprise_tax_required: "Merci de choisir."
   enterprise_final_step: "Dernière étape!"
-  enterprise_social_text: "Comment trouver la boutique en ligne %{enterprise}"
+  enterprise_social_text: "Comment trouver la boutique en ligne %{enterprise} ?"
   website: "Site internet"
   website_placeholder: "ex: openfoodfrance.fr"
   facebook: "Facebook"
@@ -1069,6 +1262,9 @@ fr:
   registration_detail_state_error: "Veuillez saisir un Département"
   registration_detail_country: "Pays:"
   registration_detail_country_error: "Veuillez saisir une Pays"
+  shipping_method_destroy_error: "Cette méthode de livraison ne peut pas être supprimée car elle est référencée dans une commande : %{number}."
+  accounts_and_billing_task_already_running_error: "Une autre tache est en cours, merci de patienter un instant..."
+  accounts_and_billing_start_task_notice: "Tache mise en file d'attente"
   fees: "Frais"
   item_cost: "Coût du produit"
   bulk: "Vrac"
@@ -1096,10 +1292,12 @@ fr:
   credit: "Crédit"
   Paid: "Payé"
   Ready: "Prêt"
+  ok: OK
+  not_visible: invisible
   you_have_no_orders_yet: "Vous n'avez pas encore de commande"
   running_balance: "Solde courant"
   outstanding_balance: "Solde restant"
-  admin_entreprise_relationships: "Liens inter-entreprises"
+  admin_entreprise_relationships: "Permissions inter-entreprises"
   admin_entreprise_relationships_everything: "Tout"
   admin_entreprise_relationships_permits: "autorise"
   admin_entreprise_relationships_seach_placeholder: "Chercher"
@@ -1109,7 +1307,7 @@ fr:
   admin_entreprise_groups_owner: "Manager principal"
   admin_entreprise_groups_on_front_page: "Sur la page d'accueil?"
   admin_entreprise_groups_entreprise: "Entreprises"
-  admin_entreprise_groups_data_powertip: "L'utilisateur principal en charge de ce groupe."
+  admin_entreprise_groups_data_powertip: "Le manager principal en charge de ce groupe."
   admin_entreprise_groups_data_powertip_logo: "Il s'agit du logo du groupe"
   admin_entreprise_groups_data_powertip_promo_image: "Cette image est affichée en haut du profil Groupe."
   admin_entreprise_groups_contact: "Contact"
@@ -1122,20 +1320,27 @@ fr:
   admin_entreprise_groups_contact_state_id: "Département"
   admin_entreprise_groups_contact_country_id: "Pays"
   admin_entreprise_groups_web: "Liens web"
-  admin_entreprise_groups_web_twitter: "ex: @OpenFoodNet"
+  admin_entreprise_groups_web_twitter: "ex: @OpenFoodNet_fr"
   admin_entreprise_groups_web_website_placeholder: "ex: www.monepicerieenligne.fr"
   admin_order_cycles: "Gérer les cycles de vente"
   open: "Ouvre"
   close: "Ferme"
+  create: "Créer"
+  search: "Rechercher"
   supplier: "Fournisseurs"
   coordinator: "Coordinateur"
   distributor: "Distributeur"
+  enterprise_fees: "Marges et commissions"
+  process_my_order: "Valider ma Commande"
+  delivery_instructions: Instructions de Livraison
+  delivery_method: Méthode de Livraison
   fee_type: "Type de marge"
   tax_category: "TVA applicable"
   calculator: "Calculateur"
   calculator_values: "Valeurs applicables"
   flat_percent_per_item: "Montant net (par produit)"
   new_order_cycles: "Nouveau cycle de vente"
+  new_order_cycle: "Nouveau Cycle de Vente"
   select_a_coordinator_for_your_order_cycle: "Choisissez un coordinateur pour votre cycle de vente"
   edit_order_cycle: "Modifier le cycle de vente"
   roles: "Roles"
@@ -1156,12 +1361,14 @@ fr:
   price: "Prix"
   on_hand: "En stock"
   save_changes: "Sauvegarder les modifications"
+  order_saved: "Commande Sauvegardée"
+  no_products: Pas de Produits
   spree_admin_overview_enterprises_header: "Mes entreprises"
   spree_admin_overview_enterprises_footer: "GÉRER MES ENTREPRISES"
   spree_admin_enterprises_hubs_name: "Nom"
   spree_admin_enterprises_create_new: "CRÉER NOUVELLE"
-  spree_admin_enterprises_shipping_methods: "Options de livraison"
-  spree_admin_enterprises_fees: "Marges de l'entreprise"
+  spree_admin_enterprises_shipping_methods: "Méthodes de livraison"
+  spree_admin_enterprises_fees: "Marges et commissions"
   spree_admin_enterprises_none_create_a_new_enterprise: "CRÉER UNE NOUVELLE ENTREPRISE"
   spree_admin_enterprises_none_text: "Vous n'avez pas encore d'entreprise"
   spree_admin_enterprises_producers_name: "Nom"
@@ -1170,26 +1377,36 @@ fr:
   spree_admin_enterprises_producers_order_cycles: "Produits dans le cycle de vente"
   spree_admin_enterprises_tabs_hubs: "HUBS"
   spree_admin_enterprises_tabs_producers: "PRODUCTEURS"
-  spree_admin_enterprises_producers_manage_order_cycles: "GÉRER MES CYCLES DE VENTES"
   spree_admin_enterprises_producers_manage_products: "GÉRER LES PRODUITS"
-  spree_admin_enterprises_producers_orders_cycle_text: "Vous n'avez pas de cycle de vente actif."
   spree_admin_enterprises_any_active_products_text: "Vous n'avez aucun produit actif."
   spree_admin_enterprises_create_new_product: "CRÉER UN NOUVEAU PRODUIT"
-  spree_admin_order_cycles: "Cycles de vente"
-  spree_admin_order_cycles_tip: "Les cycles de vente déterminent quand et où vos produits peuvent être commandés et reçus par les acheteurs."
-  dashbord: "Tableau de bord"
   spree_admin_single_enterprise_alert_mail_confirmation: "Veuillez confirmer l'adresse mail pour"
   spree_admin_single_enterprise_alert_mail_sent: "Email envoyé à "
   spree_admin_overview_action_required: "Action requise"
   spree_admin_overview_check_your_inbox: "Veuillez vérifier votre boîte mail pour les prochaines étapes. Merci!"
-  change_package: "Changer de pack"
+  spree_admin_unit_value: Nb Unités
+  spree_admin_unit_description: 'Description complémentaire (ex: "(vrac)")'
+  spree_admin_variant_unit: Unité
+  spree_admin_variant_unit_scale: Echelle unitaire (en g ou L)
+  spree_admin_variant_unit_name: Nom de la pièce (si vendu à la pièce)
+  change_package: "Changer de type de compte"
   spree_admin_single_enterprise_hint: "Astuce: Pour permettre aux gens de vous trouver, activez votre visibilité "
+  spree_admin_eg_pickup_from_school: "ex : \"Retrait des produits à l'Ecole Marimati / Au Café du coin / chez Babette / ...\""
+  spree_admin_eg_collect_your_order: "ex : \"Veuillez récupérer votre commande au 34 rue Victor Hugo, 75018 Paris\""
+  spree_classification_primary_taxon_error: "L'intitulé %{taxon}est l'intitulé de base pour %{product} et ne peut être supprimé"
+  spree_order_availability_error: "Le distributeur ne peut fournir les produits de votre panier pour ce cycle de vente."
+  spree_order_populator_error: "Le distributeur ne peut fournir tous les produits de votre panier pour ce cycle de vente. Merci de choisir un autre distributeur ou un autre cycle de vente."
+  spree_order_populator_availability_error: "Ce produit n'est pas disponible pour ce cycle de vente / distributeur."
+  spree_distributors_error: "Veuillez sélectionner au moins un hub"
+  spree_user_enterprise_limit_error: "^ %{email} ne peut pas créer de nouvelles entreprises (limite actuelle : %{enterprise_limit} entreprises )."
+  spree_variant_product_error: doit avoir au moins une variante
   your_profil_live: "Votre profil en ligne"
   on_ofn_map: "sur la carte Open Food France"
   see: "Voir"
-  live: "En ligne"
+  live: "en ligne"
   manage: "Gérer"
   resend: "Renvoyer"
+  trial: Découverte
   add_and_manage_products: "Ajouter & gérer des produits"
   add_and_manage_order_cycles: "Ajouter & gérer des cycles de vente"
   manage_order_cycles: "Gérer les cycles de vente"
@@ -1197,11 +1414,19 @@ fr:
   edit_profile_details: "Modifier les informations du profil"
   edit_profile_details_etc: "Modifier la description, les images, etc."
   order_cycle: "Cycle de vente"
+  order_cycles: "Cycles de Vente"
+  enterprises: "Entreprises"
   remove_tax: "Retirer TVA"
+  enterprise_terms_of_service: "Conditions Générales d'Utilisation"
+  enterprises_require_tos: "Les entreprises doivent accepter les Conditions Générales d'Utilisation"
+  enterprise_tos_link: "Lien vers les Conditions Générales d'Utilisation"
+  enterprise_tos_message: "Nous soutenons la mise en place d'un système alimentaire résilient et durable, et souhaitons œuvrer avec des entreprises qui partagent nos valeurs et notre vision. Ainsi, nous demandons aux entreprises s'enregistrant sur Open Food France de valider nos "
+  enterprise_tos_link_text: "Conditions d'utilisation"
+  enterprise_tos_agree: "J'adhère aux valeurs d'Open Food France et valide les Conditions Générales d'Utilisation."
   tax_settings: "Paramètres TVA"
   products_require_tax_category: "vous devez choisir la TVA applicable"
   admin_shared_address_1: "Adresse"
-  admin_shared_address_2: "Adresse (cont.)"
+  admin_shared_address_2: "Adresse (suite)"
   admin_share_city: "Ville"
   admin_share_zipcode: "Code postal"
   admin_share_country: "Pays"
@@ -1213,7 +1438,6 @@ fr:
   hub_sidebar_blue: "bleu"
   hub_sidebar_red: "rouge"
   shop_trial_in_progress: "Votre période de test se termine dans %{days}."
-  shop_trial_expired: "Bonne nouvelle! Nous avons décidé d'étendre la période de test pour votre hub, nous vous informerons avant la fin de la période."
   report_customers_distributor: "Distributeur"
   report_customers_supplier: "Fournisseurs"
   report_customers_cycle: "Cycle de vente"
@@ -1231,28 +1455,148 @@ fr:
   report_order_cycle: "Cycle de vente:"
   report_entreprises: "Entreprises:"
   report_users: "Managers:"
-  report_tax_rates: "Taxes par taux"
-  report_tax_types: "Taxes par type"
-  report_header_order_number: "Numéro de commande"
-  report_header_date: "Date"
-  report_header_items: "Produits"
-  report_header_items_total: "Total des produits %{currency_symbol}"
-  report_header_taxable_items_total: "Total des produits taxés (%{currency_symbol})"
-  report_header_sales_tax: "Tax sur la vente (%{currency_symbol})"
+  report_tax_rates: TVA par taux
+  report_tax_types: TVA par type de produit/service
+  report_header_order_cycle: Cycle de Vente
+  report_header_user: Utilisateur
+  report_header_email: Email
+  report_header_status: Statut
+  report_header_comments: Commentaire
+  report_header_first_name: Prénom
+  report_header_last_name: Nom
+  report_header_phone: n° tel
+  report_header_suburb: Ville
+  report_header_address: Adresse
+  report_header_billing_address: Adresse de facturation
+  report_header_relationship: Droits
+  report_header_hub: Hub
+  report_header_hub_address: Adresse du Hub
+  report_header_to_hub: Au Hub
+  report_header_hub_code: Code du Hub
+  report_header_code: Code
+  report_header_paid: Payé ?
+  report_header_delivery: Livré ?
+  report_header_shipping: Livraison
+  report_header_shipping_method: Méthode de Livraison
+  report_header_shipping_instructions: Instructions de Livraison
+  report_header_ship_street: Rue Livraison
+  report_header_ship_street_2: ' Rue (2) Livraison'
+  report_header_ship_city: Ville Livraison
+  report_header_ship_postcode: Code Postal Livraison
+  report_header_ship_state: Département Livraison
+  report_header_billing_street: Rue Facturation
+  report_header_billing_street_2: Rue (2) Facturation
+  report_header_billing_street_3: Rue (3) Facturation
+  report_header_billing_street_4: Rue (4) Facturation
+  report_header_billing_city: Ville Facturation
+  report_header_billing_postcode: Code Postal Facturation
+  report_header_billing_state: Département Facturation
+  report_header_incoming_transport: Transport réception
+  report_header_special_instructions: Note au producteur
+  report_header_order_number: N° commande
+  report_header_date: Date
+  report_header_confirmation_date: Date de confirmation
+  report_header_tags: Tags
+  report_header_items: Produits
+  report_header_items_total: "Montant des produits %{currency_symbol}"
+  report_header_taxable_items_total: "Montant produits soumis à TVA (%{currency_symbol})"
+  report_header_sales_tax: "TVA sur produits (%{currency_symbol})"
   report_header_delivery_charge: "Frais de livraison (%{currency_symbol})"
-  report_header_tax_on_delivery: "Taxe sur la livraison (%{currency_symbol})"
-  report_header_tax_on_fees: "Taxes sur les charges (%{currency_symbol})"
-  report_header_total_tax: "Taxe totale (%{currency_symbol})"
-  report_header_customer: "Acheteur"
-  report_header_distributor: "Distributeur"
-  report_header_total_excl_vat: "Total sans TVA (%{currency_symbol})"
-  report_header_total_incl_vat: "Total avec TVA (%{currency_symbol})"
+  report_header_tax_on_delivery: "TVA sur livraison (%{currency_symbol})"
+  report_header_tax_on_fees: "TVA sur commission hub (%{currency_symbol})"
+  report_header_total_tax: "Total TVA (%{currency_symbol})"
+  report_header_enterprise: Entreprise
+  report_header_customer: Client
+  report_header_customer_code: Code acheteur
+  report_header_product: Produit
+  report_header_product_properties: Propriétés / labels Produits
+  report_header_quantity: Quantité
+  report_header_max_quantity: Quantité Max
+  report_header_variant: Variante
+  report_header_variant_value: Nb Unités Variante
+  report_header_variant_unit: Unité
+  report_header_total_available: Total disponible
+  report_header_unallocated: Non alloué
+  report_header_max_quantity_excess: Dépassement Qté Max
+  report_header_taxons: Intitulés
+  report_header_supplier: Fournisseur
+  report_header_producer: Producteur
+  report_header_producer_suburb: Ville Producteur
+  report_header_unit: Unité
+  report_header_group_buy_unit_quantity: Nb d'unités achetées (vente par lots)
+  report_header_cost: Coût
+  report_header_shipping_cost: Coût de livraison
+  report_header_curr_cost_per_unit: Prix de revient par unité
+  report_header_total_shipping_cost: Coût de livraison total
+  report_header_payment_method: Méthode de paiement
+  report_header_sells: Vend
+  report_header_visible: Visible
+  report_header_price: Prix
+  report_header_unit_size: Contenu Unitaire
+  report_header_distributor: Distributeur
+  report_header_distributor_address: Adresse Hub Distributeur
+  report_header_distributor_city: Ville Distributeur
+  report_header_distributor_postcode: Code Postal Distributeur
+  report_header_delivery_address: Adresse Livraison
+  report_header_delivery_postcode: Code Postal Livraison
+  report_header_bulk_unit_size: Quantité totale du lot
+  report_header_weight: Poids
+  report_header_sum_total: Somme Totale
+  report_header_date_of_order: Date de Commande
+  report_header_amount_owing: Montant dû
+  report_header_amount_paid: Montant payé
+  report_header_units_required: Nb Unités Requises
+  report_header_remainder: Reste à payer
+  report_header_order_date: Date de commande
+  report_header_order_id: N° Commande
+  report_header_item_name: Nom de la pièce
+  report_header_temp_controlled_items: Article à température contrôlée ?
+  report_header_customer_name: Nom Acheteur
+  report_header_customer_email: E-mail Acheteur
+  report_header_customer_phone: Tel Acheteur
+  report_header_customer_city: Ville Acheteur
+  report_header_payment_state: Statut du Paiement
+  report_header_payment_type: Type de Paiement
+  report_header_item_price: "Pièce (%{currency})"
+  report_header_item_fees_price: "Pièce + Marge (%{currency})"
+  report_header_admin_handling_fees: "Frais de Gestion (%{currency})"
+  report_header_ship_price: "Livraison (%{currency})"
+  report_header_pay_fee_price: "Frais de Transaction (%{currency})"
+  report_header_total_price: "Total (%{currency})"
+  report_header_product_total_price: "Total Produit (%{currency})"
+  report_header_shipping_total_price: "Total Livaison (%{currency})"
+  report_header_outstanding_balance_price: "Solde (%{currency})"
+  report_header_eft_price: "TEF / Transfert Electronique (%{currency})"
+  report_header_paypal_price: "Paypal (%{currency})"
+  report_header_sku: Référence Produit
+  report_header_amount: Montant
+  report_header_balance: Solde
+  report_header_total_cost: "Coût Total"
+  report_header_total_ordered: Total Commandé
+  report_header_total_max: Max Total
+  report_header_total_units: Nb total d'articles
+  report_header_sum_max_total: "Somme Max Total"
+  report_header_total_excl_vat: "Total HT (%{currency_symbol})"
+  report_header_total_incl_vat: "Total TTC (%{currency_symbol})"
+  report_header_temp_controlled: Temp Contrôlée ?
+  report_header_is_producer: Producteur ?
+  report_header_not_confirmed: Non confirmé
+  report_header_gst_on_income: TVA
+  report_header_gst_free_income: Revenu TVA déduite
+  report_header_total_untaxable_produce: Total produits non taxable
+  report_header_total_taxable_produce: Total produits soumis à TVA (inclut TVA)
+  report_header_total_untaxable_fees: Total marges et frais annexes non taxables
+  report_header_total_taxable_fees: Total marges et frais annexes soumis à TVA (inclut TVA)
+  report_header_delivery_shipping_cost: Coût de Livraison (incl. TVA)
+  report_header_transaction_fee: Frais de Transaction (TVA non incluse)
+  report_header_total_untaxable_admin: Total ajustements non taxables
+  report_header_total_taxable_admin: Total ajustments soumis à TVA (inclut TVA)
   initial_invoice_number: "N° de facture initial:"
   invoice_date: "Date de facture:"
   due_date: "Date d'échéance:"
   account_code: "Code compte:"
   equals: "Egal"
-  contains: "contients"
+  contains: "contient"
   discount: "Réduction"
   filter_products: "Filtrer les produits"
   delete_product_variant: "La variante ne peut pas être supprimée!"
@@ -1274,42 +1618,307 @@ fr:
   adrdress: "Adresse"
   contact: "Contact"
   social: "Réseaux sociaux"
-  business_details: "N° fiscaux"
-  properties: "Propriétés"
+  business_details: "Juridique"
+  properties: "Propriétés / labels"
   shipping_methods: "Méthodes de livraison"
   payment_methods: "Méthodes de paiement"
   payment_method_fee: "Frais de transaction"
-  enterprise_fees: "Marges de l'entreprise"
-  inventory_settings: "Paramètres de stock"
-  tag_rules: "Règles des tags"
+  inventory_settings: "Catalogue boutique"
+  tag_rules: "Règles de tag"
   shop_preferences: "Préférences boutique"
+  enterprise_fee_whole_order: Commande totale
+  enterprise_fee_by: "%{type}marges/frais par %{role} %{enterprise_name}"
   validation_msg_relationship_already_established: "^Un lien est déjà établi entre ces entreprises."
   validation_msg_at_least_one_hub: "^Sélectionnez au moins  un hub"
   validation_msg_product_category_cant_be_blank: "^Veuillez sélectionner la catégorie produit"
   validation_msg_tax_category_cant_be_blank: "^Veuillez sélectionner la TVA applicable"
   validation_msg_is_associated_with_an_exising_customer: "est associé à un acheteur existant"
+  content_configuration_pricing_table: "(A FAIRE : Tableau des tarifs)"
+  content_configuration_case_studies: "(A FAIRE : Etudes de Cas)"
+  content_configuration_detail: "(A FAIRE : Détails)"
+  enterprise_name_error: "est déjà utilisé. Si vous êtes le gérant de cette entreprise et que vous souhaitez demander le transfert du compte, merci de contacter le manager actuel du profil à %{email}."
+  enterprise_owner_error: "^ %{email} ne peut pas créer de nouvelles entreprises (limite actuelle : %{enterprise_limit} entreprises )."
+  enterprise_role_uniqueness_error: "^Ce rôle existe déjà."
+  inventory_item_visibility_error: doit être vrai ou faux
+  product_importer_file_error: "erreur : aucun document importé"
+  product_importer_spreadsheet_error: "impossible de traiter le fichier : type de fichier invalide"
+  product_importer_products_save_error: n'a pu sauvegarder aucun produit :-(
+  product_import_file_not_found_notice: 'Fichier non trouvé ou impossible à ouvrir'
+  product_import_no_data_in_spreadsheet_notice: 'Aucune donnée trouvée dans le tableau'
+  order_choosing_hub_notice: Votre hub a été sélectionné.
+  order_cycle_selecting_notice: Votre cycle de vente a été sélectionné.
+  adjustments_tax_rate_error: "^Veuillez vérifier la TVA applicable pour cet ajustement."
+  active_distributors_not_ready_for_checkout_message_singular: >-
+      Le hub %{distributor_names} est sélectionné comme distributeur dans un cycle
+      de vente actif, mais n'a pas paramétré de méthode de livraison et/ou de paiement.
+      La boutique de ce hub restera inaccessible jusqu'à ce qu'une méthode de livraison
+      et une méthode de paiement aient été paramétrées.
+  active_distributors_not_ready_for_checkout_message_plural: >-
+      Les hubs %{distributor_names} sont sélectionnés comme distributeurs dans un
+      cycle de vente actif, mais n'ont pas paramétré de méthode de livraison et/ou
+      de paiement. Les boutiques de ces hubs resteront inaccessibles jusqu'à ce qu'une
+      méthode de livraison et une méthode de paiement aient été paramétrées.
+  enterprise_fees_update_notice: Les marges et commissions de votre entreprise ont été mises à jour.
+  enterprise_fees_destroy_error: "Cette marge ou commission ne peut être supprimée car elle est utilisée par la vente suivante : %{id} - %{name}."
+  enterprise_register_package_error: "Veuillez choisir une option"
+  enterprise_register_error: "L'inscription a échoué pour %{enterprise}"
+  enterprise_register_success_notice: "Bravo ! L'entreprise %{enterprise} est maintenant inscrite sur Open Food France :-)"
+  enterprise_bulk_update_success_notice: "Entreprises mises à jour avec succès"
+  enterprise_bulk_update_error: 'Echec dans la mise à jour'
+  order_cycles_create_notice: 'Votre cycle de vente a été créé.'
+  order_cycles_update_notice: 'Votre cycle de vente a été mis à jour.'
+  order_cycles_bulk_update_notice: 'Des cycles de vente ont été mis à jour.'
+  order_cycles_clone_notice: "Votre cycle de vente %{name} a été dupliqué."
+  order_cycles_email_to_producers_notice: 'Les emails à destination des producteurs ont été mis en file d''attente.'
+  order_cycles_no_permission_to_coordinate_error: "Aucune de vos entreprises n'a les droits requis pour coordonner un cycle de vente"
+  order_cycles_no_permission_to_create_error: "Vous n'avez pas les droits requis pour créer un cycle de vente coordonné par cette entreprise"
+  order_cycles_no_permission_to_delete_error: "Ce cycle de vente a été utilisé par un acheteur et ne peut pas être supprimé. Pour fermer l'accès à ce cycle de vente, veuillez le clôturer et le dupliquer pour en ouvrir un nouveau."
+  js:
+    saving: 'Enregistrement en cours...'
+    changes_saved: 'Modifications sauvegardées.'
+    save_changes_first: Veuillez d'abord sauvegarder les modifications.
+    all_changes_saved: Toutes les modifications ont été sauvegardées.
+    unsaved_changes: Des modifications n'ont pas été sauvegardées
+    all_changes_saved_successfully: Toutes les modifications ont été sauvegardées avec succès
+    oh_no: "Oups ! Nous n'avons pas réussi à sauvegarder vos modification :-("
+    unauthorized: "Vous n'avez pas les droits d'accès à cette page."
+    error: Erreur
+    unavailable: Non disponible
+    profile: Profil
+    hub: Hub
+    shop: Faire mes courses
+    choose: Choisir
+    resolve_errors: Veuillez corriger les erreurs suivantes
+    more_items: "+ %{count} en plus"
+    admin:
+      modals:
+        got_it: J'ai compris
+        tag_rule_help:
+          title: Règles de tag
+          overview: Aperçu
+          overview_text: >
+              Les règles de tag vous permettent de paramétrer ce qui est vu ou pas
+              par tel ou tel type d'acheteur.  Par exemple des options de livraison,
+              des méthodes de paiement, des produits, ou des cycles de vente.
+          by_default_rules: "Règles à appliquer \"par défaut\""
+          by_default_rules_text: >
+              Les règles de tag par défaut vous permettent de masquer des éléments
+              par défaut. Vous pouvez ensuite permettre à certains acheteurs, selon
+              les tags attribués, de voir ces éléments.
+          customer_tagged_rules: "Règles pour les acheteur avec un tag"
+          customer_tagged_rules_text: >
+              En créant une règle spécifique à un tag, vous pouvez modifier le contenu
+              vu par défaut (afficher ou masquer) par les acheteurs associés à ce
+              tag.
+      panels:
+        save: Enregistrer
+        saved: Enregistré
+        saving: En cours d'enregistrement
+        enterprise_package:
+          hub_profile: Profil Hub
+          hub_profile_cost: "COÛT: CONTRIBUTION LIBRE"
+          hub_profile_text1: >
+              Les visiteurs voient votre profil sur la carte, et peuvent vous contacter.
+              Vous augmentez ainsi votre visibilité.
+          hub_profile_text2: >
+              Créez votre profil et utilisez Open Food France pour vous connecter
+              à votre système alimentaire territorial.
+          hub_shop: Boutique Hub
+          hub_shop_text1: >
+              Vous proposez des produits de différents producteurs de votre région,
+              artisans, ou distributeurs afin de proposer une offre complète dans
+              votre boutique. Vous soutenez ainsi le développement de votre système
+              alimentaire territorial !
+          hub_shop_text2: >
+              Un hub n'a pas de modèle figé, il peut s'agir d'un groupement d'achat,
+              d'une AMAP, d'une épicerie coopérative, d'une épicerie locale de quartier
+              ou épicerie en circuit court en ligne, etc.
+          hub_shop_text3: >
+              Si vous produisez et voulez également vendre vos propres produits, vous
+              devez modifier le statut de votre entreprise, elle doit apparaitre en
+              tant que "producteur".
+          choose_package: Choisir le type de compte souhaité
+          choose_package_text1: >
+              Votre entreprise ne sera activée et visible que lorsque vous aurez choisi
+              le type de compte souhaité parmi les options à gauche.
+          choose_package_text2: >
+              Cliquez sur une option pour voir le détail du compte proposé, puis une
+              fois votre choix fait, cliquez sur le bouton rouge ENREGISTRER !
+          profile_only: Profil uniquement
+          profile_only_cost: "COÛT: CONTRIBUTION LIBRE"
+          profile_only_text1: >
+              Gagnez en visibilité, racontez votre histoire, et affichez vos coordonnées
+              pour pouvoir être contactés.
+          profile_only_text2: >
+              Si vous souhaitez vous concentrer sur votre activité de production,
+              et laisser à d'autre le soin de distribuer vos produits, vous n'avez
+              pas besoin d'une boutique sur Open Food France.
+          profile_only_text3: >
+              Saisissez votre catalogue produits sur Open Food France, ce qui permettra
+              aux hubs-distributeurs utilisant la plateforme de les proposer dans
+              leurs boutiques (sur votre autorisation).
+          producer_shop: Boutique Producteur
+          producer_shop_text1: >
+              Vendez vos produits en direct aux mangeurs/restaurateurs/etc. via votre
+              propre Boutique Producteur sur Open Food France.
+          producer_shop_text2: >
+              Une Boutique Producteur vous permet de vendre uniquement vos propres
+              produits. Si vous voulez vendre d'autres produits, sélectionnez "Hub
+              Producteur"
+          producer_hub: Hub Producteur
+          producer_hub_text1: >
+              Vous vendez non seulement vos produits, mais aussi des produits d'autres
+              producteurs de votre région, artisans, ou distributeurs afin de proposer
+              une offre complète dans votre boutique. Vous soutenez ainsi le développement
+              de votre système alimentaire territorial !
+          producer_hub_text2: >
+              Un hub producteur peut prendre différentes formes, une boutique de vente
+              directe, un magasin de producteurs en ligne, un drive fermier, etc.
+          producer_hub_text3: >
+              Open Food France soutient tous les modèles de hubs alimentaires, nous
+              pensons que la résilience du système viendra de la diversité des modèles.
+              Donc quel que soit votre modèle, nous souhaitons vous apporter les outils
+              de gestion donc vous avez besoin pour opérer votre circuit court.
+          get_listing: Référencez votre entreprise
+          always_free: CONTRIBUTION LIBRE
+          sell_produce_others: Vendez des produits de multiples fournisseurs différents
+          sell_own_produce: Vendez vos propres produits
+          sell_both: Vendez vos produits et ceux d'autres fournisseurs
+        enterprise_producer:
+          producer: Producteur
+          producer_text1: >
+              Un producteur fabrique de bonnes choses à boire et à manger. Vous êtes
+              un producteur si vous les faites pousser, les élevez, les pétrissez,
+              transformez, fermentez, les réduisez en grains, etc.
+          producer_text2: >
+              Un producteur peut aussi avoir d'autres rôles, comme par exemple stocker
+              et distribuer des produits d'autres producteurs à travers une boutique
+              sur Open Food France.
+          non_producer: Non-producteur
+          non_producer_text1: >
+              Les entreprises qui ne produisent pas ne peuvent pas créer leur propre
+              catalogue produits pour les vendre sur Open Food France.
+          non_producer_text2: >
+              Ces entreprises vont plutôt faire le lien entre des producteurs et des
+              mangeurs/restaurateurs, en proposant un modèle opérationnel pour agréger,
+              préparer les commandes, ou encore livrer les produits.
+          producer_desc: Producteurs / transformateurs
+          producer_example: 'ex: maraichers, boulangers, brasseurs, artisans'
+          non_producer_desc: Autres entreprises de distribution alimentaire
+          non_producer_example: 'ex: épiceries, coopératives, groupements d''achats'
+        enterprise_status:
+          status_title: "%{name} est en place et prêt à démarrer!"
+          severity: Rigueur
+          description: Description
+          resolve: Résoudre
+      new_tag_rule_dialog:
+        select_rule_type: "Choisir le type de règle:"
+    out_of_stock:
+      reduced_stock_available: Stock disponible
+      out_of_stock_text: >
+          Pendant que vous faisiez vos achats, le niveau de stock disponible pour
+          un ou plusieurs produits dans votre panier est devenu insuffisant pour répondre
+          à votre demande. Voilà les modifications opérées:
+      now_out_of_stock: est maintenant en rupture de stock.
+      only_n_remainging: "plus que %{num} en stock."
+    variant_overrides:
+      inventory_products: "Produits du Catalogue Boutique"
+      hidden_products: "Produits Masqués"
+      new_products: "Nouveaux Produits"
+      reset_stock_levels: Réinitialiser les niveaux de stock (par défaut)
+      changes_to: Devient
+      one_override: une modification
+      overrides: modifications
+      remain_unsaved: n'a pas encore été sauvegardé.
+      no_changes_to_save: Aucune modification à sauvegarder.'
+      no_authorisation: "Nous n'avons pas pu sauvegarder ces modifications, elles ne sont donc pas enregistrées."
+      some_trouble: "Nous n'avons pas pu sauvegarder : %{errors}"
+      changing_on_hand_stock: Modification des niveaux de stock en cours...
+      stock_reset: Les niveaux de stock ont été réinitiatlisés (valeurs par défaut)
+    tag_rules:
+      show_hide_variants: 'Afficher ou Masquer les variantes dans ma boutique'
+      show_hide_shipping: 'Afficher ou Montrer les méthodes de livraison lors de la finalisation de commande'
+      show_hide_payment: 'Afficher ou Montrer les méthodes de paiement lors de la finalisation de commande'
+      show_hide_order_cycles: 'Afficher ou Masquer les cycles de vente de ma boutique'
+      visible: VISIBLE
+      not_visible: INVISIBLE
+    services:
+      unsaved_changes_message: Des modifications n'ont pas encore été sauvegardées, sauvegarder maintenant ou ignorer ?
+      save: SAUVEGARDER
+      ignore: IGNORER
+      add_to_order_cycle: "vendre les produits (ajouter au cycle de vente)"
+      manage_products: "modifier les produits"
+      edit_profile: "modifier le profil"
+      add_products_to_inventory: "ajouter les produits au catalogue boutique"
+    resources:
+      could_not_delete_customer: 'L''acheteur n''a pas pu être supprimé'
+    product_import:
+      confirmation: |
+        Cette action remettra tous les niveaux de stock à zero pour cette
+        entreprises pour les produits non présents dans ce fichier.
+    order_cycles:
+      update_success: 'Votre cycle de vente a été mis à jour.'
+      no_distributors: Il n'y a pas de distributeur pour ce cycle de vente. Il ne sera pas visible aux acheteurs tant qu'il n'y aura pas de distributeur. Voulez-vous tout de même sauvegarder ce cycle de vente ?
+    enterprises:
+      producer: "Producteur"
+      non_producer: "Non-producteur"
+    customers:
+      select_shop: 'Veuillez d''abord choisir une boutique'
+      could_not_create: Oups ! Création impossible...
+  producers:
+    signup:
+      start_free_profile: "Commencez par créer votre profil entreprise, et changez de formule quand vous êtes prêt !"
   spree:
+    admin:
+      orders:
+        invoice:
+          issued_on: Editée le
+          tax_invoice: FACTURE
+          code: Code
+          from: De
+          to: A
+        form:
+          distribution_fields:
+            title: Distribution
+            distributor: "Distributeur : "
+            order_cycle: "Cycle de vente : "
+      overview:
+        order_cycles:
+          order_cycles: "Cycles de vente"
+          order_cycles_tip: "Les cycles de vente définissent quand et où vos produits peuvent être commandés par vos acheteurs."
+          you_have_active:
+            zero: "Vous n'avez aucun cycle de vente actif."
+            one: "Vous avez un cycle de vente actif."
+            other: "Vous avez %{count} cycles de vente actifs."
+          manage_order_cycles: "GERER LES CYCLES DE VENTE"
+      products:
+        bulk_edit:
+          header:
+            title: Edition des produits par lots
+          indicators:
+            title: CHARGEMENT DES PRODUITS
+            no_products: "Aucun produit trouvé. Ajouter un produit ?"
+            no_results: "Désolé, aucun résultat trouvé"
+      reports:
+        bulk_coop:
+          bulk_coop_supplier_report: 'Achats groupés - Totaux par Producteur'
+          bulk_coop_allocation: 'Achats groupés - Allocation'
+          bulk_coop_packing_sheets: 'Achats groupés - Feuilles de préparation des paniers'
+          bulk_coop_customer_payments: 'Achats groupés - Paiement des acheteurs'
+      variants:
+        autocomplete:
+          producer_name: Producteur
     date_picker:
       format: '%Y-%m-%d'
       js_format: 'aa-mm-jj'
-    zipcode: Code postal
-    shipment_states:
-      backorder: réapprovisionnement
-      partial: partiel
-      pending: en attente
-      ready: prêt
-      shipped: envoyé
-    payment_states:
-      balance_due: solde dû
-      completed: effectué
-      checkout: Paiement
-      credit_owed: Crédit acheteur
-      failed: échec
-      paid: payé
-      pending: en attente
-      processing: en traitement
-      void: annuler
-      invalid: Invalide
+    inventory: Catalogue boutique
+    orders:
+      bought:
+        item: "Déjà commandé dans ce cycle de vente"
+    order_mailer:
+      invoice_email:
+        hi: "Bonjour %{name}"
+        invoice_attached_text: 'Veuillez trouver ci-joint la facture pour votre récente commande auprès de '
     order_state:
       address: adresse
       adjustments: ajustements
@@ -1323,3 +1932,47 @@ fr:
       resumed: recommencé
       returned: retourné
       skrill: cash
+    payment_states:
+      balance_due: solde dû
+      completed: effectué
+      checkout: passer commande
+      credit_owed: crédit acheteur
+      failed: échec
+      paid: payé
+      pending: en attente
+      processing: en traitement
+      void: faire un avoir
+      invalid: invalide
+    shipment_states:
+      backorder: réapprovisionnement
+      partial: partiel
+      pending: en attente
+      ready: prêt
+      shipped: envoyé
+    user_mailer:
+      reset_password_instructions:
+        request_sent_text: |
+          Votre demande de nouveau mot de passe a bien été prise en compte.
+          Si vous n'avez pas demandé de nouveau mot de passe, veuillez ignorer cet e-mail.
+        link_text: >
+            Si vous êtes bien à l'origine de cette demande, veuillez cliquer sur le
+            lien ci-dessous :
+        issue_text: |
+          Si le lien ne fonctionne pas, essayez de le copier - coller dans la barre d'adresse de votre navigateur.
+          Si le problème persiste, n'hésitez pas à nous contacter.
+    weight: Poids (au kg)
+    zipcode: Code postal
+    users:
+      show:
+        open_orders: Commandes Ouvertes
+        transaction_history: Historique des Transactions
+      open_orders:
+        order: Commander
+        shop: Faire mes courses
+        changes_allowed_until: Modifications permises jusqu'à
+        items: Pièce
+        total: Total
+        edit: Modifier
+        cancel: Annuler
+        closed: Fermée
+        until: Jusqu'à

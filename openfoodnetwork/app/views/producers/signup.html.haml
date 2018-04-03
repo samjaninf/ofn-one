@@ -14,10 +14,27 @@
         %br
         %a.button.transparent{href: "/register"}
           = t :producers_signup_send
-  .pane
-    .row
-      .small-12.medium-10.medium-offset-1.columns.text-center
-        %h2
+  %br
+  .row
+    .pane
+      .small-12.medium-5.medium-offset-1.columns.panel.panel-default
+        %h2.text-center
+          = t :producers_signup_detail
+        %br
+        = ContentConfig.producer_signup_detail_html.html_safe
+      
+  
+    .pane
+      .small-12.medium-5.medium-offset-1.columns.panel.panel-default
+        %h2.text-center
+          = t :producers_signup_studies
+        %br
+        = ContentConfig.producer_signup_case_studies_html.html_safe
+
+  .row  
+    .pane
+      .small-12.medium-5.medium-offset-1.columns.panel.panel-default
+        %h2.text-center
           = t :producers_signup_enterprise
         -# %p.text-big
         -#   If there is a time-sensitive offer you can write it here, e.g.
@@ -25,28 +42,14 @@
         %br
         = ContentConfig.producer_signup_pricing_table_html.html_safe
 
-  #producer-case-studies
-    .row
-      .small-12.medium-10.medium-offset-1.columns
+  
+    .pane
+      .small-12.medium-5.medium-offset-1.columns.panel.panel-default
         %h2.text-center
-          = t :producers_signup_studies
-        %br
-        = ContentConfig.producer_signup_case_studies_html.html_safe
-
-  .pane#cta
-    .row
-      .small-12.medium-6.medium-offset-3.columns.text-center
-        %h2
           = t :producers_signup_cta_headline
-        %p.text-big= t('.start_free_profile')
+        %p.text-big
+          = t('.start_free_profile')
         %a.button.transparent{href: "/register"}
           = t :producers_signup_cta_action
-
-  #producer-details.pane.footer-pad
-    .row
-      .small-12.medium-10.medium-offset-1.columns
-        %h2.text-center
-          = t :producers_signup_detail
-        = ContentConfig.producer_signup_detail_html.html_safe
 
 = render partial: "shared/footer"

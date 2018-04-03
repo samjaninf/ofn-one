@@ -12,66 +12,55 @@
         %p.text-big
           = t :groups_signup_intro
         %br
-        %a.button.transparent{href: "hello@openfoodnetwork.org?subject=I'd%20like%20to%20talk%20to%20you%20about%20groups%20on%20the%20Open%20Food%20Network".reverse, target: '_blank', mailto: true}
+        %a.button.transparent{href: "hello@freshharvestcrate.com?subject=I'd%20like%20to%20talk%20to%20you%20about%20groups%20on%20the%20Open%20Food%20Network".reverse, target: '_blank', mailto: true}
           = t :groups_signup_email
+  %br
+  .groups-details
+    .row
+      .pane
+        .small-12.medium-3.medium-offset-1.columns.panel.panel-default
+          %h3.text-center
+            = t :groups_signup_motivation1
+          %p.text-small
+            = t :groups_signup_motivation2
+          %p.text-small
+            = t :groups_signup_motivation3
+        .small-12.medium-3.medium-offset-1.columns.panel.panel-default
+          %h3.text-center
+            = t :groups_signup_motivation4
+          %p.text-small
+            = t :groups_signup_motivation5
+          %p.text-small
+            = t :groups_signup_motivation6
+        .small-12.medium-3.medium-offset-1.columns.panel.panel-default
+          %h3.text-center
+            = t :groups_signup_motivation7
+          %p.text-small
+            = t :groups_signup_motivation8
+          %p.text-small
+            = t :groups_signup_motivation9
+    .row
+      .pane
+        .small-12.medium-3.medium-offset-1.columns.panel.panel-default
+          %h3.text-center
+            = t :groups_signup_pricing
+          -# %p.text-small
+          -#   / If there is a time-sensitive offer you can write it here, e.g.
+          -#   Time-sensitive offer goes here!
+          %p.text-small
+            = ContentConfig.group_signup_pricing_table_html.html_safe
 
-  .groups-details.pane
-    .row
-      .small-12.medium-8.medium-offset-2.columns
-        %h3.text-center
-          = t :groups_signup_motivation1
-        %p.text-big
-          = t :groups_signup_motivation2
-        %p.text-big
-          = t :groups_signup_motivation3
-        %br
-        %h3.text-center
-          = t :groups_signup_motivation4
-        %p.text-big
-          = t :groups_signup_motivation5
-        %p.text-big
-          = t :groups_signup_motivation6
-        %br
-        %h3.text-center
-          = t :groups_signup_motivation7
-        %p.text-big
-          = t :groups_signup_motivation8
-        %p.text-big
-          = t :groups_signup_motivation9
-  .pane
-    .row
-      .small-12.medium-10.medium-offset-1.columns.text-center
-        %h2
-          = t :groups_signup_pricing
-        -# %p.text-big
-        -#   / If there is a time-sensitive offer you can write it here, e.g.
-        -#   Time-sensitive offer goes here!
-        %br
-        = ContentConfig.group_signup_pricing_table_html.html_safe
-
-  #shops-case-studies
-    .row
-      .small-12.medium-10.medium-offset-1.columns
-        %h2.text-center
-          = t :groups_signup_studies
-        %br
-        = ContentConfig.group_signup_case_studies_html.html_safe
-
-  .pane#cta
-    .row
-      .small-12.medium-6.medium-offset-3.columns.text-center
-        %h2
-          = t :groups_signup_contact
-        %p.text-big
-          = t :groups_signup_contact_text
-        %a.button.transparent{href: "hello@openfoodnetwork.org?subject=I'd%20like%20to%20talk%20to%20you%20about%20groups%20on%20the%20Open%20Food%20Network".reverse, target: '_blank', mailto: true}
-          = t :groups_signup_email
-
-  #hub-details.pane.footer-pad
-    .row
-      .small-12.medium-10.medium-offset-1.columns
-        %h2.text-center
-          = t :groups_signup_detail
-        = ContentConfig.group_signup_detail_html.html_safe
+  
+      .pane
+        .small-12.medium-3.medium-offset-1.columns.panel.panel-default
+          %h3.text-center
+            = t :groups_signup_studies
+          = ContentConfig.group_signup_case_studies_html.html_safe
+      .pane
+        .small-12.medium-3.medium-offset-1.columns.panel.panel-primary
+          %h3.text-center
+            = t :groups_signup_detail
+          %p.text-small
+            = ContentConfig.group_signup_detail_html.html_safe
 
 = render partial: "shared/footer"

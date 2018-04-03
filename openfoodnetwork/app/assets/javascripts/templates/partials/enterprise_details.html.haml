@@ -11,11 +11,13 @@
         %span.filter-shopfront.property-selectors.pad-top
           %ul.inline-block
             %li{"ng-repeat" => "property in enterprise.supplied_properties"}
-              %a.button.tiny{"ng-bind" => "property.presentation"}
+              %a.button.tiny.disabled{"ng-bind" => "property.presentation"}
 
       .about-container.pad-top
         %img.enterprise-logo{"ng-src" => "{{::enterprise.logo}}", "ng-if" => "::enterprise.logo"}
-        %p.text-small{"ng-bind-html" => "::enterprise.long_description"}
+        %p.text-small{"ng-bind-html" => "::enterprise.long_description", "ng-if" => "::enterprise.long_description"}
+        %p{"ng-if" => "::!enterprise.long_description"}
+          %span.text-small {{'enterprise_unclaimed_profile' | t}}
   .small-12.large-4.columns
     %ng-include{src: "'partials/contact.html'"}
     %ng-include{src: "'partials/follow.html'"}

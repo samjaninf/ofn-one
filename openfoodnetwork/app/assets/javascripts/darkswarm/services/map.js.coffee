@@ -1,4 +1,4 @@
-Darkswarm.factory "OfnMap", (Enterprises, EnterpriseModal, visibleFilter) ->
+Darkswarm.factory "OfnMap", (Enterprises, EnterpriseModal,  visibleFilter) ->
   new class OfnMap
     constructor: ->
       @enterprises = @enterprise_markers(Enterprises.enterprises)

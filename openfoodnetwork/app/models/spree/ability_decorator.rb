@@ -1,7 +1,7 @@
 class AbilityDecorator
   include CanCan::Ability
 
-  # All abilites are allocated from this initialiser, currently in 5 chunks.
+  # All abilites are allocated from this initialiser.
   # Spree also defines other abilities.
   def initialize(user)
     add_shopping_abilities user
@@ -56,16 +56,22 @@ class AbilityDecorator
       user == item.order.user &&
       item.order.changes_allowed?
     end
+
     can [:cancel], Spree::Order do |order|
       order.user == user
+    end
+
+    can [:destroy], Spree::CreditCard do |credit_card|
+      credit_card.user == user
     end
   end
 
   # New users can create an enterprise, and gain other permissions from doing this.
   def add_base_abilities(user)
     can [:create], Enterprise
+    can [:claim], Enterprise
   end
-
+  
   def add_group_management_abilities(user)
     can [:admin, :index], :overview
     can [:admin, :sync], :analytic
@@ -117,6 +123,10 @@ class AbilityDecorator
 
     can [:admin, :bulk_update], ColumnPreference do |column_preference|
       column_preference.user == user
+    end
+
+    can [:status, :destroy], StripeAccount do |stripe_account|
+      user.enterprises.include? stripe_account.enterprise
     end
   end
 
@@ -193,6 +203,7 @@ class AbilityDecorator
     end
     can [:admin, :bulk_management, :managed], Spree::Order if user.admin? || user.enterprises.any?(&:is_distributor)
     can [:admin , :for_line_items], Enterprise
+    can [:admin, :index, :create, :update, :destroy], :line_item
     can [:admin, :index, :create], Spree::LineItem
     can [:destroy, :update], Spree::LineItem do |item|
       order = item.order
@@ -239,7 +250,6 @@ class AbilityDecorator
     can [:create], Customer
     can [:admin, :index, :update, :destroy], Customer, enterprise_id: Enterprise.managed_by(user).pluck(:id)
   end
-
 
   def add_relationship_management_abilities(user)
     can [:admin, :index, :create], EnterpriseRelationship

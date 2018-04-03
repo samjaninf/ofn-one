@@ -17,11 +17,11 @@ class ProductDistribution < ActiveRecord::Base
   end
 
   def create_adjustment_for(line_item)
-    a = enterprise_fee.create_locked_adjustment(adjustment_label_for(line_item), line_item.order, line_item, true)
+    a = enterprise_fee.create_adjustment(adjustment_label_for(line_item), line_item.order, line_item, true)
     AdjustmentMetadata.create! adjustment: a, enterprise: enterprise_fee.enterprise, fee_name: enterprise_fee.name, fee_type: enterprise_fee.fee_type, enterprise_role: 'distributor'
   end
 
   def adjustment_label_for(line_item)
-    "Product distribution by #{distributor.name} for #{line_item.product.name}"
+    I18n.t(:products_distribution_adjustment_label, distributor: distributor.name, product: line_item.product.name )
   end
 end

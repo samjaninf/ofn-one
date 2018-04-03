@@ -29,7 +29,7 @@ Spree::Order.class_eval do
     go_to_state :delivery
     go_to_state :payment, :if => lambda { |order|
       # Fix for #2191
-      if order.shipping_method.andand.require_ship_address and
+      if order.shipping_method.andand.delivery?
         if order.ship_address.andand.valid?
           order.create_shipment!
           order.update_totals
@@ -37,7 +37,8 @@ Spree::Order.class_eval do
       end
       order.payment_required?
     }
-    go_to_state :confirm, :if => lambda { |order| order.confirmation_required? }
+    # NOTE: :confirm step was removed because we were not actually using it
+    # go_to_state :confirm, :if => lambda { |order| order.confirmation_required? }
     go_to_state :complete
     remove_transition :from => :delivery, :to => :confirm
   end
@@ -50,8 +51,8 @@ Spree::Order.class_eval do
       # Find orders that are distributed by the user or have products supplied by the user
       # WARNING: This only filters orders, you'll need to filter line items separately using LineItem.managed_by
       with_line_items_variants_and_products_outer.
-      where('spree_orders.distributor_id IN (?) OR spree_products.supplier_id IN (?)', user.enterprises, user.enterprises).
-      select('DISTINCT spree_orders.*')
+        where('spree_orders.distributor_id IN (?) OR spree_products.supplier_id IN (?)', user.enterprises, user.enterprises).
+        select('DISTINCT spree_orders.*')
     end
   }
 
@@ -65,8 +66,8 @@ Spree::Order.class_eval do
 
   scope :with_line_items_variants_and_products_outer, lambda {
     joins('LEFT OUTER JOIN spree_line_items ON (spree_line_items.order_id = spree_orders.id)').
-    joins('LEFT OUTER JOIN spree_variants ON (spree_variants.id = spree_line_items.variant_id)').
-    joins('LEFT OUTER JOIN spree_products ON (spree_products.id = spree_variants.product_id)')
+      joins('LEFT OUTER JOIN spree_variants ON (spree_variants.id = spree_line_items.variant_id)').
+      joins('LEFT OUTER JOIN spree_products ON (spree_products.id = spree_variants.product_id)')
   }
 
   scope :not_state, lambda { |state|
@@ -76,7 +77,7 @@ Spree::Order.class_eval do
   # -- Methods
   def products_available_from_new_distribution
     # Check that the line_items in the current order are available from a newly selected distribution
-    errors.add(:base, "Distributor or order cycle cannot supply the products in your cart") unless DistributionChangeValidator.new(self).can_change_to_distribution?(distributor, order_cycle)
+    errors.add(:base, I18n.t(:spree_order_availability_error)) unless DistributionChangeValidator.new(self).can_change_to_distribution?(distributor, order_cycle)
   end
 
   def empty_with_clear_shipping_and_payments!
@@ -161,9 +162,8 @@ Spree::Order.class_eval do
   end
 
   def cap_quantity_at_stock!
-    line_items.each &:cap_quantity_at_stock!
+    line_items.each(&:cap_quantity_at_stock!)
   end
-
 
   def set_distributor!(distributor)
     self.distributor = distributor
@@ -182,6 +182,10 @@ Spree::Order.class_eval do
   end
 
   def update_distribution_charge!
+    # `with_lock` acquires an exclusive row lock on order so no other
+    # requests can update it until the transaction is commited.
+    # See https://github.com/rails/rails/blob/3-2-stable/activerecord/lib/active_record/locking/pessimistic.rb#L69
+    # and https://www.postgresql.org/docs/current/static/sql-select.html#SQL-FOR-UPDATE-SHARE
     with_lock do
       EnterpriseFee.clear_all_adjustments_on_order self
 
@@ -290,6 +294,24 @@ Spree::Order.class_eval do
     complete? && distributor.andand.allow_order_changes? && order_cycle.andand.open?
   end
 
+  # Override of existing Spree method. Can remove when we reach 2-0-stable
+  # See commit: https://github.com/spree/spree/commit/5fca58f658273451193d5711081d018c317814ed
+  # Allows GatewayError to show useful error messages in checkout
+  def process_payments!
+    pending_payments.each do |payment|
+      break if payment_total >= total
+
+      payment.process!
+
+      if payment.completed?
+        self.payment_total += payment.amount
+      end
+    end
+  rescue Spree::Core::GatewayError => e # This section changed
+    result = !!Spree::Config[:allow_checkout_on_gateway_error]
+    errors.add(:base, e.message) and return result
+  end
+
   private
 
   def shipping_address_from_distributor
@@ -345,9 +367,20 @@ Spree::Order.class_eval do
   end
 
   def update_adjustment!(adjustment)
-    locked = adjustment.locked
-    adjustment.locked = false
+    state = adjustment.state
+    adjustment.state = 'open'
     adjustment.update!(self)
-    adjustment.locked = locked
+    adjustment.state = state
+  end
+
+  # object_params sets the payment amount to the order total, but it does this before
+  # the shipping method is set. This results in the customer not being charged for their
+  # order's shipping. To fix this, we refresh the payment amount here.
+  def charge_shipping!
+    update_totals
+    return unless payments.any?
+    payments.first.update_attribute :amount, total
   end
 end
+
+Spree::Order.state_machine.after_transition to: :payment, do: :charge_shipping!

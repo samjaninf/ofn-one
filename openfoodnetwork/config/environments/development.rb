@@ -16,7 +16,15 @@ Openfoodnetwork::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.email.com',
+    port:                 587,
+    domain:               'email.com',
+    user_name:            'fixme@gmail.com',
+    password:             'password',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -30,9 +38,8 @@ Openfoodnetwork::Application.configure do
   config.assets.debug = false
 
   # Show emails using Letter Opener
-  # config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.delivery_method = :letter_opener_web
-  config.action_mailer.default_url_options = { host: "0.0.0.0:3000" }
+  #config.action_mailer.delivery_method = :letter_opener
+  #config.action_mailer.default_url_options = { host: "0.0.0.0:3000" }
 end
 
 

@@ -4,6 +4,10 @@ Spree::AppConfiguration.class_eval do
   # we can allow to be modified in the UI by adding appropriate form
   # elements to existing or new configuration pages.
 
+  # Embedded Shopfronts
+  preference :enable_embedded_shopfronts, :boolean, default: false
+  preference :embedded_shopfronts_whitelist, :text, default: nil
+
   # Terms of Service Preferences
   preference :enterprises_require_tos, :boolean, default: false
 
@@ -35,4 +39,7 @@ Spree::AppConfiguration.class_eval do
   # Invoices & Receipts
   preference :invoice_style2?, :boolean, default: false
   preference :enable_receipt_printing?, :boolean, default: false
+
+  # Stripe Connect
+  preference :stripe_connect_enabled, :boolean, default: false
 end

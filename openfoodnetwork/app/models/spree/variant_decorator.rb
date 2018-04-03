@@ -36,9 +36,9 @@ Spree::Variant.class_eval do
   scope :in_stock, where('spree_variants.count_on_hand > 0 OR spree_variants.on_demand=?', true)
   scope :in_order_cycle, lambda { |order_cycle|
     with_order_cycles_inner.
-    merge(Exchange.outgoing).
-    where('order_cycles.id = ?', order_cycle).
-    select('DISTINCT spree_variants.*')
+      merge(Exchange.outgoing).
+      where('order_cycles.id = ?', order_cycle).
+      select('DISTINCT spree_variants.*')
   }
 
   scope :for_distribution, lambda { |order_cycle, distributor|
@@ -52,7 +52,7 @@ Spree::Variant.class_eval do
   scope :not_hidden_for, lambda { |enterprise|
     return where("1=0") unless enterprise.present?
     joins("LEFT OUTER JOIN (SELECT * from inventory_items WHERE enterprise_id = #{sanitize enterprise.andand.id}) AS o_inventory_items ON o_inventory_items.variant_id = spree_variants.id")
-    .where("o_inventory_items.id IS NULL OR o_inventory_items.visible = (?)", true)
+      .where("o_inventory_items.id IS NULL OR o_inventory_items.visible = (?)", true)
   }
 
   # Define sope as class method to allow chaining with other scopes filtering id.
@@ -70,7 +70,6 @@ Spree::Variant.class_eval do
     ]
   end
 
-
   def price_with_fees(distributor, order_cycle)
     price + fees_for(distributor, order_cycle)
   end
@@ -85,7 +84,7 @@ Spree::Variant.class_eval do
 
   def delete
     if product.variants == [self] # Only variant left on product
-      errors.add :product, "must have at least one variant"
+      errors.add :product, I18n.t(:spree_variant_product_error)
       false
     else
       transaction do

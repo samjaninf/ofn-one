@@ -1,0 +1,12 @@
+%h3
+  = t :email_claim_greeting, user: @user.login
+%p.lead
+  = t :email_claim_profile, enterprise: @enterprise.name, user: @user.login
+%p &nbsp;
+
+
+
+
+= render 'shared/mailers/signoff'
+
+= render 'shared/mailers/social_and_contact'

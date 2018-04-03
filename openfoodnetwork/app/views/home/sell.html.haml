@@ -18,29 +18,36 @@
         %h3= t :sell_producers
         %p
           = t :sell_producers_detail
-        %a.button.transparent{href: signup_producers_path}
-          = t :register_title
-
+        %br
+        
       .small-12.medium-4.columns.text-center
         %h3= t :sell_hubs
         %p
           = t :sell_hubs_detail
-        %a.button.transparent{href: signup_shops_path}
-          = t :register_title
-
+        %br
+        
       .small-12.medium-4.columns.text-center
         %h3= t :sell_groups
         %p
           = t :sell_groups_detail
+        %br
+        
+    .row
+      .small-12.medium-4.columns.text-center
+        %a.button.transparent{href: signup_producers_path}
+          = t :register_producer
+      .small-12.medium-4.columns.text-center
+        %a.button.transparent{href: signup_shops_path}
+          = t :register_shop
+      .small-12.medium-4.columns.text-center
         %a.button.transparent{href: signup_groups_path}
-          = t :register_title
-
+          = t :register_group
     .row
       .small-12.medium-12.columns.text-center
         %p= t :sell_listing_price
 
         %p
           = t :sell_embed
-          = link_to t(:sell_ask_services), ContentConfig.footer_email.reverse, mailto: true
+          = link_to t(:sell_ask_services), ContentConfig.footer_email , mailto: true
 
 = render "shared/footer"

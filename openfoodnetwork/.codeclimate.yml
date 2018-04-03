@@ -1,0 +1,14 @@
+engines:
+  rubocop:
+    enabled: true
+    channel: rubocop-0-48
+  scss-lint:
+    enabled: false
+ratings:
+  paths:
+  - app/**
+  - lib/**
+  - "**.rb"
+exclude_paths:
+- spec/**/*
+- vendor/**/*

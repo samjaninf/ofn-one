@@ -1,8 +1,6 @@
 Openfoodnetwork::Application.routes.draw do
   root :to => 'home#index'
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
+
   # Redirects from old URLs avoid server errors and helps search engines
   get "/enterprises", to: redirect("/")
   get "/products", to: redirect("/")
@@ -55,10 +53,18 @@ Openfoodnetwork::Application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :bulk_line_items
+  end
+
   get '/checkout', :to => 'checkout#edit' , :as => :checkout
   put '/checkout', :to => 'checkout#update' , :as => :update_checkout
   get '/checkout/paypal_payment/:order_id', to: 'checkout#paypal_payment', as: :paypal_payment
 
+  get 'embedded_shopfront/shopfront_session', to: 'application#shopfront_session'
+  post 'embedded_shopfront/enable', to: 'application#enable_embedded_styles'
+  post 'embedded_shopfront/disable', to: 'application#disable_embedded_styles'
+  post 'enterprise/claim', to: 'enterprises#claim'
   resources :enterprises do
     collection do
       post :search
@@ -74,7 +80,8 @@ Openfoodnetwork::Application.routes.draw do
   get "/enterprises/:permalink", to: redirect("/") # Legacy enterprise URL
 
   devise_for :enterprise, controllers: { confirmations: 'enterprise_confirmations' }
-
+  devise_for :enterprise, controllers: { claim: 'claim'}
+  
   namespace :admin do
     resources :order_cycles do
       post :bulk_update, on: :collection, as: :bulk_update
@@ -158,6 +165,15 @@ Openfoodnetwork::Application.routes.draw do
     end
 
     resource :invoice_settings, only: [:edit, :update]
+
+    resource :stripe_connect_settings, only: [:edit, :update]
+
+    resources :stripe_accounts, only: [:destroy] do
+      get :connect, on: :collection
+      get :connect_callback, on: :collection
+      get :status, on: :collection
+      post :deauthorize, on: :collection
+    end
   end
 
   namespace :api do
@@ -221,6 +237,9 @@ Spree::Core::Engine.routes.prepend do
   match '/admin/reports/xero_invoices' => 'admin/reports#xero_invoices', :as => "xero_invoices_admin_reports",  :via  => [:get, :post]
   match '/admin', :to => 'admin/overview#index', :as => :admin
   match '/admin/payment_methods/show_provider_preferences' => 'admin/payment_methods#show_provider_preferences', :via => :get
+  put 'credit_cards/new_from_token', to: 'credit_cards#new_from_token'
+
+  resources :credit_cards
 
 
   namespace :api, :defaults => { :format => 'json' } do
@@ -235,6 +254,7 @@ Spree::Core::Engine.routes.prepend do
         get :overridable
       end
       delete :soft_delete
+      post :clone
 
       resources :variants do
         delete :soft_delete
@@ -244,6 +264,7 @@ Spree::Core::Engine.routes.prepend do
     resources :orders do
       get :managed, on: :collection
     end
+
   end
 
   namespace :admin do
@@ -262,8 +283,6 @@ Spree::Core::Engine.routes.prepend do
       get :print_ticket, on: :member
       get :managed, on: :collection
     end
-
-    resources :line_items, only: [:index], format: :json
   end
 
   resources :orders do

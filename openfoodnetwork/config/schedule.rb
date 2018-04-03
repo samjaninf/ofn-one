@@ -2,7 +2,7 @@ require 'whenever'
 
 # Learn more: http://github.com/javan/whenever
 
-env "MAILTO", "rohan@rohanmitchell.com"
+env "MAILTO", "maintainer@freshharvestcrate.com"
 
 
 # If we use -e with a file containing specs, rspec interprets it and filters out our examples

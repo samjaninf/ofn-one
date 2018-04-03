@@ -5,6 +5,7 @@
 // Generic \\
 
 @mixin tiledPane {
+  //background-image: url("/assets/tile-wide.png");
   background-image: none;
   background-color: $brand-colour;
   background-position: center center;
@@ -15,6 +16,10 @@
 @mixin panepadding {
   padding-top: 100px;
   padding-bottom: 100px;
+
+  @media all and (max-width: 640px) {
+    padding-top: 25px;
+  }
 }
 
 @mixin paneWhiteText {
@@ -232,7 +237,8 @@
 
 @mixin producersbg {
   background-color: lighten($clr-turquoise, 68%);
-  background-image: url("/assets/producers.svg");
+  //background-image: url("/assets/producers.svg");
+  background-image: none;
   background-position: center 50px;
   background-repeat: no-repeat;
   background-size: 922px 763px;
@@ -240,13 +246,15 @@
 
 @mixin hubsbg {
   background-color: $brand-colour;
-  background-image: url("/assets/hubs-bg.jpg");
+  background-image: none;
+  //background-image: url("/assets/hubs-bg.jpg");
   background-position: center center;
 }
 
 @mixin groupsbg {
   background-color: lighten($clr-brick, 56%);
-  background-image: url("/assets/groups.svg");
+  background-image: none;
+/*background-image: url("/assets/groups.svg");*/
   background-position: center 50px;
   background-repeat: no-repeat;
   background-size: 922px 922px;

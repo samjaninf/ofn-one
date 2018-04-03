@@ -4,14 +4,15 @@ module OpenFoodNetwork
       @user = user
 
       @opts = opts.
-              reject { |k, v| v.blank? }.
-              reverse_merge({report_type: 'summary',
-                             invoice_date: Time.zone.today,
-                             due_date: Time.zone.today + 1.month,
-                             account_code: 'food sales'})
+        reject { |k, v| v.blank? }.
+        reverse_merge({report_type: 'summary',
+                       invoice_date: Time.zone.today,
+                       due_date: Time.zone.today + 1.month,
+                       account_code: 'food sales'})
     end
 
     def header
+      # NOTE: These are NOT to be translated, they need to be in this exact format to work with Xero
       %w(*ContactName EmailAddress POAddressLine1 POAddressLine2 POAddressLine3 POAddressLine4 POCity PORegion POPostalCode POCountry *InvoiceNumber Reference *InvoiceDate *DueDate InventoryItemCode *Description *Quantity *UnitAmount Discount *AccountCode *TaxType TrackingName1 TrackingOption1 TrackingName2 TrackingOption2 Currency BrandingTheme Paid?)
     end
 
@@ -95,26 +96,26 @@ module OpenFoodNetwork
     end
 
     def produce_summary_rows(order, invoice_number, opts)
-      [summary_row(order, 'Total untaxable produce (no tax)',       total_untaxable_products(order), invoice_number, 'GST Free Income',        opts),
-       summary_row(order, 'Total taxable produce (tax inclusive)',  total_taxable_products(order),   invoice_number, 'GST on Income',          opts)]
+      [summary_row(order, I18n.t(:report_header_total_untaxable_produce), total_untaxable_products(order), invoice_number, I18n.t(:report_header_gst_free_income), opts),
+       summary_row(order, I18n.t(:report_header_total_taxable_produce), total_taxable_products(order), invoice_number, I18n.t(:report_header_gst_on_income), opts)]
     end
 
     def fee_summary_rows(order, invoice_number, opts)
-      [summary_row(order, 'Total untaxable fees (no tax)',          total_untaxable_fees(order),     invoice_number, 'GST Free Income',        opts),
-       summary_row(order, 'Total taxable fees (tax inclusive)',     total_taxable_fees(order),       invoice_number, 'GST on Income',          opts)]
+      [summary_row(order, I18n.t(:report_header_total_untaxable_fees), total_untaxable_fees(order), invoice_number, I18n.t(:report_header_gst_free_income), opts),
+       summary_row(order, I18n.t(:report_header_total_taxable_fees), total_taxable_fees(order), invoice_number, I18n.t(:report_header_gst_on_income), opts)]
     end
 
     def shipping_summary_rows(order, invoice_number, opts)
-      [summary_row(order, 'Delivery Shipping Cost (tax inclusive)', total_shipping(order),           invoice_number, tax_on_shipping_s(order), opts)]
+      [summary_row(order, I18n.t(:report_header_delivery_shipping_cost), total_shipping(order), invoice_number, tax_on_shipping_s(order), opts)]
     end
 
     def payment_summary_rows(order, invoice_number, opts)
-      [summary_row(order, 'Transaction Fee (no tax)',               total_transaction(order),        invoice_number, 'GST Free Income', opts)]
+      [summary_row(order, I18n.t(:report_header_transaction_fee), total_transaction(order), invoice_number, I18n.t(:report_header_gst_free_income), opts)]
     end
 
     def admin_adjustment_summary_rows(order, invoice_number, opts)
-      [summary_row(order, 'Total untaxable admin adjustments (no tax)',      total_untaxable_admin_adjustments(order), invoice_number, 'GST Free Income', opts),
-       summary_row(order, 'Total taxable admin adjustments (tax inclusive)', total_taxable_admin_adjustments(order),   invoice_number, 'GST on Income',   opts)]
+      [summary_row(order, I18n.t(:report_header_total_untaxable_admin), total_untaxable_admin_adjustments(order), invoice_number, I18n.t(:report_header_gst_free_income), opts),
+       summary_row(order, I18n.t(:report_header_total_taxable_admin), total_taxable_admin_adjustments(order), invoice_number, I18n.t(:report_header_gst_on_income), opts)]
     end
 
     def summary_row(order, description, amount, invoice_number, tax_type, opts={})
@@ -151,7 +152,7 @@ module OpenFoodNetwork
        '',
        Spree::Config.currency,
        '',
-       order.paid? ? 'Y' : 'N'
+       order.paid? ? I18n.t(:y) : I18n.t(:n)
       ]
     end
 
@@ -175,40 +176,40 @@ module OpenFoodNetwork
     end
 
     def total_untaxable_products(order)
-      order.line_items.without_tax.sum &:amount
+      order.line_items.without_tax.sum(&:amount)
     end
 
     def total_taxable_products(order)
-      order.line_items.with_tax.sum &:amount
+      order.line_items.with_tax.sum(&:amount)
     end
 
     def total_untaxable_fees(order)
-      order.adjustments.enterprise_fee.without_tax.sum &:amount
+      order.adjustments.enterprise_fee.without_tax.sum(&:amount)
     end
 
     def total_taxable_fees(order)
-      order.adjustments.enterprise_fee.with_tax.sum &:amount
+      order.adjustments.enterprise_fee.with_tax.sum(&:amount)
     end
 
     def total_shipping(order)
-      order.adjustments.shipping.sum &:amount
+      order.adjustments.shipping.sum(&:amount)
     end
 
     def total_transaction(order)
-      order.adjustments.payment_fee.sum &:amount
+      order.adjustments.payment_fee.sum(&:amount)
     end
 
     def tax_on_shipping_s(order)
       tax_on_shipping = order.adjustments.shipping.sum(&:included_tax) > 0
-      tax_on_shipping ? 'GST on Income' : 'GST Free Income'
+      tax_on_shipping ? I18n.t(:report_header_gst_on_income) : I18n.t(:report_header_gst_free_income)
     end
 
     def total_untaxable_admin_adjustments(order)
-      order.adjustments.admin.without_tax.sum &:amount
+      order.adjustments.admin.without_tax.sum(&:amount)
     end
 
     def total_taxable_admin_adjustments(order)
-      order.adjustments.admin.with_tax.sum &:amount
+      order.adjustments.admin.with_tax.sum(&:amount)
     end
 
     def detail?
@@ -216,7 +217,7 @@ module OpenFoodNetwork
     end
 
     def tax_type(taxable)
-      taxable.has_tax? ? 'GST on Income' : 'GST Free Income'
+      taxable.has_tax? ? I18n.t(:report_header_gst_on_income) : I18n.t(:report_header_gst_free_income)
     end
   end
 end

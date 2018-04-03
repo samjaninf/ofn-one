@@ -32,7 +32,7 @@
   }
 
   .case-study {
-    background-color: rgba(255, 255, 255, 0.5);
+    @include tiledPane;
     padding: 1rem;
     margin-top: 2rem;
     text-align: center;

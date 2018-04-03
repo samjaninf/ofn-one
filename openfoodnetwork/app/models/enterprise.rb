@@ -42,6 +42,7 @@ class Enterprise < ActiveRecord::Base
   has_many :billable_periods
   has_many :inventory_items
   has_many :tag_rules
+  has_one :stripe_account, dependent: :destroy
 
   delegate :latitude, :longitude, :city, :state_name, :to => :address
 
@@ -66,7 +67,6 @@ class Enterprise < ActiveRecord::Base
   supports_s3 :logo
   supports_s3 :promo_image
 
-
   validates :name, presence: true
   validate :name_is_unique
   validates :sells, presence: true, inclusion: {in: SELLS}
@@ -77,7 +77,6 @@ class Enterprise < ActiveRecord::Base
   validate :shopfront_taxons
   validate :enforce_ownership_limit, if: lambda { owner_id_changed? && !owner_id.nil? }
   validates_length_of :description, :maximum => 255
-
 
   before_save :confirmation_check, if: lambda { email_changed? }
 
@@ -95,7 +94,6 @@ class Enterprise < ActiveRecord::Base
 
   after_rollback :restore_permalink
 
-
   scope :by_name, order('name')
   scope :visible, where(visible: true)
   scope :confirmed, where('confirmed_at IS NOT NULL')
@@ -103,9 +101,9 @@ class Enterprise < ActiveRecord::Base
   scope :activated, where("confirmed_at IS NOT NULL AND sells != 'unspecified'")
   scope :ready_for_checkout, lambda {
     joins(:shipping_methods).
-    joins(:payment_methods).
-    merge(Spree::PaymentMethod.available).
-    select('DISTINCT enterprises.*')
+      joins(:payment_methods).
+      merge(Spree::PaymentMethod.available).
+      select('DISTINCT enterprises.*')
   }
   scope :not_ready_for_checkout, lambda {
     # When ready_for_checkout is empty, ActiveRecord generates the SQL:
@@ -152,25 +150,25 @@ class Enterprise < ActiveRecord::Base
 
   scope :active_distributors, lambda {
     with_distributed_products_outer.with_order_cycles_as_distributor_outer.
-    where('(product_distributions.product_id IS NOT NULL AND spree_products.deleted_at IS NULL AND spree_products.available_on <= ? AND spree_products.count_on_hand > 0) OR (order_cycles.id IS NOT NULL AND order_cycles.orders_open_at <= ? AND order_cycles.orders_close_at >= ?)', Time.zone.now, Time.zone.now, Time.zone.now).
-    select('DISTINCT enterprises.*')
+      where('(product_distributions.product_id IS NOT NULL AND spree_products.deleted_at IS NULL AND spree_products.available_on <= ? AND spree_products.count_on_hand > 0) OR (order_cycles.id IS NOT NULL AND order_cycles.orders_open_at <= ? AND order_cycles.orders_close_at >= ?)', Time.zone.now, Time.zone.now, Time.zone.now).
+      select('DISTINCT enterprises.*')
   }
 
   scope :distributors_with_active_order_cycles, lambda {
     with_order_cycles_as_distributor_outer.
-    merge(OrderCycle.active).
-    select('DISTINCT enterprises.*')
+      merge(OrderCycle.active).
+      select('DISTINCT enterprises.*')
   }
 
   scope :distributing_products, lambda { |products|
     # TODO: remove this when we pull out product distributions
     pds = joins("INNER JOIN product_distributions ON product_distributions.distributor_id = enterprises.id").
-    where("product_distributions.product_id IN (?)", products).select('DISTINCT enterprises.id')
+      where("product_distributions.product_id IN (?)", products).select('DISTINCT enterprises.id')
 
     exs = joins("INNER JOIN exchanges ON (exchanges.receiver_id = enterprises.id AND exchanges.incoming = 'f')").
-    joins('INNER JOIN exchange_variants ON (exchange_variants.exchange_id = exchanges.id)').
-    joins('INNER JOIN spree_variants ON (spree_variants.id = exchange_variants.variant_id)').
-    where('spree_variants.product_id IN (?)', products).select('DISTINCT enterprises.id')
+      joins('INNER JOIN exchange_variants ON (exchange_variants.exchange_id = exchanges.id)').
+      joins('INNER JOIN spree_variants ON (spree_variants.id = exchange_variants.variant_id)').
+      where('spree_variants.product_id IN (?)', products).select('DISTINCT enterprises.id')
 
     where(id: pds | exs)
   }
@@ -378,7 +376,7 @@ class Enterprise < ActiveRecord::Base
     dups = dups.where('id != ?', id) unless new_record?
 
     if dups.any?
-      errors.add :name, "has already been taken. If this is your enterprise and you would like to claim ownership, please contact the current manager of this profile at #{dups.first.owner.email}."
+      errors.add :name, I18n.t(:enterprise_name_error, email: dups.first.owner.email)
     end
   end
 
@@ -427,7 +425,7 @@ class Enterprise < ActiveRecord::Base
 
   def enforce_ownership_limit
     unless owner.can_own_more_enterprises?
-      errors.add(:owner, "^#{owner.email} is not permitted to own any more enterprises (limit is #{owner.enterprise_limit}).")
+      errors.add(:owner, I18n.t(:enterprise_owner_error, email: owner.email, enterprise_limit: owner.enterprise_limit ))
     end
   end
 

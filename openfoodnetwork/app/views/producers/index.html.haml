@@ -8,11 +8,11 @@
           = t :producers_headline
         %p.text-big
           = t :producers_text
-          
 = inject_enterprises
 
 .producers{"ng-controller" => "EnterprisesCtrl", "ng-cloak" => true}
   .row
+    
   = render partial: "shared/components/enterprise_search"
   = render partial: "producers/filters"
 

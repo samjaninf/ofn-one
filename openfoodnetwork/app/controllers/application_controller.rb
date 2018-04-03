@@ -3,6 +3,8 @@ require 'open_food_network/referer_parser'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  prepend_before_filter :restrict_iframes
+
   include EnterprisesHelper
   helper CssSplitter::ApplicationHelper
 
@@ -18,12 +20,73 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def shopfront_session
+    session[:safari_fix] = true
+    render 'shop/shopfront_session', layout: false
+  end
+
+  def enable_embedded_styles
+    session[:embedded_shopfront] = true
+    render json: {}, status: 200
+  end
+
+  def disable_embedded_styles
+    session.delete :embedded_shopfront
+    session.delete :shopfront_redirect
+    render json: {}, status: 200
+  end
+
+  protected
+
+  def after_sign_in_path_for(resource_or_scope)
+    return session[:shopfront_redirect] if session[:shopfront_redirect]
+    stored_location_for(resource_or_scope) || signed_in_root_path(resource_or_scope)
+  end
+
+  def after_sign_out_path_for(_resource_or_scope)
+    session[:shopfront_redirect] ? session[:shopfront_redirect] : root_path
+  end
+
   private
+
+  def restrict_iframes
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['Content-Security-Policy'] = "frame-ancestors 'none'"
+  end
+
+  def enable_embedded_shopfront
+    whitelist = Spree::Config[:embedded_shopfronts_whitelist]
+    return unless Spree::Config[:enable_embedded_shopfronts] && whitelist.present?
+    return if request.referer && URI(request.referer).scheme != 'https' && !Rails.env.test?
+
+    response.headers.delete 'X-Frame-Options'
+    response.headers['Content-Security-Policy'] = "frame-ancestors #{whitelist}"
+
+    check_embedded_request
+    set_embedded_layout
+  end
+
+  def check_embedded_request
+    return unless params[:embedded_shopfront]
+
+    # Show embedded shopfront CSS
+    session[:embedded_shopfront] = true
+
+    # Get shopfront slug and set redirect path
+    if params[:controller] == 'enterprises' && params[:action] == 'shop' && params[:id]
+      slug = params[:id]
+      session[:shopfront_redirect] = '/' + slug + '/shop?embedded_shopfront=true'
+    end
+  end
+
+  def set_embedded_layout
+    return unless session[:embedded_shopfront]
+    @shopfront_layout = 'embedded'
+  end
 
   def action
     params[:action].to_sym
   end
-
 
   def require_distributor_chosen
     unless @distributor = current_distributor
@@ -61,7 +124,6 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
-
 
   # All render calls within the block will be performed with the specified format
   # Useful for rendering html within a JSON response, particularly if the specified

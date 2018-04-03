@@ -10,21 +10,36 @@ class EnterprisesController < BaseController
   before_filter :check_stock_levels, only: :shop
 
   before_filter :clean_permalink, only: :check_permalink
+  before_filter :enable_embedded_shopfront
 
   respond_to :js, only: :permalink_checker
 
   def relatives
+    set_enterprise
+
     respond_to do |format|
       format.json do
-        enterprise = Enterprise.find(params[:id])
-        enterprises = enterprise.andand.relatives.andand.activated
+        enterprises = @enterprise.andand.relatives.andand.activated
         render(json: enterprises,
                each_serializer: Api::EnterpriseSerializer,
                data: OpenFoodNetwork::EnterpriseInjectionData.new)
       end
     end
   end
-
+  def claim
+    
+      @enterprise = Enterprise.find(params[:enterprise_id])
+      user = Spree::User.find(params[:user_id])
+      @enterprise.skip_reconfirmation!
+      @enterprise.update_column('email', user.email)
+      @enterprise.update_column('owner_id', user.id)
+      user.enterprise_roles.build(:enterprise => @enterprise).save
+      EnterpriseMailer::claim_profile(@enterprise,user,"doveraudio@gmail.com")
+      EnterpriseMailer::claim_profile_alert(@enterprise,user,"doveraudio@gmail.com")
+      render json: [user, @enterprise]
+    
+   
+  end
   def check_permalink
     render text: params[:permalink], status: 409 and return if Enterprise.find_by_permalink params[:permalink]
 
@@ -38,6 +53,10 @@ class EnterprisesController < BaseController
   end
 
   private
+
+  def set_enterprise
+    @enterprise = Enterprise.find_by_id(params[:id])
+  end
 
   def clean_permalink
     params[:permalink] = params[:permalink].parameterize

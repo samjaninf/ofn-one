@@ -14,9 +14,8 @@
 //= require angular-resource
 //= require angular-animate
 //= require angular-sanitize
-//= require admin/spree_core
+//= require admin/spree_backend
 //= require admin/spree_auth
-//= require admin/spree_promo
 //= require admin/spree_paypal_express
 //= require ../shared/ng-infinite-scroll.min.js
 //= require ../shared/ng-tags-input.min.js
@@ -48,7 +47,7 @@
 //= require textAngular-rangy.min.js
 //= require textAngular-sanitize.min.js
 //= require textAngular.min.js
-//= require darkswarm/i18n.js
+//= require i18n/translations
 //= require darkswarm/i18n.translate.js
 
 

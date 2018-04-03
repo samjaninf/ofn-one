@@ -10,7 +10,8 @@
     border: 1px solid rgba($dark-grey, 0.35);
     border-left: none;
     border-right: none;
-    background-color: #9d74c4;
+    background-color: $brand-colour;
+    //background-image: url("/assets/tile-wide.png");
     background-image: none;
     background-position: center center;
     padding: 12px 0 8px 0;

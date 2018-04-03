@@ -1,3 +1,5 @@
+require 'open_food_network/available_payment_method_filter'
+
 module EnterprisesHelper
   def current_distributor
     @current_distributor ||= current_order(false).andand.distributor
@@ -22,12 +24,24 @@ module EnterprisesHelper
     return [] unless current_distributor.present?
     payment_methods = current_distributor.payment_methods.available(:front_end).all
 
+    filter = OpenFoodNetwork::AvailablePaymentMethodFilter.new
+    filter.filter!(payment_methods)
+
     applicator = OpenFoodNetwork::TagRuleApplicator.new(current_distributor, "FilterPaymentMethods", current_customer.andand.tag_list)
     applicator.filter!(payment_methods)
 
     payment_methods
   end
-
+  def claim_enterprise user, enterprise
+    puts user
+    puts enterprise
+    enterprise.email = user.email
+    enterprise.owner_id = user.id
+    enterprise.save()
+    puts user
+    puts enterprise
+    puts "ran the function"
+  end
   def managed_enterprises
     Enterprise.managed_by(spree_current_user)
   end
@@ -48,7 +62,7 @@ module EnterprisesHelper
 
   def enterprise_type_name(enterprise)
     if enterprise.sells == 'none'
-      enterprise.producer_profile_only ? 'Profile' : 'Supplier Only'
+      enterprise.producer_profile_only ? I18n.t(:profile) : I18n.t(:supplier_only)
     else
       "Has Shopfront"
     end
@@ -56,7 +70,7 @@ module EnterprisesHelper
 
   def enterprise_confirm_delete_message(enterprise)
     if enterprise.supplied_products.present?
-      "This will also delete the #{pluralize enterprise.supplied_products.count, 'product'} that this enterprise supplies. Are you sure you want to continue?"
+      I18n.t(:enterprise_confirm_delete_message, product: pluralize(enterprise.supplied_products.count, 'product'))
     else
       t(:are_you_sure)
     end

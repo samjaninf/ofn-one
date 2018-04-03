@@ -60,6 +60,20 @@ feature "Authentication", js: true, retry: 3 do
             page.should have_content "too short"
           end
 
+          scenario "Failing to sign up because email is already registered" do
+            fill_in "Email", with: user.email
+            fill_in "Choose a password", with: "foobarino"
+            click_signup_button
+            expect(page).to have_content "There's already an account for this email."
+          end
+
+          scenario "Failing to sign up because password confirmation doesn't match or is blank" do
+            fill_in "Email", with: user.email
+            fill_in "Choose a password", with: "ForgotToRetype"
+            click_signup_button
+            expect(page).to have_content "doesn't match"
+          end
+
           scenario "Signing up successfully" do
             fill_in "Email", with: "test@foo.com"
             fill_in "Choose a password", with: "test12345"

@@ -131,6 +131,16 @@ describe Spree::Admin::ReportsController do
   context "Supplier" do
     before { login_as_enterprise_user [s1] }
 
+    describe 'index' do
+      it "loads reports relevant to producers" do
+        spree_get :index
+
+        report_types = assigns(:reports).keys
+        expect(report_types).to include "orders_and_fulfillment", "products_and_inventory", "packing" # and others
+        expect(report_types).to_not include "sales_tax"
+      end
+    end
+
     describe 'Bulk Coop' do
       context "where I have granted P-OC to the distributor" do
         before do
@@ -205,7 +215,7 @@ describe Spree::Admin::ReportsController do
 
     it "assigns report types" do
       spree_get :products_and_inventory
-      assigns(:report_types).should == Spree::Admin::ReportsController::REPORT_TYPES[:products_and_inventory]
+      assigns(:report_types).should == subject.report_types[:products_and_inventory]
     end
 
     it "creates a ProductAndInventoryReport" do
@@ -223,7 +233,7 @@ describe Spree::Admin::ReportsController do
     before { login_as_admin }
 
     it "should have report types for customers" do
-      Spree::Admin::ReportsController::REPORT_TYPES[:customers].should == [
+      subject.report_types[:customers].should == [
         ["Mailing List", :mailing_list],
         ["Addresses", :addresses]
       ]
@@ -246,7 +256,7 @@ describe Spree::Admin::ReportsController do
 
     it "assigns report types" do
       spree_get :customers
-      assigns(:report_types).should == Spree::Admin::ReportsController::REPORT_TYPES[:customers]
+      assigns(:report_types).should == subject.report_types[:customers]
     end
 
     it "creates a CustomersReport" do

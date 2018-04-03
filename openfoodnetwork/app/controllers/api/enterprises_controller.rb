@@ -22,7 +22,14 @@ module Api
         invalid_resource!(@enterprise)
       end
     end
-
+    
+    def claim
+      @enterprise = Enterprise.find_by_permalink(params[:id]) || Enterprise.find(params[:id])
+      @user = current_api_user
+      #authorize! :claim, Enterprise
+      echo @user
+    end
+    
     def update
       @enterprise = Enterprise.find_by_permalink(params[:id]) || Enterprise.find(params[:id])
       authorize! :update, @enterprise

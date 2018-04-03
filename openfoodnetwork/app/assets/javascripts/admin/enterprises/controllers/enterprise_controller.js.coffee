@@ -50,3 +50,11 @@ angular.module("admin.enterprises")
           $scope.Enterprise.users.push manager
         else
           alert ("#{manager.email}" + " " + t("is_already_manager"))
+    
+    $scope.claimEnterprise = (manager) ->
+      if manager.id? and manager.email?
+        manager =
+          id: manager.id
+          email: manager.email
+        for i, user of $scope.Enterprise.users when user.email == "admin.admin.com"
+          alert(t("REmoved the admin"))

@@ -47,13 +47,13 @@ class Api::CachedEnterpriseSerializer < ActiveModel::Serializer
   attributes :name, :id, :description, :latitude, :longitude,
     :long_description, :website, :instagram, :linkedin, :twitter,
     :facebook, :is_primary_producer, :is_distributor, :phone, :visible,
-    :email_address, :hash, :logo, :promo_image, :path, :pickup, :delivery,
+    :email_address,:email, :hash, :logo, :promo_image, :path, :pickup, :delivery,
     :icon, :icon_font, :producer_icon_font, :category, :producers, :hubs
 
   attributes :taxons, :supplied_taxons
 
   has_one :address, serializer: Api::AddressSerializer
-
+  has_one :owner, serializer: Api::OwnerSerializer
   has_many :supplied_properties, serializer: Api::PropertySerializer
   has_many :distributed_properties, serializer: Api::PropertySerializer
 
@@ -68,7 +68,8 @@ class Api::CachedEnterpriseSerializer < ActiveModel::Serializer
   end
 
   def email_address
-    object.email_address.to_s.reverse
+    #object.email_address.to_s.reverse
+    object.email_address.to_s
   end
 
   def hash

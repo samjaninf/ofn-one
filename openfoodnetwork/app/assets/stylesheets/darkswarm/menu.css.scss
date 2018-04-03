@@ -18,8 +18,6 @@ nav {
       background-color: transparent;
     }
 
-
-
     ul.center {
       display: inline-block;
 
@@ -53,7 +51,6 @@ nav {
     font-size: 0.75rem;
     height: $topbar-height;
     opacity: 0.8;
-    font-weight: 600 !important;
 
     &:hover, &:focus, &:active {
       opacity: 1;
@@ -119,6 +116,13 @@ nav {
 
 .tab-bar .ofn-logo {
   padding: 9px 0 0 9px;
+}
+
+.top-bar .ofn-logo img {
+  height: auto;
+  width: auto;
+  max-height: 74px;
+  max-width: 250px;
 }
 
 .left-off-canvas-menu {
@@ -187,4 +191,16 @@ nav {
       padding: 0 1em;
     }
   }
+}
+
+@media only screen and (max-width: 480px){
+.medium-3 {
+    width: 100%;
+}
+}
+
+@media only screen and (max-width: 768px){
+.medium-3 {
+    width: 100%;
+}
 }

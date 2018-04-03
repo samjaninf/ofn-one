@@ -26,7 +26,6 @@ module WebHelper
     have_selector selector
   end
 
-
   def current_path_should_be path
     current_path = URI.parse(current_url).path
     expect(page).to have_current_path path
@@ -46,7 +45,6 @@ module WebHelper
     from = options.delete :from
     page.find_by_id(from).find("option[value='#{value}']").select_option
   end
-
 
   def should_have_failed
     page.status_code.should == 200
@@ -113,6 +111,18 @@ module WebHelper
 
   def dirty_form_dialog
     DirtyFormDialog.new(page)
+  end
+
+  def set_i18n_locale(locale = 'en')
+    page.evaluate_script("I18n.locale = '#{locale}'")
+  end
+
+  def get_i18n_locale
+    page.evaluate_script("I18n.locale;")
+  end
+
+  def get_i18n_translation(key = nil)
+    page.evaluate_script("I18n.t('#{key}');")
   end
 
   # Fetch the content of a script block

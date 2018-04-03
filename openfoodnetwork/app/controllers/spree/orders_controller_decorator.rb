@@ -4,6 +4,7 @@ Spree::OrdersController.class_eval do
   after_filter  :populate_variant_attributes, only: :populate
   before_filter :update_distribution, only: :update
   before_filter :filter_order_params, only: :update
+  before_filter :enable_embedded_shopfront
 
   prepend_before_filter :require_order_cycle, only: :edit
   prepend_before_filter :require_distributor_chosen, only: :edit
@@ -30,7 +31,6 @@ Spree::OrdersController.class_eval do
       end
     end
   end
-
 
   def update
     @insufficient_stock_lines = []
@@ -71,7 +71,6 @@ Spree::OrdersController.class_eval do
     end
   end
 
-
   def populate
     # Without intervention, the Spree::Adjustment#update_adjustable callback is called many times
     # during cart population, for both taxation and enterprise fees. This operation triggers a
@@ -98,7 +97,6 @@ Spree::OrdersController.class_eval do
       end
     end
   end
-
 
   # Report the stock levels in the order for all variant ids requested
   def stock_levels(order, variant_ids)
@@ -135,7 +133,7 @@ Spree::OrdersController.class_eval do
       distributor = Enterprise.is_distributor.find params[:order][:distributor_id]
       @order.set_distributor! distributor
 
-      flash[:notice] = 'Your hub has been selected.'
+      flash[:notice] = I18n.t(:order_choosing_hub_notice)
       redirect_to request.referer
 
     elsif params[:commit] == 'Choose Order Cycle'
@@ -143,7 +141,7 @@ Spree::OrdersController.class_eval do
       order_cycle = OrderCycle.active.find params[:order][:order_cycle_id]
       @order.set_order_cycle! order_cycle
 
-      flash[:notice] = 'Your order cycle has been selected.'
+      flash[:notice] = I18n.t(:order_choosing_hub_notice)
       redirect_to request.referer
     end
   end
@@ -242,7 +240,7 @@ Spree::OrdersController.class_eval do
     return unless order_to_update.andand.complete?
 
     items = params[:order][:line_items_attributes]
-    .andand.select{ |k,attrs| attrs["quantity"].to_i > 0 }
+      .andand.select{ |k,attrs| attrs["quantity"].to_i > 0 }
 
     if items.empty?
       flash[:error] = I18n.t(:orders_cannot_remove_the_final_item)
