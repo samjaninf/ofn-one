@@ -8,6 +8,7 @@ gem 'i18n-js', '~> 3.0.0'
 
 # Patched version. See http://rubysec.com/advisories/CVE-2015-5312/.
 gem 'nokogiri', '>= 1.6.7.1'
+gem 'deface', :github => 'spree/deface', :ref => '1110a13'
 
 gem 'pg'
 gem 'spree', github: 'openfoodfoundation/spree', branch: 'step-6a', ref: '5a76d45'
