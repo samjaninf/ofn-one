@@ -49,7 +49,6 @@ gem 'rabl'
 gem "active_model_serializers"
 gem 'oj'
 # gem 'deface', :github => 'spree/deface', :ref => '1110a13'
-gem 'spree', git: 'git://github.com/spree/spree.git', :branch => '3-4-stable'
 gem 'paperclip'
 gem 'dalli'
 gem 'geocoder'
