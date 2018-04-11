@@ -94,7 +94,8 @@ EOF
   echo -e "===> Openfoodnetwork is ready! Visit the url in your browser to configure!"
 
   # run shell
-  tail -f ${OFN_DIR}/log/ofn.log
+  #tail -f ${OFN_DIR}/log/production.log
+  tail -n 0 -f ${OFN_DIR}/log/*
   /bin/bash
 
 fi
