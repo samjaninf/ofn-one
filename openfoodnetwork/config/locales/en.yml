@@ -53,7 +53,7 @@
 # * Participate in the community discussions:
 #   - https://community.openfoodnetwork.org/t/workflow-to-structure-translations/932
 
-en:
+en-fhc:
   activerecord:
     # Overridden here due to a bug in spree i18n (Issue #870)
     attributes:
@@ -65,34 +65,42 @@ en:
         spree/user:
           attributes:
             email:
-              taken: "There's already an account for this email. Please login or reset your password."
+              taken: "Sorry, This Email is taken. If you already have an account, please login or reset your password."
   devise:
     failure:
       invalid: |
         Invalid email or password.
-        Were you a guest last time?  Perhaps you need to create an account or reset your password.
-    enterprise_confirmations:
+        Try again. Otherwise, you may create an account or reset your password.
+    enterprise_confirmations: 
       enterprise:
         confirmed: Thank you, your email address has been confirmed.
         not_confirmed: Your email address could not be confirmed. Perhaps you have already completed this step?
         confirmation_sent: "Confirmation email sent!"
         confirmation_not_sent: "Could not send a confirmation email."
+    user_sessions:
+      spree_user:
+        signed_out: "You have successfully signed out! See you soon!"
   enterprise_mailer:
     confirmation_instructions:
       subject: "Please confirm the email address for %{enterprise}"
     welcome:
       subject: "%{enterprise} is now on %{sitename}"
+    claim:
+      subject: "%{user} would like to claim %{enterprise}"
   producer_mailer:
     order_cycle:
       subject: "Order cycle report for %{producer}"
-  home: "OFN"
-  title: Open Food Network
+  home: "FHC"
+  title: Fresh Harvest Crate
   welcome_to: 'Welcome to '
-  site_meta_description: "We begin from the ground up. With farmers and growers ready to tell their stories proudly and truly. With distributors ready to connect people with products fairly and honestly. With buyers who believe that better weekly shopping decisions can…"
-  search_by_name: Search by name or suburb...
-  producers: 'Australian Producers'
-  producers_join: Australian producers are now welcome to join the Open Food Network. #FIXME
-  charges_sales_tax: Charges GST?
+  site_meta_description: "Connecting Farmers and Co-Ops with people, customers and restaraunts. Without the waste."
+  search_by_name: Search by name or city...
+  producers: 'Producers'
+  welcome_to_ofn: "Welcome to Fresh Harvest Crate!"
+  claim_profile: "Is this your location? Create a profile and send an email to "
+  claim_email: "claim@FreshHarvestCrate.com"
+  producers_join: Producers are now welcome to join Fresh Harvest Crate.
+  charges_sales_tax: Charges Sales Tax?
   print_invoice: "Print Invoice"
   print_ticket: "Print Ticket"
   select_ticket_printer: "Select printer for tickets"
@@ -102,22 +110,22 @@ en:
   edit_order: "Edit Order"
   ship_order: "Ship Order"
   cancel_order: "Cancel Order"
-  confirm_send_invoice: "An invoice for this order will be sent to the customer. Are you sure you want to continue?"
-  confirm_resend_order_confirmation: "Are you sure you want to resend the order confirmation email?"
-  must_have_valid_business_number: "%{enterprise_name} must have a valid ABN before invoices can be sent."
+  confirm_send_invoice: "An invoice for this order will be sent to the customer. Confirm?"
+  confirm_resend_order_confirmation: "Resend order confirmation?"
+  must_have_valid_business_number: "%{enterprise_name} must have a valid Tax-ID before invoices can be sent."
   invoice: "Invoice"
   percentage_of_sales: "%{percentage} of sales"
   capped_at_cap: "capped at %{cap}"
   per_month: "per month"
   free: "free"
   free_trial: "free trial"
-  plus_tax: "plus GST"
+  plus_tax: "plus Sales Tax"
   min_bill_turnover_desc: "once turnover exceeds %{mbt_amount}"
   say_no: "No"
   say_yes: "Yes"
   then: then
   sort_order_cycles_on_shopfront_by: "Sort Order Cycles On Shopfront By"
-  required_fields: Required fields are denoted with an asterisk
+  required_fields: Required fields are marked with an asterisk
   select_continue: Select and Continue
   remove: Remove
   or: or
@@ -125,6 +133,7 @@ en:
   expand_all: Expand all
   loading: Loading...
   show_more: Show more
+  more: More
   show_all: Show all
   show_all_with_more: "Show All (%{num}  More)"
   cancel: Cancel
@@ -165,7 +174,8 @@ en:
   notes: Notes
   error: Error
   processing_payment: Processing payment...
-
+  currency_symbol_position: "Currency Symbol Position?"
+  content_configuration_pricing_table: "Pricing Table"
 
   actions:
     create_and_add_another: "Create and Add Another"
@@ -247,9 +257,9 @@ en:
     business_model_configuration:
       edit:
         business_model_configuration: "Business Model"
-        business_model_configuration_tip: "Configure the rate at which shops will be charged each month for use of the Open Food Network."
+        business_model_configuration_tip: "Configure the rate at which shops will be charged each month for use of Fresh Harvest Crate."
         bill_calculation_settings: "Bill Calculation Settings"
-        bill_calculation_settings_tip: "Adjust the amount that enterprises will be billed each month for use of the OFN."
+        bill_calculation_settings_tip: "Adjust the amount that enterprises will be billed each month for use of Fresh Harvest Crate."
         shop_trial_length: "Shop Trial Length (Days)"
         shop_trial_length_tip: "The length of time (in days) that enterprises who are set up as shops can run as a trial period."
         fixed_monthly_charge: "Fixed Monthly Charge"
@@ -261,7 +271,7 @@ en:
         tax_rate: "Tax Rate"
         tax_rate_tip: "Tax rate that applies to the the monthly bill that enterprises are charged for using the system."
         minimum_monthly_billable_turnover: "Minimum Monthly Billable Turnover"
-        minimum_monthly_billable_turnover_tip: "Minimum monthly turnover before a shopfront will be charged for using OFN. Enterprises turning over less than this amount in a month will not be charged, either as a percentage or fixed rate."
+        minimum_monthly_billable_turnover_tip: "Minimum monthly turnover before a shopfront will be charged for using Fresh Harvest Crate. Enterprises turning over less than this amount in a month will not be charged, either as a percentage or fixed rate."
         example_bill_calculator: "Example Bill Calculator"
         example_bill_calculator_legend: "Alter the example turnover to visualise the effect of the settings to the left."
         example_monthly_turnover: "Example Monthly Turnover"
@@ -309,7 +319,7 @@ en:
 
     contents:
       edit:
-        title: Content
+        title: Content 
         header: Header
         home_page: Home page
         producer_signup_page: Producer signup page
@@ -422,21 +432,21 @@ en:
           desc_long: About Us
           desc_long_placeholder: Tell customers about yourself. This information appears on your public profile.
         business_details:
-          abn: ABN
-          abn_placeholder: eg. 99 123 456 789
-          acn: ACN
-          acn_placeholder: eg. 123 456 789
+          abn: Federal Tax ID
+          abn_placeholder: (ex. 12-3456789)
+          acn: State Tax ID
+          acn_placeholder: (ex. 0222333)
           display_invoice_logo: Display logo in invoices
           invoice_text: Add customized text at the end of invoices
         contact:
           name: Name
-          name_placeholder: eg. Gustav Plum
+          name_placeholder: eg. Paul Bunyan
           email_address: Email Address
-          email_address_placeholder: eg. gustav@truffles.com
-          phone: Phone
-          phone_placeholder: eg. 98 7654 3210
+          email_address_placeholder: eg. paul@blueoxdairy.com
+          phone: Phone Number
+          phone_placeholder: eg. 207-555-6789
           website: Website
-          website_placeholder: eg. www.truffles.com
+          website_placeholder: eg. www.blueoxdairy.com
         enterprise_fees:
           name: Name
           fee_type: Fee Type
@@ -487,7 +497,7 @@ en:
           permalink: Permalink (no spaces)
           permalink_tip: "This permalink is used to create the url to your shop: %{link}your-shop-name/shop"
           link_to_front: Link to shop front
-          link_to_front_tip: A direct link to your shopfront on the Open Food Network.
+          link_to_front_tip: A direct link to your shopfront on Fresh Harvest Crate.
         shipping_methods:
           name: Name
           applies: Applies?
@@ -525,14 +535,14 @@ en:
           twitter_placeholder: eg. @the_prof
         stripe_connect:
           connect_with_stripe: "Connect with Stripe"
-          stripe_connect_intro: "To accept payments using credit card, you will need to connect your stripe account to the Open Food Network. Use the button to the right to get started."
+          stripe_connect_intro: "To accept payments using credit card, you will need to connect your stripe account to Fresh Harvest Crate. Use the button to the right to get started."
           stripe_account_connected: "Stripe account connected."
           disconnect: "Disconnect account"
           confirm_modal:
             title: Connect with Stripe
-            part1: Stripe is a payment processing service that allows shops on the OFN to accept credit card payments from customers.
-            part2: To use this feature, you must connect your Stripe account to the OFN. Clicking 'I Agree' below will redirect to you the Stripe website where you can connect an existing Stripe account, or create a new one if you don't already have one.
-            part3: This will allow the Open Food Network to accept credit card payments from customers on your behalf. Please note that you will need to maintain your own Stripe account, pay the fees Stripe charges and handle any chargebacks and customer service yourself.
+            part1: Stripe is a payment processing service that allows shops on Fresh Harvest Crate to accept credit card payments from customers.
+            part2: To use this feature, you must connect your Stripe account to Fresh Harvest Crate. Clicking 'I Agree' below will redirect to you the Stripe website where you can connect an existing Stripe account, or create a new one if you don't already have one.
+            part3: This will allow Fresh Harvest Crate to accept credit card payments from customers on your behalf. Please note that you will need to maintain your own Stripe account, pay the fees Stripe charges and handle any chargebacks and customer service yourself.
             i_agree: I Agree
             cancel: Cancel
         tag_rules:
@@ -574,22 +584,22 @@ en:
         producer: Producer
       change_type_form:
         producer_profile: Producer Profile
-        connect_ofn: Connect through OFN
+        connect_ofn: Connect through Fresh Harvest Crate
         always_free: ALWAYS FREE
-        producer_description_text: Add your products to Open Food Network, allowing hubs to stock your products in their stores.
+        producer_description_text: Add your products to Fresh Harvest Crate, allowing hubs to stock your products in their stores.
         producer_shop: Producer Shop
         sell_your_produce: Sell your own produce
-        producer_shop_description_text: Sell your products directly to customers through your very own Open Food Network shopfront.
+        producer_shop_description_text: Sell your products directly to customers through your very own Fresh Harvest Crate shopfront.
         producer_shop_description_text2: A Producer Shop is for your produce only, if you want to sell produce grown/produced off site, select 'Producer Hub'.
         producer_hub: Producer Hub
         producer_hub_text: Sell produce from self and others
-        producer_hub_description_text: Your enterprise is the backbone of your local food system. You can sell your own produce as well as produce aggregated from other enterprises through your shopfront on the Open Food Network.
+        producer_hub_description_text: Your enterprise is the backbone of your local food system. You can sell your own produce as well as produce aggregated from other enterprises through your shopfront on Fresh Harvest Crate.
         profile: Profile Only
         get_listing: Get a listing
-        profile_description_text: People can find and contact you on the Open Food Network. Your enterprise will be visible on the map, and will be searchable in listings.
+        profile_description_text: People can find and contact you on Fresh Harvest Crate. Your enterprise will be visible on the map, and will be searchable in listings.
         hub_shop: Hub Shop
         hub_shop_text: Sell produce from others
-        hub_shop_description_text: Your enterprise is the backbone of your local food system. You aggregate produce from other enterprises and can sell it through your shop on the Open Food Network.
+        hub_shop_description_text: Your enterprise is the backbone of your local food system. You aggregate produce from other enterprises and can sell it through your shop on Fresh Harvest Crate.
         choose_option: Please choose one of the options above.
         change_now: Change now
       enterprise_user_index:
@@ -609,7 +619,7 @@ en:
         title: New Enterprise
         back_link: Back to enterprises list
       welcome:
-        welcome_title: Welcome to the Open Food Network!
+        welcome_title: Welcome to Fresh Harvest Crate!
         welcome_text: You have successfully created a
         next_step: Next step
         choose_starting_point: 'Choose your starting point:'
@@ -680,7 +690,7 @@ en:
         enable_receipt_printing?: Show options for printing receipts using thermal printers in order dropdown?
     overview:
       enterprises_header:
-        ofn_with_tip: Enterprises are Producers and/or Hubs and are the basic unit of organisation within the Open Food Network.
+        ofn_with_tip: Enterprises are Producers and/or Hubs and are the basic unit of organisation within Fresh Harvest Crate.
       enterprises_hubs_tabs:
         has_no_payment_methods: "%{enterprise} has no payment methods"
         has_no_shipping_methods: "%{enterprise} has no shipping methods"
@@ -791,7 +801,7 @@ en:
         checkout: "Checkout now"
         already_ordered_products: "Already ordered in this order cycle"
     register_call:
-      selling_on_ofn: "Interested in getting on the Open Food Network?"
+      selling_on_ofn: "Interested in getting on Fresh Harvest Crate?"
       register: "Register here"
   shop:
     messages:
@@ -919,68 +929,80 @@ en:
   card_could_not_be_removed: Sorry, the card could not be removed
 
   ie_warning_headline: "Your browser is out of date :-("
-  ie_warning_text: "For the best Open Food Network experience, we strongly recommend upgrading your browser:"
+  ie_warning_text: "For the best Fresh Harvest Crate experience, we strongly recommend upgrading your browser:"
   ie_warning_chrome: Download Chrome
   ie_warning_firefox: Download Firefox
   ie_warning_ie: Upgrade Internet Explorer
-  ie_warning_other: "Can't upgrade your browser? Try Open Food Network on your smartphone :-)"
+  ie_warning_other: "Can't upgrade your browser? Try Fresh Harvest Crate on your smartphone :-)"
 
-  footer_global_headline: "OFN Global"
+  footer_global_headline: "Fresh Harvest Crate"
   footer_global_home: "Home"
   footer_global_news: "News"
   footer_global_about: "About"
   footer_global_contact: "Contact"
 
-  footer_sites_headline: "OFN Sites"
+  footer_sites_headline: "Fresh Harvest Crate Sites"
   footer_sites_developer: "Developer"
   footer_sites_community: "Community"
   footer_sites_userguide: "User Guide"
 
   footer_secure: "Secure and trusted."
-  footer_secure_text: "Open Food Network uses SSL encryption (2048 bit RSA) everywhere to keep your shopping and payment information private. Our servers do not store your credit card details and payments are processed by PCI-compliant services."
+  footer_secure_text: "We use SSL encryption to secure your transaction. We do not store your financial information. Payments are processed through Secure, Trusted, Third-Party Vendors."
 
   footer_contact_headline: "Keep in touch"
   footer_contact_email: "Email us"
 
   footer_nav_headline: "Navigate"
   footer_join_headline: "Join us"
-  footer_join_body: "Create a listing, shop or group directory on the Open Food Network."
-  footer_join_cta: "Tell me more!"
+  footer_join_body: "Create a producer profile, shop or a group on Fresh Harvest Crate."
+  footer_join_cta: "Learn More!"
 
   footer_legal_call: "Read our"
   footer_legal_tos: "Terms and conditions"
   footer_legal_visit: "Find us on"
-  footer_legal_text_html: "Open Food Network is a free and open source software platform. Our content is licensed with %{content_license} and our code with %{code_license}."
-
+  footer_legal_text_html: "Fresh Harvest Crate is a free and open source software platform. Our content is licensed with %{content_license} and our code with %{code_license}."
+  footer_legal_copyright: "© 2017 Fresh Harvest Crate All Rights Reserved | We are a brand of StoicEdge, a Maine based Company"
+  
   home_shop: Shop Now
-
+  
+  home_buyer: "I am a buyer"
+  
+  home_harvester: "I am a Harvester"
+  
+  tagline_part1: "Fresh Harvest Crate : A new way to source locally grown fresh food"
+  
   brandstory_headline: "Food, unincorporated."
-  brandstory_intro: "Sometimes the best way to fix the system is to start a new one…"
-  brandstory_part1: "We begin from the ground up. With farmers and growers ready to tell their stories proudly and truly. With distributors ready to connect people with products fairly and honestly. With buyers who believe that better weekly shopping decisions can seriously change the world."
-  brandstory_part2: "Then we need a way to make it real. A way to empower everyone who grows, sells and buys food. A way to tell all the stories, to handle all the logistics. A way to turn transaction into transformation every day."
-  brandstory_part3: "So we build an online marketplace that levels the playing field. It’s transparent, so it creates real relationships. It’s open source, so it’s owned by everyone. It scales to regions and nations, so people start versions across the world."
-  brandstory_part4: "It works everywhere. It changes everything."
-  brandstory_part5_strong: "We call it Open Food Network."
-  brandstory_part6: "We all love food. Now we can love our food system too."
-
+  brandstory_part1_strong: "Support your community"
+  brandstory_part1: "Using our platform you are supporting local food harvesters and producers."
+  brandstory_part2_strong: "Get Quality Food."
+  brandstory_part2: "You are getting fresh and locally sourced food without all of the hassle of traveling to the farm."
+  brandstory_part3_strong: "Get Noticed"
+  brandstory_part3: "With Fresh Harvest Crate  you be able to market and sell your harvest to local customers"
+  brandstory_part4_strong: "Fight Food Insecurity"
+  brandstory_part4: "With every purchase you are helping to fight food insecurity, throughout your local area"
+  brandstory_extra_strong: "Get Started with Fresh Harvest Crate  Today!"
+  brandstory_extra: "With Fresh Harvest Crate  you will be able to support your local economy and you won’t spend hours getting your local food. You will be able to be able to pick and choose what you want."
+  brandstory_lead2: " for an extra profit margin, and better brand independence, than selling to a major supermarket."
   learn_body: "Explore models, stories and resources to support you to develop your fair food business or organisation.  Find training, events and other opportunities to learn from peers."
   learn_cta: "Get Inspired"
 
-  connect_body: "Search our full directories of producers, hubs and groups to find fair food traders near you.  List your business or organisation on the OFN so buyers can find you.  Join the community to get advice and solve problems together."
+  connect_body: "Search our full directories of producers, hubs and groups to find fresh harvested food near you.  List your business or organisation on Fresh Harvest Crate so buyers can find you.  Join the community to get advice and solve problems together."
   connect_cta: "Go Exploring"
 
-  system_headline: "Shopping - here's how it works."
+  system_headline: "Get your locally sourced food in 4 simple steps,"
   system_step1: "1. Search"
-  system_step1_text: "Search our diverse, independent shops for seasonal local food. Search by neighbourhood and food category, or whether you prefer delivery or pickup."
-  system_step2: "2. Shop"
-  system_step2_text: "Transform your transactions with affordable local food from diverse producers and hubs. Know the stories behind your food and the people who make it!"
-  system_step3: "3. Pick-up / Delivery"
-  system_step3_text: "Hang on for your delivery, or visit your producer or hub for a more personal connection with your food. Food shopping as diverse as nature intended it."
-
-  cta_headline: "Shopping that makes the world a better place."
+  system_step1_text: "Find all farm producers available near you"
+  system_step2: "2. Choose"
+  system_step2_text: "Browse hundreds of items from local harvesters/ food producers"
+  system_step3: "3. Pay"
+  system_step3_text: "It's quick, secure and easy"
+  system_step4: "4. Pick-up / Delivery"
+  system_step4_text: "Your Food is prepared for pickup or delivered to your door"
+  
+  cta_headline: "Shop fresh, shop local. Support small business."
   cta_label: "I'm Ready"
 
-  stats_headline: "We're creating a new food system."
+  stats_headline: "Join our community food system."
   stats_producers: "food producers"
   stats_shops: "food shops"
   stats_shoppers: "food shoppers"
@@ -1043,11 +1065,9 @@ en:
   email_welcome: "Welcome"
   email_confirmed: "Thank you for confirming your email address."
   email_registered: "is now part of"
-  email_userguide_html: "The User Guide with detailed support for setting up your Producer or Hub is here:
-%{link}"
+  email_userguide_html: "The User Guide with detailed support for setting up your Producer or Hub is here:"
   email_admin_html: "You can manage your account by logging into the %{link} or by clicking on the cog in the top right hand side of the homepage, and selecting Administration."
-  email_community_html: "We also have an online forum for community discussion related to OFN software and the unique challenges of running a food enterprise. You are encouraged to join in. We are constantly evolving and your input into this forum will shape what happens next.
-%{link}"
+  email_community_html: "We also have an online forum for community discussion related to OFN software and the unique challenges of running a food enterprise. You are encouraged to join in. We are constantly evolving and your input into this forum will shape what happens next."
   join_community: "Join the community"
   email_help: "If you have any difficulties, check out our FAQs, browse the forum or post a 'Support' topic and someone will help you out!"
   email_confirmation_greeting: "Hi, %{contact}!"
@@ -1071,6 +1091,11 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   email_confirm_shop_greeting: "Hi %{name},"
   email_confirm_shop_order_html: "Well done! You have a new order for <strong>%{distributor}</strong>!"
   email_confirm_shop_number_html: "Order confirmation <strong>#%{number}</strong>"
+  email_claim_greeting: "Thanks %{user}, for claiming your Fresh Harvest Crate profile for %{enterprise}!"
+  email_claim_profile: "Greetings, <br/>   Welcome to FreshHarvestCrate %{user}, you have just claimed the profile for %{enterprise}!<br/> Please log in and get started updating your profile. <br> Thanks!"
+  email_claim_alert: "%{user} has just claimed a profile on Fresh Harvest Crate"
+  email_claim_alert_message: "Greetings, <br/>    %{user} has just claimed the profile for %{enterprise}!<br/> If it looks like something is wrong,<br/> please log in right away!"
+  
   email_order_summary_item: "Item"
   email_order_summary_quantity: "Qty"
   email_order_summary_price: "Price"
@@ -1093,7 +1118,7 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   email_signup_login: Your login
   email_signup_email: Your login email is
   email_signup_shop_html: "You can start shopping online now at %{link}."
-  email_signup_text: "Thanks for joining the network.
+  email_signup_text: "Thanks for joining Fresh Harvest Crate.
   If you are a customer, we look forward to introducing you to many fantastic farmers, wonderful food hubs and delicious food!
   If you are a producer or food enterprise, we are excited to have you as a part of the network."
   email_signup_help_html: "We welcome all your questions and feedback; you can use the <em>Send Feedback</em> button on the site or email us at %{email}"
@@ -1160,14 +1185,14 @@ See the %{link} to find out more about %{sitename}'s features and to start using
 
   search_no_results_html: "Sorry, no results found for %{query}. Try another search?"
 
-  components_profiles_popover: "Profiles do not have a shopfront on the Open Food Network, but may have their own physical or online shop elsewhere"
+  components_profiles_popover: "Profiles do not have a shopfront on Fresh Harvest Crate, but may have their own physical or online shop elsewhere"
   components_profiles_show: "Show profiles"
   components_filters_nofilters: "No filters"
   components_filters_clearfilters: "Clear all filters"
 
   groups_title: Groups
-  groups_headline: Groups / regions
-  groups_text: "Every producer is unique. Every business has something different to offer. Our groups are collectives of producers, hubs and distributors who share something in common like location, farmers market or philosophy. This makes your shopping experience easier. So explore our groups and have the curating done for you."
+  groups_headline: Groups / Regions
+  groups_text: "Gathering together producers from a particular region, or a variety of producers of similar products. Groups are a way for larger quantities, or greater varieties of products to be distributed. Producers can look here to find groups to join up with. Customers can find a lot of opportunities for bulk purchases, or mixed items they can't get individually."
   groups_search: "Search name or keyword"
   groups_no_groups: "No groups found"
   groups_about: "About Us"
@@ -1182,22 +1207,22 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   groups_contact_facebook: Follow us on Facebook
   groups_signup_title: Sign up as a group
   groups_signup_headline: Groups sign up
-  groups_signup_intro: "We're an amazing platform for collaborative marketing, the easiest way for your members and stakeholders to reach new markets. We're non-profit, affordable, and simple."
+  groups_signup_intro: "We are providing a platform to connect together groups of farms and producers who want to pool resources, and offer products in a collaborative fashion."
   groups_signup_email: Email us
-  groups_signup_motivation1: We transform food systems fairly.
-  groups_signup_motivation2: It's why we get out of bed every day. We're a global non-profit, based on open source code. We play fair. You can always trust us.
-  groups_signup_motivation3: We know you have big ideas, and we want to help. We'll share our knowledge, networks and resources. We know that isolation doesn't create change, so we'll partner with you.
-  groups_signup_motivation4: We meet you where you are.
-  groups_signup_motivation5: You might be an alliance of food hubs, producers, or distributors, and an industry body, or a local government.
-  groups_signup_motivation6: Whatever your role in your local food movement, we're ready to help. However you come to wonder what Open Food Network would look like or is doing in your part of the world, let's start the conversation.
-  groups_signup_motivation7: We make food movements make more sense.
-  groups_signup_motivation8: You need to activate and enable your networks, we offer a platform for conversation and action. You need real engagement. We’ll help reach all the players, all the stakeholders, all the sectors.
-  groups_signup_motivation9: You need resourcing. We’ll bring all our experience to bear. You need cooperation. We’ll better connect you to a global network of peers.
-  groups_signup_pricing: Group Account
+  groups_signup_motivation1: Our goal is to provide a stable service.
+  groups_signup_motivation2: Producers and consumers can interact without the delay and cost associated with traditional food marketplaces. We are basing this system on an open source software system, and customizing it for specific local needs. We are open to suggestions.
+  groups_signup_motivation3: Sign up and get involved!
+  groups_signup_motivation4: You do what you always do.
+  groups_signup_motivation5: We give you a system to reach a wider market, with a secure payment system. By giving you a centralized, online hub to manage payments, you can accept more sales, and take on more clients.
+  groups_signup_motivation6: This platform supports a variety of organizations. Farmers Markets, Distribution Hubs, Health Food Stores? Get in touch, we can help you plan and set up your storefront. 
+  groups_signup_motivation7: Flexible Access Options
+  groups_signup_motivation8: Take advantage of a public storefront, if that's what you need. We also have settings for you to manage private groups. 
+  groups_signup_motivation9: Keep your Farmers Market open every day. Want a store for your own farm, but want to form a Co-Op or sell things from other farms too? We can help you get it all figured out.
+  groups_signup_pricing: Group Account Costs?
   groups_signup_studies: Case Studies
   groups_signup_contact: Ready to discuss?
-  groups_signup_contact_text: "Get in touch to discover what OFN can do for you:"
-  groups_signup_detail: "Here's the detail."
+  groups_signup_contact_text: "Get in touch to discover what Fresh Harvest Crate can do for you:"
+  groups_signup_detail: "Wondering what we are about?"
 
   login_invalid: "Invalid email or password"
 
@@ -1207,19 +1232,19 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   modal_hubs_content2: You can only shop at one food hub at a time.
 
   modal_groups: "Groups / Regions"
-  modal_groups_content1: These are the organisations and relationships between hubs which make up the Open Food Network.
+  modal_groups_content1: These are the organisations and relationships between hubs which make up Fresh Harvest Crate.
   modal_groups_content2: Some groups are clustered by location or council, others by non-geographic similarities.
 
   modal_how: "How it works"
-  modal_how_shop: Shop the Open Food Network
+  modal_how_shop: Shop Fresh Harvest Crate
   modal_how_shop_explained: Search for a food hub near you to start shopping! You can expand each food hub to see what kinds of goodies are available, and click through to start shopping. (You can only shop one food hub at a time.)
   modal_how_pickup: Pick-ups, delivery and shipping costs
   modal_how_pickup_explained: Some food hubs deliver to your door, while others require you to pick-up your purchases. You can see which options are available on the homepage, and select which you'd like at the shopping and check-out pages. Delivery will cost more, and pricing differs from hub-to-hub. Each food hub is a sales point with independent business operations and logisitics - so variations between hubs are to be expected.
   modal_how_more: Learn more
-  modal_how_more_explained: "If you want to learn more about the Open Food Network, how it works, and get involved, check out:"
+  modal_how_more_explained: "If you want to learn more about Fresh Harvest Crate, how it works, and get involved, check out:"
 
   modal_producers: "Producers"
-  modal_producers_explained: "Our producers make all the delicious food you can shop for on the Open Food Network."
+  modal_producers_explained: "Our producers make all the delicious food you can shop for on Fresh Harvest Crate."
 
   producers_about: About us
   producers_buy: Shop for
@@ -1231,18 +1256,18 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   producers_filter_type: Type
   producers_filter_property: Property
   producers_title: Producers
-  producers_headline: Find local producers
+  producers_headline: Find a Local Farm Stand!
   producers_signup_title: Sign up as a producer
-  producers_signup_headline: Food producers, empowered.
-  producers_signup_motivation: Sell your food and tell your stories to diverse new markets. Save time and money on every overhead. We support innovation without the risk. We've levelled the playing field.
-  producers_signup_send: Join now
-  producers_signup_enterprise: Enterprise Accounts
-  producers_signup_studies: Stories from our producers.
-  producers_signup_cta_headline: Join now!
-  producers_signup_cta_action: Join now
-  producers_signup_detail: Here's the detail.
+  producers_signup_headline: Sign up to sell today!
+  producers_signup_motivation: We hope to bring you a strong sales platform. Our goal is to help you reach more customers, and for those customers, to be able to shop a variety of vendors, with the ability to make payments online.
+  producers_signup_send: Join Today!
+  producers_signup_enterprise: Bring your business to more people.
+  producers_signup_studies: Help our community grow.
+  producers_signup_cta_headline: What are you waiting for?
+  producers_signup_cta_action: Sign up today, and begin taking orders in moments.
+  producers_signup_detail: Showcase your hard work!
   producer: Producer
-
+  producers_text: "Shop Fresh. Shop Local. Support Community Business!"
   products_item: Item
   products_description: Description
   products_variant: Variant
@@ -1252,33 +1277,35 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   products_price: "Price"
 
   register_title: Register
-
+  register_producer: Get a Producer Profile!
+  register_shop: Get a Shop Profile!
+  register_group: Get a Group Profile!
   sell_title: "Register"
-  sell_headline: "Get on the Open Food Network!"
-  sell_motivation: "Showcase your beautiful food."
+  sell_headline: "Get on Fresh Harvest Crate!"
+  sell_motivation: "An online marketplace for Farm Fresh Products, such as Fruit, Vegetables, Cheeses. Whatever you are producing, market it here and reduce your overall cost to market."
   sell_producers: "Producers"
   sell_hubs: "Hubs"
   sell_groups: "Groups"
-  sell_producers_detail: "Set up a profile for your business on the OFN in just minutes.  At any time you can upgrade your profile to an online store and sell your products direct to customers."
-  sell_hubs_detail: "Set up a profile for your food enterprise or organisation on the OFN. At any time you can upgrade your profile to a multi-producer shop."
-  sell_groups_detail: "Set up a tailored directory of enterprises (producers and other food enterprises) for your region or for your organisation."
+  sell_producers_detail: "Ready to start? Getting going is easy, in just a couple of forms, you can be selling your farm products here. Convenient scheduling tools keep your customers informed of whats ready for purchase."
+  sell_hubs_detail: "Green Grocers, Farmers Markets, Health Food Stores, register here! Bring your carefully curated selection of food and natural products to a wider audience. Enjoy having a 24 hour virtual storefront attached to your real location."
+  sell_groups_detail: "Build a hub for your Regional directory, Large Co-Op, or distribution center. Get started here."
   sell_user_guide: "Find out more in our user guide."
-  sell_listing_price: "Listing on the OFN is free.  Opening and running a shop on OFN is free.  Setting up a group directory on OFN for your organisation or regional network is free."
-  sell_embed: "We can also embed an OFN shop in your own customised website or build a customised local food network website for your region."
-  sell_ask_services: "Ask us about OFN services."
+  sell_listing_price: "Listing on Fresh Harvest Crate is free.  Opening and running a shop on Fresh Harvest Crate is free. Setting up a group directory on Fresh Harvest Crate for your organisation or regional network is free. We charge a small flat percentage from each purchase."
+  sell_embed: ""
+  sell_ask_services: "Ask us about Fresh Harvest Crate services."
 
   shops_title: Shops
   shops_headline: Shopping, transformed.
-  shops_text: Food grows in cycles, farmers harvest in cycles, and we order food in cycles. If you find an order cycle closed, check back soon.
+  shops_text: Remember, Most local foods are seasonal, so check back regularly for new crops and products! 
   shops_signup_title: Sign up as a hub
-  shops_signup_headline: Food hubs, unlimited.
-  shops_signup_motivation: Whatever your model, we support you. However you change, we're with you. We're non-profit, independent, and open-sourced. We're the software partners you've dreamed of.
-  shops_signup_action: Join now
-  shops_signup_pricing: Enterprise Accounts
+  shops_signup_headline: Get your shop going online, today!
+  shops_signup_motivation: We are leveraging an Open-Source platform to provide a comprehensive marketplace for fresh food and products.
+  shops_signup_action: Sign Up Today
+  shops_signup_pricing: Comparable to other sales systems.
   shops_signup_stories: Stories from our hubs.
-  shops_signup_help: We're ready to help.
-  shops_signup_help_text: You need a better return. You need new buyers and logistics partners. You need your story told across wholesale, retail, and the kitchen table.
-  shops_signup_detail: Here's the detail.
+  shops_signup_help: Need some help? Get in touch!
+  shops_signup_help_text: If you've already begun selling to customers through a farmers market, your own home, or a local hub, you are ready to join our marketplace. Get started Today!
+  shops_signup_detail: Get your goods available to people online. 
 
   orders_fees: Fees...
   orders_edit_title: Shopping Cart
@@ -1376,7 +1403,7 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   choose_password: "Choose a password"
   confirm_password: "Confirm password"
   action_signup: "Sign up now"
-  welcome_to_ofn: "Welcome to the Open Food Network!"
+  welcome_to_ofn: "Welcome to Fresh Harvest Crate!"
   signup_or_login: "Start By Signing Up (or logging in)"
   have_an_account: "Already have an account?"
   action_login: "Log in now."
@@ -1385,10 +1412,67 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   reset_password: "Reset password"
   registration_greeting: "Greetings!"
   who_is_managing_enterprise: "Who is responsible for managing %{enterprise}?"
+  enterprise:
+    registration:
+      modal:
+        steps:
+          details:
+            title: 'Details'
+            headline: "Let's Get Started"
+            enterprise: "Woot! First we need to know a little bit about your enterprise:"
+            producer: "Woot! First we need to know a little bit about your farm:"
+            enterprise_name_field: "Enterprise Name:"
+            producer_name_field: "Farm Name:"
+            producer_name_field_placeholder: "e.g. Charlie's Awesome Farm"
+            producer_name_field_error: "Please choose a unique name for your enterprise"
+            address1_field: "Address line 1:"
+            address1_field_placeholder: "e.g. 123 Cranberry Drive"
+            address1_field_error: "Please enter an address"
+            address2_field: "Address line 2:"
+            suburb_field: "Suburb:"
+            suburb_field_placeholder: "e.g. Northcote"
+            suburb_field_error: "Please enter a suburb"
+            postcode_field: "Postcode:"
+            postcode_field_placeholder: "e.g. 3070"
+            postcode_field_error: "Postcode required"
+            state_field: "State:"
+            state_field_error: "State required"
+            country_field: "Country:"
+            country_field_error: "Please select a country"
+          contact:
+            title: 'Contact'
+            contact_field: 'Primary Contact'
+            contact_field_placeholder: 'Contact Name'
+            contact_field_required: "You need to enter a primary contact."
+            email_field: 'Email address'
+            email_field_placeholder: 'eg. charlie@thefarm.com'
+            phone_field: 'Phone number'
+            phone_field_placeholder: 'eg. (03) 1234 5678'
+          type:
+            title: 'Type'
+            headline: "Last step to add %{enterprise}!"
+            question: "Are you a producer?"
+            yes_producer: "Yes, I'm a producer"
+            no_producer: "No, I'm not a producer"
+            producer_field_error: "Please choose one. Are you are producer?"
+            yes_producer_help: "Producers make yummy things to eat and/or drink. You're a producer if you grow it, raise it, brew it, bake it, ferment it, milk it or mould it."
+            no_producer_help: "If you’re not a producer, you’re probably someone who sells and distributes food. You might be a hub, coop, buying group, retailer, wholesaler or other."
+
+          about:
+            title: 'About'
+          images:
+            title: 'Images'
+          social:
+            title: 'Social'
+  # TODO: Remove these once the enterprise.registration.modal keys are translated
   enterprise_contact: "Primary Contact"
+  enterprise_contact_placeholder: "Contact Name"
   enterprise_contact_required: "You need to enter a primary contact."
   enterprise_email_address: "Email address"
+  enterprise_email_placeholder: "eg. charlie@thefarm.com"
   enterprise_phone: "Phone number"
+  enterprise_phone_placeholder: "eg. (03) 1234 5678"
+  # END
   back: "Back"
   continue: "Continue"
   limit_reached_headline: "Oh no!"
@@ -1413,7 +1497,9 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   logo_placeholder: "Your logo will appear here for review once uploaded"
   enterprise_about_headline: "Nice one!"
   enterprise_about_message: "Now let's flesh out the details about"
-  enterprise_success: "Success! %{enterprise} added to the Open Food Network "
+  enterprise_unclaimed_profile: This profile is unclaimed, or incomplete. Is it yours? Log in and claim it today! 
+  ##enterprise_success: "Success! %{enterprise} added to Fresh Harvest Crate " // Some reason this not acknowledged.
+  successfully_created: "Success! %{resource} added to Fresh Harvest Crate "
   enterprise_registration_exit_message: "If you exit this wizard at any stage, you need to click the confirmation link in the email you have received. This will take you to your admin interface where you can continue setting up your profile."
   enterprise_description: "Short Description"
   enterprise_description_placeholder: "A short sentence describing your enterprise"
@@ -1421,23 +1507,23 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   enterprise_long_desc_placeholder: "This is your opportunity to tell the story of your enterprise - what makes you different and wonderful? We'd suggest keeping your description to under 600 characters or 150 words."
   enterprise_long_desc_length: "%{num} characters / up to 600 recommended"
   enterprise_limit: Enterprise Limit
-  enterprise_abn: "ABN"
-  enterprise_abn_placeholder: "eg. 99 123 456 789"
-  enterprise_acn: "ACN"
-  enterprise_acn_placeholder: "eg. 123 456 789"
+  enterprise_abn: "Federal Tax ID"
+  enterprise_abn_placeholder: "(ex. 12-3456789)"
+  enterprise_acn: "State Tax ID"
+  enterprise_acn_placeholder: "(ex. 0222333)"
   enterprise_tax_required: "You need to make a selection."
   enterprise_final_step: "Final step!"
   enterprise_social_text: "How can people find %{enterprise} online?"
   website: "Website"
-  website_placeholder: "eg. openfoodnetwork.org.au"
+  website_placeholder: "eg. freshharvestcrate.com"
   facebook: "Facebook"
-  facebook_placeholder: "eg. www.facebook.com/PageNameHere"
+  facebook_placeholder: "eg. www.facebook.com/freshharvestcrate"
   linkedin: "LinkedIn"
-  linkedin_placeholder: "eg. www.linkedin.com/YourNameHere"
+  linkedin_placeholder: "eg. www.linkedin.com/freshharvestcrate"
   twitter: "Twitter"
-  twitter_placeholder: "eg. @twitter_handle"
+  twitter_placeholder: "eg. @freshharvestcrate"
   instagram: "Instagram"
-  instagram_placeholder: "eg. @instagram_handle"
+  instagram_placeholder: "eg. @freshharvestcrate"
   registration_greeting: "Hi there!"
   registration_intro: "You can now create a profile for your Producer or Hub"
   registration_action: "Let's get started!"
@@ -1449,16 +1535,19 @@ See the %{link} to find out more about %{sitename}'s features and to start using
   registration_promo_image: "Landscape image for your profile"
   registration_about_us: "'About Us' text"
   registration_outcome_headline: "What do I get?"
-  registration_outcome1_html: "Your profile helps people <strong>find</strong> and <strong>contact</strong> you on the Open Food Network."
+  registration_outcome1_html: "Your profile helps people <strong>find</strong> and <strong>contact</strong> you on Fresh Harvest Crate."
   registration_outcome2: "Use this space to tell the story of your enterprise, to help drive connections to your social and online presence. "
-  registration_outcome3: "It's also the first step towards trading on the Open Food Network, or opening an online store."
+  registration_outcome3: "It's also the first step towards trading on Fresh Harvest Crate, or opening an online store."
   registration_finished_headline: "Finished!"
   registration_finished_thanks: "Thanks for filling out the details for %{enterprise}."
-  registration_finished_login: "You can change or update your enterprise at any stage by logging into Open Food Network and going to Admin."
+  registration_finished_login: "You can change or update your enterprise at any stage by logging into Fresh Harvest Crate and going to Admin."
   registration_finished_activate: "Activate %{enterprise}."
   registration_finished_activate_instruction_html: "We've sent a confirmation email to <strong>%{email}</strong> if it hasn't been activated before.<br/>
-Please follow the instructions there to make your enterprise visible on the Open Food Network."
-  registration_finished_action: "Open Food Network home"
+Please follow the instructions there to make your enterprise visible on Fresh Harvest Crate."
+  registration_finished_action: "Fresh Harvest Crate home"
+  registration_contact_name: 'Contact Name'
+
+  # TODO: Remove these once the enterprise.registration.modal keys are translated
   registration_type_headline: "Last step to add %{enterprise}!"
   registration_type_question: "Are you a producer?"
   registration_type_producer: "Yes, I'm a producer"
@@ -1466,9 +1555,13 @@ Please follow the instructions there to make your enterprise visible on the Open
   registration_type_error: "Please choose one. Are you are producer?"
   registration_type_producer_help: "Producers make yummy things to eat and/or drink. You're a producer if you grow it, raise it, brew it, bake it, ferment it, milk it or mould it."
   registration_type_no_producer_help: "If you’re not a producer, you’re probably someone who sells and distributes food. You might be a hub, coop, buying group, retailer, wholesaler or other."
+  # END
   create_profile: "Create Profile"
   registration_images_headline: "Thanks!"
   registration_images_description: "Let's upload some pretty pictures so your profile looks great! :)"
+
+
+  # TODO: Remove these once the enterprise.registration.modal keys are translated
   registration_detail_headline: "Let's Get Started"
   registration_detail_enterprise: "Woot! First we need to know a little bit about your enterprise:"
   registration_detail_producer: "Woot! First we need to know a little bit about your farm:"
@@ -1490,7 +1583,8 @@ Please follow the instructions there to make your enterprise visible on the Open
   registration_detail_state_error: "State required"
   registration_detail_country: "Country:"
   registration_detail_country_error: "Please select a country"
-  shipping_method_destroy_error: "That shipping method cannot be deleted as it is referenced by an order: %{number}."
+  # END
+  shipping_method_destroy_error: "I'm sorry, there are still pending orders using that shipping method: %{number}."
   accounts_and_billing_task_already_running_error: "A task is already running, please wait until it has finished"
   accounts_and_billing_start_task_notice: "Task Queued"
   fees: "Fees"
@@ -1639,7 +1733,7 @@ Please follow the instructions there to make your enterprise visible on the Open
   spree_user_enterprise_limit_error: "^%{email} is not permitted to own any more enterprises (limit is %{enterprise_limit})."
   spree_variant_product_error: must have at least one variant
   your_profil_live: "Your profile live"
-  on_ofn_map: "on the Open Food Network map"
+  on_ofn_map: "on Fresh Harvest Crate map"
   see: "See"
   live: "live"
   manage: "Manage"
@@ -1875,9 +1969,9 @@ Please follow the instructions there to make your enterprise visible on the Open
   validation_msg_product_category_cant_be_blank: "^Product Category cant be blank"
   validation_msg_tax_category_cant_be_blank: "^Tax Category can't be blank"
   validation_msg_is_associated_with_an_exising_customer: "is associated with an existing customer"
-  content_configuration_pricing_table: "(TODO: Pricing table)"
-  content_configuration_case_studies: "(TODO: Case studies)"
-  content_configuration_detail: "(TODO: Detail)"
+  content_configuration_pricing_table: "We charge a small flat percentage on each purchase."
+  content_configuration_case_studies: "Coming Soon... HERACLES"
+  content_configuration_detail: "Sell your products, allowing customers to place orders day or night. Customers get your products how you decide, whether by pickup or delivery. Charge full price for your product, just like the grocery store."
   enterprise_name_error: "has already been taken. If this is your enterprise and you would like to claim ownership, please contact the current manager of this profile at %{email}."
   enterprise_owner_error: "^%{email} is not permitted to own any more enterprises (limit is %{enterprise_limit})."
   enterprise_role_uniqueness_error: "^That role is already present."
@@ -1957,15 +2051,15 @@ Please follow the instructions there to make your enterprise visible on the Open
           hub_profile: Hub Profile
           hub_profile_cost: "COST: ALWAYS FREE"
           hub_profile_text1: >
-            People can find and contact you on the Open Food Network. Your enterprise will be
+            People can find and contact you on Fresh Harvest Crate. Your enterprise will be
             visible on the map, and will be searchable in listings.
           hub_profile_text2: >
             Having a profile, and making connections within your local food system through
-            the Open Food Network will always be free.
+            Fresh Harvest Crate will always be free.
           hub_shop: Hub Shop
           hub_shop_text1: >
             Your enterprise is the backbone of your local food system. You aggregate produce
-            from other enterprises and can sell it through your shop on the Open Food Network.
+            from other enterprises and can sell it through your shop on Fresh Harvest Crate.
           hub_shop_text2: >
             Hubs can take many forms, whether they be a food co-op, a buying group, a veggie-box
             program, or a local grocery store.
@@ -1985,13 +2079,13 @@ Please follow the instructions there to make your enterprise visible on the Open
             A profile makes you visible and contactable to others and is a way to share your story.
           profile_only_text2: >
             If you prefer to focus on producing food, and want to leave the work of selling it
-            to someone else, you won't require a shop on the Open Food Network.
+            to someone else, you won't require a shop on Fresh Harvest Crate.
           profile_only_text3: >
-            Add your products to Open Food Network, allowing hubs to stock your products in
+            Add your products to Fresh Harvest Crate, allowing hubs to stock your products in
             their stores.
           producer_shop: Producer Shop
           producer_shop_text1: >
-            Sell your products directly to customers through your very own Open Food Network
+            Sell your products directly to customers through your very own Fresh Harvest Crate
             shopfront.
           producer_shop_text2: >
             A Producer Shop is for your produce only, if you want to sell produce grown/produced
@@ -2000,12 +2094,12 @@ Please follow the instructions there to make your enterprise visible on the Open
           producer_hub_text1: >
             Your enterprise is the backbone of your local food system. You can sell your own
             produce as well as produce aggregated from other enterprises through your shopfront
-            on the Open Food Network.
+            on Fresh Harvest Crate.
           producer_hub_text2: >
             Producer Hubs can take many forms, whether they be a CSA, a veggie-box program,
             or a food co-op with a rooftop garden.
           producer_hub_text3: >
-            The Open Food Network aims to support as many hub models as possible, so no matter
+            The Fresh Harvest Crate aims to support as many hub models as possible, so no matter
             your situation, we want to provide the tools you need to run your organisation or
             local food business.
           get_listing: Get a listing
@@ -2020,11 +2114,11 @@ Please follow the instructions there to make your enterprise visible on the Open
             raise it, brew it, bake it, ferment it, milk it or mould it.
           producer_text2: >
             Producers can also perform other functions, such as aggregating food from other
-            enterprises and selling it through a shop on the Open Food Network.
+            enterprises and selling it through a shop on Fresh Harvest Crate.
           non_producer: Non-producer
           non_producer_text1: >
             Non-producers do not produce any food themselves, meaning that they cannot create
-            their own products for sale through the Open Food Network.
+            their own products for sale through Fresh Harvest Crate.
           non_producer_text2: >
             Instead, non-producers specialise in linking producers to the end eater, whether it
             be by aggregating, grading, packing, selling or delivering food.
@@ -2281,3 +2375,207 @@ Please follow the instructions there to make your enterprise visible on the Open
         total: Total
         paid?: Paid?
         view: View
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_years:
+        one: 1 year
+        other: "%{count} years"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: "Validation failed: %{errors}"
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      required: must exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+    template:
+      body: 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: "%{count} errors prohibited this %{model} from being saved"
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "$"
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: pm
