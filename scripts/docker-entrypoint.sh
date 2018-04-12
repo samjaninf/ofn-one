@@ -26,11 +26,13 @@ if [ "$1" = 'ofn' ]; then
     echo "===> Running assets:precompile..."
     bundle exec rake assets:precompile
 
-    echo "==> setting hostname now..."
-    sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
+    # echo "==> setting hostname now..."
+    # sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
 
-    echo "==> starting nginx, postfix and memcached..."
-    service nginx start; service postfix start; service memcached start
+    # echo "==> starting nginx, postfix and memcached..."
+    # service nginx start; service postfix start; service memcached start
+    echo "==> starting postfix and memcached..."
+    service service postfix start; service memcached start
 
   cat << EOF > /opt/ofn/config/unicorn.rb
 app_path = File.expand_path(File.dirname(__FILE__) + '/..')
