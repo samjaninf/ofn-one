@@ -32,7 +32,7 @@ if [ "$1" = 'ofn' ]; then
     # echo "==> starting nginx, postfix and memcached..."
     # service nginx start; service postfix start; service memcached start
     echo "==> starting postfix and memcached..."
-    service service postfix start; service memcached start
+    service postfix start; service memcached start
 
   cat << EOF > /opt/ofn/config/unicorn.rb
 app_path = File.expand_path(File.dirname(__FILE__) + '/..')
