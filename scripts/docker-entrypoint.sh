@@ -26,13 +26,11 @@ if [ "$1" = 'ofn' ]; then
     echo "===> Running assets:precompile..."
     bundle exec rake assets:precompile
 
-    # echo "==> setting hostname now..."
-    # sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
+    echo "==> setting hostname now..."
+    sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
 
-    # echo "==> starting nginx, postfix and memcached..."
-    # service nginx start; service postfix start; service memcached start
-    echo "==> starting postfix and memcached..."
-    service postfix start; service memcached start
+    echo "==> starting nginx, postfix and memcached..."
+    service nginx start; service postfix start; service memcached start
 
   cat << EOF > /opt/ofn/config/unicorn.rb
 app_path = File.expand_path(File.dirname(__FILE__) + '/..')
@@ -84,7 +82,7 @@ EOF
 
   # wait for openfoodnetwork processe coming up
   until (echo > /dev/tcp/localhost/3000) &> /dev/null; do
-    echo "==> waiting for openfoodnetwork to be ready..."
+    echo "==> waiting for freshharvestcrate to be ready..."
     sleep 10
   done
 
@@ -93,7 +91,7 @@ EOF
   script/delayed_job -n 2 start
 
   # show url
-  echo -e "===> Openfoodnetwork is ready! Visit the url in your browser to configure!"
+  echo -e "===> freshharvestcrate is ready! Visit the url in your browser to configure!"
 
   # run shell
   #tail -f ${OFN_DIR}/log/production.log
