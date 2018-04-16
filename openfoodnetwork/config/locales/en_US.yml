@@ -53,7 +53,7 @@
 # * Participate in the community discussions:
 #   - https://community.openfoodnetwork.org/t/workflow-to-structure-translations/932
 
-en-US:
+en_US:
   activerecord:
     # Overridden here due to a bug in spree i18n (Issue #870)
     attributes:
