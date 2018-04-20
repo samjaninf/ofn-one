@@ -23,8 +23,8 @@ if [ "$1" = 'ofn' ]; then
     fi
 
     # assets precompile
-    echo "===> Running assets:precompile..."
-    bundle exec rake assets:precompile
+    # echo "===> Running assets:precompile..."
+    # bundle exec rake assets:precompile
 
     echo "==> setting hostname now..."
     sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf
