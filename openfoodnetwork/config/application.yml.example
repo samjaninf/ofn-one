@@ -1,0 +1,36 @@
+# Add application configuration variables here, as shown below.
+#
+# Change this, it has serious security implications.
+# Minimum 30 but usually 128 characters. To obtain run 'rake secret', or faster, 'openssl rand -hex 128'
+SECRET_TOKEN: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+TIMEZONE: Melbourne
+# Default country for dropdowns etc. See for codes: http://en.wikipedia.org/wiki/ISO_3166-1
+DEFAULT_COUNTRY_CODE: US
+# Locale for translation.
+LOCALE: en_US
+# For multilingual - ENV doesn't have array so pass it as string with commas
+AVAILABLE_LOCALES: en,es,en-GB
+# Spree zone.
+CHECKOUT_ZONE: Australia
+# Find currency codes at http://en.wikipedia.org/wiki/ISO_4217.
+CURRENCY: AUD
+
+# SingleSignOn login for Discourse
+#
+# DISCOURSE_SSO_SECRET should be a random string. It must be the same as provided to your Discourse instance.
+#DISCOURSE_SSO_SECRET: ""
+#
+# DISCOURSE_URL must be the URL of your Discourse instance.
+#DISCOURSE_URL: "https://noticeboard.openfoodnetwork.org.au"
+
+# see: https://developers.google.com/maps/documentation/javascript/get-api-key
+# GOOGLE_MAPS_API_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Stripe Connect details for instance account
+# Find these under 'API keys' and 'Connect' in your Stripe account dashboard -> Account Settings
+# Under 'Connect', the Redirect URI should be set to https://YOUR_SERVER_URL/stripe/callback (e.g. https://openfoodnetwork.org.uk/stripe/connect)
+# Under 'Webhooks', you should set up a Connect endpoint pointing to https://YOUR_SERVER_URL/stripe/webhook e.g. (https://openfoodnetwork.org.uk/stripe/webhook)
+# STRIPE_INSTANCE_SECRET_KEY: "sk_test_xxxxxx" # This can be a test key or a live key
+# STRIPE_INSTANCE_PUBLISHABLE_KEY: "pk_test_xxxx" # This can be a test key or a live key
+# STRIPE_CLIENT_ID: "ca_xxxx" # This can be a development ID or a production ID
