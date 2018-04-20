@@ -145,5 +145,4 @@ end
 group :production do
   gem "asset_sync"
   gem "fog-aws"
-  gem "activerecord-nulldb-adapter"
 end
