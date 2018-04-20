@@ -1,34 +1,9 @@
-development:
-  adapter: <%= ENV['DB_ADAPTER'] ||= 'postgresql' %>
-  encoding: unicode
-  database: fhc_dev
-  pool: 5
-  host: localhost
-  username: vagrant
-  password: vagrant
-
-test:
-  adapter: <%= ENV['DB_ADAPTER'] ||= 'postgresql' %>
-  encoding: unicode
-  database: fhc_test<%= ENV['TEST_ENV_NUMBER'] %>
-  pool: 5
-  host: localhost
-  username: vagrant
-  password: vagrant
-
 #not used with heroku
 production:
   adapter: <%= ENV['DB_ADAPTER'] ||= 'postgresql' %>
+  host: <%= ENV['OFN_DB_HOST'] ||= 'postgresql' %>
   encoding: unicode
-  database: fhc_prod
+  database: <%= ENV['OFN_DB'] ||= 'fhc_prod' %>
   pool: 5
-  username: vagrant
-  password: vagrant
-
-staging:
-  adapter: <%= ENV['DB_ADAPTER'] ||= 'postgresql' %>
-  encoding: unicode
-  database: fhc_prod
-  pool: 5
-  username: vagrant
-  password: vagrant
+  username: <%= ENV['OFN_DB_USER'] ||= 'fhc' %>
+  password: <%= ENV['OFN_DB_PASS'] ||= 'f00d' %>

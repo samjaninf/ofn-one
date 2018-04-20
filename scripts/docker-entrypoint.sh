@@ -6,20 +6,21 @@ if [ "$1" = 'ofn' ]; then
     export PGPASSWORD=$OFN_DB_PASS
     export rakeSecret=$(rake secret)
     echo "===> Configuring Openfoodnetwork for production please wait..."
-    sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${OFN_DB_USER}#" -e "s#.*password:.*#  password: ${OFN_DB_PASS}#" -e "s#.*database:.*#  database: ${OFN_DB}\n  host: ${OFN_DB_HOST}#" < /database.yml.pkgr > ${OFN_DIR}/config/database.yml
+    # sed -e "s#production:#${RAILS_ENV}:#" -e "s#.*adapter:.*#  adapter: postgresql#" -e "s#.*username:.*#  username: ${OFN_DB_USER}#" -e "s#.*password:.*#  password: ${OFN_DB_PASS}#" -e "s#.*database:.*#  database: ${OFN_DB}\n  host: ${OFN_DB_HOST}#" < /database.yml.pkgr > ${OFN_DIR}/config/database.yml
     cd ${OFN_DIR}
     echo "==> Testing if database exists. if not, then populate database"
-    if ! psql -lqtA -h ${OFN_DB_HOST} -U ${OFN_DB_USER} | grep -qw ${OFN_DB} ; then
-      echo "===> Running db:drop..."
-      bundle exec rake db:drop
+    # if ! psql -lqtA -h ${OFN_DB_HOST} -U ${OFN_DB_USER} | grep -qw ${OFN_DB} ; then
+    if ! psql -h 127.0.0.1 -U $POSTGRESQL_USER -q -d $POSTGRESQL_DATABASE -c "SELECT * FROM schema_migrations WHERE version='20170921065259'" ; then
+      # echo "===> Running db:drop..."
+      # bundle exec rake db:drop
       echo "===> Running db:create..."
-      bundle exec rake db:create
+      bundle exec rake db:create || echo "<== DB already exists..."
       echo "===> Running db:schema:load..."
       bundle exec rake db:schema:load || echo "<== Schema already loaded..."
       echo "===> Running db:migrate..."
       bundle exec rake db:migrate || echo "<== already migrated..."
-      echo "===> Running db:seed..."
-      bundle exec rake db:seed || echo "<== Already seeded"
+      # echo "===> Running db:seed..."
+      # bundle exec rake db:seed || echo "<== Already seeded"
     fi
 
     # assets precompile

@@ -29,7 +29,7 @@ RUN gem install bundler && bundle config git.allow_insecure true
 COPY openfoodnetwork/. /opt/ofn
 WORKDIR /opt/ofn
 RUN bundle install --without test development staging mysql
-RUN SECRET_TOKEN="6f68c4c1da3ecd7adb2f9331786648ebfe6f824459ed80932f443b79cf15c6be52fa4d75e6e11db282d0a6e571b463f58416428d89eae5a2b564b9c7ad8d92e4" DB_ADAPTER=nulldb bundle exec rake assets:precompile
+RUN SECRET_TOKEN="6f68c4c1da3ecd7adb2f9331786648ebfe6f824459ed80932f443b79cf15c6be52fa4d75e6e11db282d0a6e571b463f58416428d89eae5a2b564b9c7ad8d92e4" bundle exec rake assets:precompile
 
 RUN useradd -M -d /opt/ofn -s /bin/bash ofn
 
