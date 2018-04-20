@@ -1,4 +1,4 @@
-FROM ruby:2.1.5-alpine
+FROM ruby:2.1.5
 MAINTAINER Zammad.org <info@zammad.org>
 ARG BUILD_DATE
 
