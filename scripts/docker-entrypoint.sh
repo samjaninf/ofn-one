@@ -10,7 +10,7 @@ if [ "$1" = 'ofn' ]; then
     cd ${OFN_DIR}
     echo "==> Testing if database exists. if not, then populate database"
     # if ! psql -lqtA -h ${OFN_DB_HOST} -U ${OFN_DB_USER} | grep -qw ${OFN_DB} ; then
-    if ! psql -h 127.0.0.1 -U $POSTGRESQL_USER -q -d $POSTGRESQL_DATABASE -c "SELECT * FROM schema_migrations WHERE version='20170921065259'" ; then
+    if ! psql -lqtA -h ${OFN_DB_HOST} -U $POSTGRESQL_USER -q -d $POSTGRESQL_DATABASE -c "SELECT * FROM schema_migrations WHERE version='20170921065259'" ; then
       # echo "===> Running db:drop..."
       # bundle exec rake db:drop
       echo "===> Running db:create..."
