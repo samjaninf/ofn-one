@@ -119,7 +119,7 @@ module Openfoodnetwork
     config.assets.version = ENV["ASSET_VERSION"] || '1.2'
 
     # 
-    config.assets.prefix = "/production/assets"
+    config.assets.prefix = "/assets"
 
     config.sass.load_paths += [
       "#{Gem.loaded_specs['foundation-rails'].full_gem_path}/vendor/assets/stylesheets/foundation/components",
