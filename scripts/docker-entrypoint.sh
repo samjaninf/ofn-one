@@ -10,22 +10,14 @@ if [ "$1" = 'ofn' ]; then
     cd ${OFN_DIR}
     echo "==> Testing if database exists. if not, then populate database"
     # if ! psql -lqtA -h ${OFN_DB_HOST} -U ${OFN_DB_USER} | grep -qw ${OFN_DB} ; then
-    if ! psql -lqtA -h ${OFN_DB_HOST} -U $POSTGRESQL_USER -q -d $POSTGRESQL_DATABASE -c "SELECT * FROM schema_migrations WHERE version='20170921065259'" ; then
-      # echo "===> Running db:drop..."
-      # bundle exec rake db:drop
+    if ! psql -lqtA -h ${OFN_DB_HOST} -U ${OFN_DB_USER} -q -d ${OFN_DB} -c "SELECT * FROM schema_migrations WHERE version='20170921065259'" ; then
       echo "===> Running db:create..."
       bundle exec rake db:create || echo "<== DB already exists..."
       echo "===> Running db:schema:load..."
       bundle exec rake db:schema:load || echo "<== Schema already loaded..."
       echo "===> Running db:migrate..."
       bundle exec rake db:migrate || echo "<== already migrated..."
-      # echo "===> Running db:seed..."
-      # bundle exec rake db:seed || echo "<== Already seeded"
     fi
-
-    # assets precompile
-    # echo "===> Running assets:precompile..."
-    # bundle exec rake assets:precompile
 
     echo "==> setting hostname now..."
     sed -e "s#.*server_name.*#    server_name ${OFN_URL};#" < /ofn.conf.pkgr > /etc/nginx/sites-enabled/ofn.conf

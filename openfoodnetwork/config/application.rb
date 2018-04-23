@@ -118,8 +118,9 @@ module Openfoodnetwork
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = ENV["ASSET_VERSION"] || '1.2'
 
-    # 
+    # Asset pipeline paths, not using asset-path
     config.assets.prefix = "/assets"
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     config.sass.load_paths += [
       "#{Gem.loaded_specs['foundation-rails'].full_gem_path}/vendor/assets/stylesheets/foundation/components",
