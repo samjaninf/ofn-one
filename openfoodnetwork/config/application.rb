@@ -120,7 +120,7 @@ module Openfoodnetwork
 
     # Asset pipeline paths, not using asset-path
     config.assets.prefix = "/assets"
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    # config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     config.sass.load_paths += [
       "#{Gem.loaded_specs['foundation-rails'].full_gem_path}/vendor/assets/stylesheets/foundation/components",
